@@ -1,30 +1,28 @@
 
-  
-    <!DOCTYPE HTML>
+ <!DOCTYPE HTML>
 <html>
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>About me | Xinghunm</title>
+    <title>React最佳实践 | Xinghunm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Xinghunm">
     
 
     
-    <meta name="description" content="80末程序员…微信:">
-<meta property="og:type" content="website">
-<meta property="og:title" content="About me">
-<meta property="og:url" content="http://yoursite.com/about/index.html">
+    <meta name="description" content="在React应用的开发中遵循一定的基本准则，能使代码更加友好，提高代码质量。">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React最佳实践">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/排序方法/index.html">
 <meta property="og:site_name" content="Xinghunm">
-<meta property="og:description" content="80末程序员…微信:">
+<meta property="og:description" content="在React应用的开发中遵循一定的基本准则，能使代码更加友好，提高代码质量。">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/assets/weixin.png">
-<meta property="og:updated_time" content="2018-12-05T14:07:29.561Z">
+<meta property="og:updated_time" content="2018-12-29T02:28:01.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="About me">
-<meta name="twitter:description" content="80末程序员…微信:">
-<meta name="twitter:image" content="http://yoursite.com/assets/weixin.png">
+<meta name="twitter:title" content="React最佳实践">
+<meta name="twitter:description" content="在React应用的开发中遵循一定的基本准则，能使代码更加友好，提高代码质量。">
 
     
     <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
@@ -36,9 +34,9 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 </html>
-      <body>
-        <header>
-          
+  <body>
+    <header>
+      
 
 <div id="xh">
 		
@@ -113,30 +111,46 @@
 	}
 
 </script>
-        </header>
-        <div id="container">
-          <div id="main" class="page" itemscope="" itemprop="blogPost">
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/about/index.html" title="About me" itemprop="url">About me</a>
+      <a href="/2017/06/20/排序方法/" title="React最佳实践" itemprop="url">React最佳实践</a>
   </h1>
   
   <p class="article-time">
-    <time datetime="2018-12-05T14:07:29.561Z" itemprop="datePublished"> Published 2018-12-05</time>
+    <time datetime="2017-06-20T12:10:07.000Z" itemprop="datePublished"> Published 2017-06-20</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>80末程序员…<br>微信:<br><img src="../assets/weixin.png" alt=""></p>
-  
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#快速排序法"><span class="toc-number">1.</span> <span class="toc-text">快速排序法</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="快速排序法"><a href="#快速排序法" class="headerlink" title="快速排序法"></a><strong>快速排序法</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const quickSort = (arr) =&gt; &#123;</span><br><span class="line">  if (arr.length &lt;= 1) return arr;</span><br><span class="line">  const pivotIndex = Math.floor(arr.length / 2);</span><br><span class="line">  const pivot = arr.splice(pivotIndex, 1);</span><br><span class="line">  const left = [];</span><br><span class="line">  const right = [];</span><br><span class="line"></span><br><span class="line">  for(let i = 0; i&lt; arr.length; i++) &#123;</span><br><span class="line">    const value = arr[i];</span><br><span class="line">    if (value &lt; pivot) &#123;</span><br><span class="line">      left.push(value);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      right.push(value);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return quickSort(left).concat(pivot, quickSort(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/react/">react</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/react/">react</a>
+  </div>
 
 </div>
 
@@ -144,7 +158,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/about/index.html" data-title="About me | Xinghunm" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/06/20/排序方法/" data-title="React最佳实践 | Xinghunm" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -155,6 +169,27 @@
    	       
 	</article>
 	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2017/06/20/react最佳实践/" title="React最佳实践">
+  <strong>上一篇：</strong><br>
+  <span>
+  React最佳实践</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/02/25/正则表达式/" title="正则表达式">
+ <strong>下一篇：</strong><br> 
+ <span>正则表达式
+</span>
+</a>
+</div>
+
+</nav>
+
 	
 
 <section id="comments" class="comment">
@@ -164,8 +199,57 @@
 </section>
 
 </div>  
-        </div>
-        <footer><div id="footer">
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git</a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS</a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network</a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react</a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject</a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="../img/author.jpg" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
 	
 	<div class="line">
 		<span></span>
@@ -204,7 +288,7 @@
 	</p>
 </div>
 </footer>
-        <script src="/js/jquery-2.0.3.min.js"></script>
+    <script src="/js/jquery-2.0.3.min.js"></script>
 <script src="/js/jquery.imagesloaded.min.js"></script>
 <script src="/js/gallery.js"></script>
 <script src="/js/jquery.qrcode-0.12.0.min.js"></script>
@@ -250,6 +334,32 @@ $(document).ready(function(){
       o.css('display', 'none');
         
     }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
   });
 });
 </script>
@@ -370,6 +480,5 @@ ga('send', 'pageview');
 
 <!-- Tiny_search End -->
 
-      </body>
-     </html>
-     
+  </body>
+</html>

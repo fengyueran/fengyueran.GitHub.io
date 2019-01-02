@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="Xinghunm">
 <meta property="og:description" content="最近在做一个上传的客户端，上传的部分由后端同学以SDK的方式提供，因此该SDK是在一个独立的仓库，那么对于客户端该如何方便的对集成该SDK呢？这就可以考虑用git的submodule。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-05T03:08:32.000Z">
+<meta property="og:updated_time" content="2018-12-14T09:16:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git submodule的使用">
 <meta name="twitter:description" content="最近在做一个上传的客户端，上传的部分由后端同学以SDK的方式提供，因此该SDK是在一个独立的仓库，那么对于客户端该如何方便的对集成该SDK呢？这就可以考虑用git的submodule。">
@@ -160,7 +160,7 @@
 <p>在工作目录克隆下submodule的仓库，切换到工作分支进行修改提交并push到远程仓库。这种方法需要submodule开发人员告诉MainProject的开发人员submodule有更新或主动查看是否有更新，有更新时就在MainProject的src/uploaderSDK下pull远程代码(需要知道submodule的工作分支)，快速合并后，uploaderSDK的commit有如下变化，此时同1不要git submodule update，而只是在MainProject下提交这个更改。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Subproject commit f4573cc1bb50000779202c7f56a640b1ffc075cb</span><br><span class="line">+Subproject commit 64ae6d149c0f6e3b06b8cea262c6126a7bc0887f</span><br></pre></td></tr></table></figure></p>
 <h3 id="删除submodule"><a href="#删除submodule" class="headerlink" title="删除submodule"></a><strong>删除submodule</strong></h3><p>执行如下命令</p>
 <p>1) $ git submodule deinit<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">逆初始化模块，submodule为子模块目录，执行后可发现子模块目录被清空</span><br><span class="line">$ git submodule deinit [submodule_name] </span><br><span class="line">-&gt; Cleared directory &apos;test2sub&apos;</span><br><span class="line">Submodule &apos;test2sub&apos; (git@github.com:fengyueran/test2sub.git) unregistered for path &apos;test2sub&apos;</span><br><span class="line"></span><br><span class="line">//执行如下命令还能看到子项目信息</span><br><span class="line">$ git submodule</span><br><span class="line">-&gt; -dab52c62f52353d9967619625c28e28dc4320aef test2sub</span><br></pre></td></tr></table></figure></p>
-<p>2) $ git rm –cached [submodule_name]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 删除.gitmodules中记录的模块信息（--cached选项清除.git/modules中的缓存）</span><br><span class="line">git rm --cached test2sub</span><br><span class="line">//执行如下命令已看看不到删除的子项目信息了</span><br><span class="line">$ git submodule</span><br></pre></td></tr></table></figure></p>
+<p>2) $ git rm <code>--</code>cached [submodule_name]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 删除.gitmodules中记录的模块信息（--cached选项清除.git/modules中的缓存）</span><br><span class="line">git rm --cached test2sub</span><br><span class="line">//执行如下命令已看看不到删除的子项目信息了</span><br><span class="line">$ git submodule</span><br></pre></td></tr></table></figure></p>
 <p>3）$ git commit<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;remove submodule&quot;</span><br></pre></td></tr></table></figure></p>
   
 	</div>
@@ -245,6 +245,10 @@
 		  
 		
 		  
+			<li><a href="/categories/network/" title="network">network</a></li>
+		  
+		
+		  
 			<li><a href="/categories/react/" title="react">react</a></li>
 		  
 		
@@ -302,7 +306,7 @@
 		
 
 	<p class="copyright" style="margin-top: 10px;">
-	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
 	
 	<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
 	

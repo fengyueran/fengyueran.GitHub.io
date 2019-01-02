@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="Xinghunm">
 <meta property="og:description" content="正则表达式，对于前端同学的我来说用得不多，也就一直没去研究，当需要写正则时候就是一头雾水，包括配置webpack,jest等。于是在这里整理了一些JavaScritpt正则相关的内容，以此对正则表达式有一个基本的认识并能够运用正则处理日常需求。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-05T03:08:32.000Z">
+<meta property="og:updated_time" content="2019-01-02T06:54:00.153Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="正则表达式">
 <meta name="twitter:description" content="正则表达式，对于前端同学的我来说用得不多，也就一直没去研究，当需要写正则时候就是一头雾水，包括配置webpack,jest等。于是在这里整理了一些JavaScritpt正则相关的内容，以此对正则表达式有一个基本的认识并能够运用正则处理日常需求。">
@@ -140,7 +140,7 @@
 <li><p><strong>正则表达式</strong><br>它描述了一种字符串匹配的模式，即要寻找符合这一模式(某种规则)的子串，找到后进行提取或替换。</p>
 </li>
 <li><p><strong>元字符</strong><br>在正则表达式中具有特殊含义的字符，如<code>+</code>号，代表前面的字符必须至少出现一次（1次或多次），runoo+b，可以匹配 runoob、runooob、runoooooob等。<br><code>*</code> 号代表字符可以不出现，也可以出现一次或者多次（0次、或1次、或多次）<br>runoo*b，可以匹配 runob、runoob、runoooooob 等。<br>如果要匹配字符串中的特殊符号，则需要对其进行转义，即在其前加一个<code>\</code>，如<code>runo\+ob</code> 匹配 <code>runo+ob</code>。<br>以下是正则中的特殊字符：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">( ) [ ] &#123; &#123; \ ^ $ | ? * + . &lt; &gt; - = !</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">( ) [ ] &#123; &#125; \ ^ $ | ? * + .</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>子模式</strong><br>在正则表达式中，可以使用括号()将模式中的子字符串括起来，以形成一个子模式。将子模式视为一个整体时，那么它就相当于一个单个字符。</p>
 </li>
@@ -254,7 +254,14 @@
 <li><p>匹配最后一个斜杠后的，最后一个点前的内容</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var s = &apos;http://i2.xxx.com/wx/images_2016/monkey/m4_1e3thtr.png&apos;;</span><br><span class="line"></span><br><span class="line">//要匹配目标内容，可以从后往回推，首先是后缀名(.*表示)，后缀名前跟着一个&apos;.&apos;(\.表示)，&apos;.&apos;前则是目标内容，用括号捕获，目标内容前为斜杠(\/表示)，斜杠前为任意内容，正则表达式如下：</span><br><span class="line">var r =/.*\/(.*)\..*/;</span><br><span class="line">var m = s.match(r);</span><br><span class="line">console.log(str.match(patt));</span><br><span class="line">=&gt; [&quot;http://i2.xxx.com/wx/images_2016/monkey/m4_1e3thtr.png&quot;,&quot;m4_1e3thtr&quot;]</span><br></pre></td></tr></table></figure>
 </li>
+<li><p>验证字符串组成，第一个为数字，后面可以是字母、数字、下划线组成的1到50位的字符。</p>
+</li>
 </ul>
+<p><code>str.match(/\d\w{1,50}$/)</code></p>
+<ul>
+<li>js将一浮点数小数点左边的数字每三位加一个逗号</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//当一个字符串中某个数字后跟着n对三个数字(\d&#123;3&#125;)就匹配这个数字</span><br><span class="line">const formateNum = (num) =&gt; &#123;</span><br><span class="line">  const numStr = num.toString();</span><br><span class="line">  //替换小数点左边的数字</span><br><span class="line">  return numStr.replace(/\d+/, (match) =&gt; &#123;</span><br><span class="line">    //替换目标数字为`$&#123;matchNum&#125;,`</span><br><span class="line">    return match.replace(/(\d)(?=(\d&#123;3&#125;+$))/, (s1) =&gt; `$&#123;s1&#125;,`);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">formateNum(435345.656)</span><br><span class="line">=&gt; &quot;435,345.656&quot;</span><br></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -291,7 +298,7 @@
 <nav class="article-nav clearfix">
  
  <div class="prev">
- <a href="/2017/06/20/react最佳实践/" title="React最佳实践">
+ <a href="/2017/06/20/排序方法/" title="React最佳实践">
   <strong>上一篇：</strong><br>
   <span>
   React最佳实践</span>
@@ -335,6 +342,10 @@
 		
 		  
 			<li><a href="/categories/JS/" title="JS">JS</a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network</a></li>
 		  
 		
 		  
@@ -395,7 +406,7 @@
 		
 
 	<p class="copyright" style="margin-top: 10px;">
-	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2018
+	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
 	
 	<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
 	
