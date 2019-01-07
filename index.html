@@ -32,8 +32,7 @@
   <body>
     <header>
       
-
-<div id="xh">
+<div>
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
@@ -63,49 +62,6 @@
 				</ul>
 			</ul></nav>			
 </div>
-<script>
-	const isHome = document.getElementsByTagName('title')[0].text == 'Xinghunm';
-
-	function scrollTo(element, to, duration) {
-			var start = element.scrollTop,
-					change = to - start,
-					currentTime = 0,
-					increment = 20;
-					
-			var animateScroll = function(){        
-					currentTime += increment;
-					var val = Math.easeInOutQuad(currentTime, start, change, duration);
-					element.scrollTop = val;
-					if(currentTime < duration) {
-							setTimeout(animateScroll, increment);
-					}
-			};
-			animateScroll();
-	}
-
-	//t = current time
-	//b = start value
-	//c = change in value
-	//d = duration
-	Math.easeInOutQuad = function (t, b, c, d) {
-		t /= d/2;
-		if (t < 1) return c/2*t*t + b;
-		t--;
-		return -c/2 * (t*(t-2) - 1) + b;
-	};
-
-	if (isHome) {
-	  document.getElementById("xh").style.height = window.innerHeight + 'px';
-		window.timer =	setTimeout(function() {
-			if (document.documentElement.scrollTop==0) {
-				scrollTo(document.documentElement, window.innerHeight, 1000)
-			}}, 1500)
-  } else if(window.timer) {
-		clearTimeout(window.timer);
-		window.timer = null;
-	}
-
-</script>
     </header>
     <div id="container">
       <div id="main">
@@ -113,15 +69,15 @@
   
 <section class="post" itemscope="" itemprop="blogitem">
   
-    <a href="/2018/12/28/nginx配置/" title="" itemprop="url">
+    <a href="/2017/10/11/10.nginx基本配置及常用命令/" title="nginx基本配置及常用命令" itemprop="url">
   
-    <h1 itemprop="name"></h1>
+    <h1 itemprop="name">nginx基本配置及常用命令</h1>
     
      
-           <p itemprop="description">123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566########### 每个指令必</p>
-        
+      <p itemprop="description">最近自己搭建了一个网站，并准备用nginx作为服务器，于是搜索了nginx的配置。nginx可配置项很多，由于该网站只是个人使用，只是简单进行了配置，在这里作一个记录。</p>
+      
     
-    <time datetime="2018-12-28T03:18:11.000Z" itemprop="datePublished">2018-12-28</time>
+    <time datetime="2017-10-11T10:10:20.000Z" itemprop="datePublished">2017-10-11</time>
   </a>
 </section>
 
@@ -133,22 +89,15 @@
   
 <section class="post" itemscope="" itemprop="blogitem">
   
-    <a href="/2018/12/27/JS常用函数/" title="" itemprop="url">
+    <a href="/2017/06/27/树的深度遍历与广度遍历/" title="树的深度遍历与广度遍历" itemprop="url">
   
-    <h1 itemprop="name"></h1>
+    <h1 itemprop="name">树的深度遍历与广度遍历</h1>
     
      
-           <p itemprop="description">取整函数
-向上取整: Math.ceil():
-向下取整: Math.floor():
-四舍五入: Math.round():
-
-生成随机数
-产生[m, n]的随机整数
-12// Math.random产生[0, 1)的随机数const random = (m, n) =&amp;gt;</p>
-        
+      <p itemprop="description">作为一个非科班出生的前端开发人员，平时对数据结构与算法了解得相对较少，当谈到深度遍历与广度遍历时就一脸懵逼，于是查阅相关资料对其有一个基本认识并能够实现深度、广度遍历的方法。</p>
+      
     
-    <time datetime="2018-12-27T07:13:29.000Z" itemprop="datePublished">2018-12-27</time>
+    <time datetime="2017-06-26T18:11:08.000Z" itemprop="datePublished">2017-06-27</time>
   </a>
 </section>
 
@@ -160,12 +109,12 @@
   
 <section class="post" itemscope="" itemprop="blogitem">
   
-    <a href="/2017/06/20/react最佳实践/" title="React最佳实践" itemprop="url">
+    <a href="/2017/06/20/伪类与伪元素的区别/" title="伪类与伪元素的区别" itemprop="url">
   
-    <h1 itemprop="name">React最佳实践</h1>
+    <h1 itemprop="name">伪类与伪元素的区别</h1>
     
      
-      <p itemprop="description">在React应用的开发中遵循一定的基本准则，能使代码更加友好，提高代码质量。</p>
+      <p itemprop="description">伪类与伪元素，一直傻傻分不清楚。</p>
       
     
     <time datetime="2017-06-20T12:10:07.000Z" itemprop="datePublished">2017-06-20</time>
@@ -180,7 +129,7 @@
   
 <section class="post" itemscope="" itemprop="blogitem">
   
-    <a href="/2017/06/20/排序方法/" title="React最佳实践" itemprop="url">
+    <a href="/2017/06/20/react最佳实践/" title="React最佳实践" itemprop="url">
   
     <h1 itemprop="name">React最佳实践</h1>
     
@@ -280,15 +229,15 @@
   
 <section class="post" itemscope="" itemprop="blogitem">
   
-    <a href="/2016/01/01/AJAX是什么/" title="AJAX是什么" itemprop="url">
+    <a href="/2016/06/05/JS常用方法/" title="JS常用方法" itemprop="url">
   
-    <h1 itemprop="name">AJAX是什么</h1>
+    <h1 itemprop="name">JS常用方法</h1>
     
      
-      <p itemprop="description">前端的同学在日常编程中应该对网络请求得心应手，什么get请求、post请求第三方库api一调用得溜溜的，其实这些库基本都是封装的ajax请求，那什么是ajax呢？</p>
+      <p itemprop="description">js中方法很多，在这里记录下自己容易忘记的一些较为重要的方法和技巧</p>
       
     
-    <time datetime="2016-01-01T10:10:20.000Z" itemprop="datePublished">2016-01-01</time>
+    <time datetime="2016-06-05T10:10:20.000Z" itemprop="datePublished">2016-06-05</time>
   </a>
 </section>
 
@@ -300,16 +249,15 @@
   
 <section class="post" itemscope="" itemprop="blogitem">
   
-    <a href="/2016/01/01/JavaScript中的this/" title="AJAX是什么" itemprop="url">
+    <a href="/2016/05/05/css选择器/" title="css选择器" itemprop="url">
   
-    <h1 itemprop="name">AJAX是什么</h1>
+    <h1 itemprop="name">css选择器</h1>
     
      
-           <p itemprop="description">this是什么在JavaScript中并没有OOP编程的概念，我们谈到的this不同于一些OOP编程里指向的实例化对象，它指的是运行时的上下文。所谓上下文，就是运行时所在的环境对象，比如你在公司，可能你的领导是你的部门经理，在家就是你媳妇儿一样，不同的场合上下文是不一样的。
-什么</p>
-        
+      <p itemprop="description">css选择器用法较多，不常用的选择器容易遗忘，于是在这里整理出css选择器的基本用法，以备查用。</p>
+      
     
-    <time datetime="2016-01-01T10:10:20.000Z" itemprop="datePublished">2016-01-01</time>
+    <time datetime="2016-05-05T10:10:20.000Z" itemprop="datePublished">2016-05-05</time>
   </a>
 </section>
 
@@ -336,23 +284,39 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git</a></li>
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/JS/" title="JS">JS</a></li>
+			<li><a href="/categories/JS/" title="JS">JS<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/network/" title="network">network</a></li>
+			<li><a href="/categories/css/" title="css">css<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/react/" title="react">react</a></li>
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/subject/" title="subject">subject</a></li>
+			<li><a href="/categories/js/" title="js">js<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -363,7 +327,7 @@
   <br>
   <p class="asidetitle">微信</p>
   <p>我的微信号，和我一起成长：</p>
-  <img src="../img/author.jpg" width="230px">
+  <img src="/images/weixin.png" width="230px">
 </div>
 
 
@@ -404,13 +368,13 @@
 			
 		
 
-	<p class="copyright" style="margin-top: 10px;">
-	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
-	
-	<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
-	
-
-	</p>
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
 </div>
 </footer>
     <script src="/js/jquery-2.0.3.min.js"></script>
@@ -462,6 +426,8 @@ $(document).ready(function(){
   });
 });
 </script>
+
+
 
 
 

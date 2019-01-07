@@ -4,25 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>AJAX是什么 | Xinghunm</title>
+    <title>css选择器 | Xinghunm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Xinghunm">
     
 
     
-    <meta name="description" content="基本选择器 *: 通配符，匹配任何元素例：* { color: red }  #id: id选择器例：匹配所有id属性为app的元素#app { color: red }  .class: class选择器匹配所有class属性为btn的元素例：.btn { color: red }  element: 元素选择器匹配所有div标签例：div { color: red }   优先级: # &amp;gt">
-<meta name="keywords" content="network">
+    <meta name="description" content="css选择器用法较多，不常用的选择器容易遗忘，于是在这里整理出css选择器的基本用法，以备查用。">
+<meta name="keywords" content="css">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AJAX是什么">
-<meta property="og:url" content="http://yoursite.com/2016/01/01/css选择器/index.html">
+<meta property="og:title" content="css选择器">
+<meta property="og:url" content="http://yoursite.com/2016/05/05/css选择器/index.html">
 <meta property="og:site_name" content="Xinghunm">
-<meta property="og:description" content="基本选择器 *: 通配符，匹配任何元素例：* { color: red }  #id: id选择器例：匹配所有id属性为app的元素#app { color: red }  .class: class选择器匹配所有class属性为btn的元素例：.btn { color: red }  element: 元素选择器匹配所有div标签例：div { color: red }   优先级: # &amp;gt">
+<meta property="og:description" content="css选择器用法较多，不常用的选择器容易遗忘，于是在这里整理出css选择器的基本用法，以备查用。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-02T02:20:50.214Z">
+<meta property="og:updated_time" content="2019-01-07T08:43:36.395Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AJAX是什么">
-<meta name="twitter:description" content="基本选择器 *: 通配符，匹配任何元素例：* { color: red }  #id: id选择器例：匹配所有id属性为app的元素#app { color: red }  .class: class选择器匹配所有class属性为btn的元素例：.btn { color: red }  element: 元素选择器匹配所有div标签例：div { color: red }   优先级: # &amp;gt">
+<meta name="twitter:title" content="css选择器">
+<meta name="twitter:description" content="css选择器用法较多，不常用的选择器容易遗忘，于是在这里整理出css选择器的基本用法，以备查用。">
 
     
     <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
@@ -37,8 +37,7 @@
   <body>
     <header>
       
-
-<div id="xh">
+<div>
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
@@ -68,49 +67,6 @@
 				</ul>
 			</ul></nav>			
 </div>
-<script>
-	const isHome = document.getElementsByTagName('title')[0].text == 'Xinghunm';
-
-	function scrollTo(element, to, duration) {
-			var start = element.scrollTop,
-					change = to - start,
-					currentTime = 0,
-					increment = 20;
-					
-			var animateScroll = function(){        
-					currentTime += increment;
-					var val = Math.easeInOutQuad(currentTime, start, change, duration);
-					element.scrollTop = val;
-					if(currentTime < duration) {
-							setTimeout(animateScroll, increment);
-					}
-			};
-			animateScroll();
-	}
-
-	//t = current time
-	//b = start value
-	//c = change in value
-	//d = duration
-	Math.easeInOutQuad = function (t, b, c, d) {
-		t /= d/2;
-		if (t < 1) return c/2*t*t + b;
-		t--;
-		return -c/2 * (t*(t-2) - 1) + b;
-	};
-
-	if (isHome) {
-	  document.getElementById("xh").style.height = window.innerHeight + 'px';
-		window.timer =	setTimeout(function() {
-			if (document.documentElement.scrollTop==0) {
-				scrollTo(document.documentElement, window.innerHeight, 1000)
-			}}, 1500)
-  } else if(window.timer) {
-		clearTimeout(window.timer);
-		window.timer = null;
-	}
-
-</script>
     </header>
     <div id="container">
       <div id="main" class="post" itemscope="" itemprop="blogPost">
@@ -119,11 +75,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/01/01/css选择器/" title="AJAX是什么" itemprop="url">AJAX是什么</a>
+      <a href="/2016/05/05/css选择器/" title="css选择器" itemprop="url">css选择器</a>
   </h1>
-  
-  <p class="article-time">
-    <time datetime="2016-01-01T10:10:20.000Z" itemprop="datePublished"> Published 2016-01-01</time>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-05-05T10:10:20.000Z" itemprop="datePublished"> Published 2016-05-05</time>
     
   </p>
 </header>
@@ -253,13 +212,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/network/">network</a>
+  <a class="article-category-link" href="/categories/css/">css</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/network/">network</a>
+  <span></span> <a href="/tags/css/">css</a>
   </div>
 
 </div>
@@ -268,7 +227,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/01/01/css选择器/" data-title="AJAX是什么 | Xinghunm" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/05/05/css选择器/" data-title="css选择器 | Xinghunm" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -282,13 +241,21 @@
 <nav class="article-nav clearfix">
  
  <div class="prev">
- <a href="/2016/01/01/JavaScript中的this/" title="AJAX是什么">
+ <a href="/2016/06/05/JS常用方法/" title="JS常用方法">
   <strong>上一篇：</strong><br>
   <span>
-  AJAX是什么</span>
+  JS常用方法</span>
 </a>
 </div>
 
+
+<div class="next">
+<a href="/2016/01/02/JavaScript中的this/" title="JavaScript中的this">
+ <strong>下一篇：</strong><br> 
+ <span>JavaScript中的this
+</span>
+</a>
+</div>
 
 </nav>
 
@@ -299,6 +266,8 @@
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
+
+
 
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
@@ -313,23 +282,39 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git</a></li>
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/JS/" title="JS">JS</a></li>
+			<li><a href="/categories/JS/" title="JS">JS<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/network/" title="network">network</a></li>
+			<li><a href="/categories/css/" title="css">css<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/react/" title="react">react</a></li>
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/subject/" title="subject">subject</a></li>
+			<li><a href="/categories/js/" title="js">js<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -340,7 +325,7 @@
   <br>
   <p class="asidetitle">微信</p>
   <p>我的微信号，和我一起成长：</p>
-  <img src="../img/author.jpg" width="230px">
+  <img src="/images/weixin.png" width="230px">
 </div>
 
 
@@ -381,13 +366,13 @@
 			
 		
 
-	<p class="copyright" style="margin-top: 10px;">
-	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
-	
-	<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
-	
-
-	</p>
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
 </div>
 </footer>
     <script src="/js/jquery-2.0.3.min.js"></script>
@@ -538,6 +523,8 @@ var disqus_shortname = 'xinghunm';
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 }());
 </script>
+
+
 
 
 

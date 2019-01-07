@@ -4,24 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>Xinghunm</title>
+    <title>伪类与伪元素的区别 | Xinghunm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Xinghunm">
     
 
     
-    <meta name="description" content="取整函数 向上取整: Math.ceil(): 向下取整: Math.floor(): 四舍五入: Math.round():  生成随机数 产生[m, n]的随机整数 12// Math.random产生[0, 1)的随机数const random = (m, n) =&amp;gt; Math.ceil(Math.random() * (n - m)) + m;  产生(m, n]的随机整数 1234">
+    <meta name="description" content="伪类与伪元素，一直傻傻分不清楚。">
+<meta name="keywords" content="html">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Xinghunm">
-<meta property="og:url" content="http://yoursite.com/2018/12/27/JS常用函数/index.html">
+<meta property="og:title" content="伪类与伪元素的区别">
+<meta property="og:url" content="http://yoursite.com/2017/06/20/伪类与伪元素的区别/index.html">
 <meta property="og:site_name" content="Xinghunm">
-<meta property="og:description" content="取整函数 向上取整: Math.ceil(): 向下取整: Math.floor(): 四舍五入: Math.round():  生成随机数 产生[m, n]的随机整数 12// Math.random产生[0, 1)的随机数const random = (m, n) =&amp;gt; Math.ceil(Math.random() * (n - m)) + m;  产生(m, n]的随机整数 1234">
+<meta property="og:description" content="伪类与伪元素，一直傻傻分不清楚。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-27T08:05:48.000Z">
+<meta property="og:updated_time" content="2019-01-07T08:45:33.427Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Xinghunm">
-<meta name="twitter:description" content="取整函数 向上取整: Math.ceil(): 向下取整: Math.floor(): 四舍五入: Math.round():  生成随机数 产生[m, n]的随机整数 12// Math.random产生[0, 1)的随机数const random = (m, n) =&amp;gt; Math.ceil(Math.random() * (n - m)) + m;  产生(m, n]的随机整数 1234">
+<meta name="twitter:title" content="伪类与伪元素的区别">
+<meta name="twitter:description" content="伪类与伪元素，一直傻傻分不清楚。">
 
     
     <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
@@ -36,8 +37,7 @@
   <body>
     <header>
       
-
-<div id="xh">
+<div>
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
@@ -67,49 +67,6 @@
 				</ul>
 			</ul></nav>			
 </div>
-<script>
-	const isHome = document.getElementsByTagName('title')[0].text == 'Xinghunm';
-
-	function scrollTo(element, to, duration) {
-			var start = element.scrollTop,
-					change = to - start,
-					currentTime = 0,
-					increment = 20;
-					
-			var animateScroll = function(){        
-					currentTime += increment;
-					var val = Math.easeInOutQuad(currentTime, start, change, duration);
-					element.scrollTop = val;
-					if(currentTime < duration) {
-							setTimeout(animateScroll, increment);
-					}
-			};
-			animateScroll();
-	}
-
-	//t = current time
-	//b = start value
-	//c = change in value
-	//d = duration
-	Math.easeInOutQuad = function (t, b, c, d) {
-		t /= d/2;
-		if (t < 1) return c/2*t*t + b;
-		t--;
-		return -c/2 * (t*(t-2) - 1) + b;
-	};
-
-	if (isHome) {
-	  document.getElementById("xh").style.height = window.innerHeight + 'px';
-		window.timer =	setTimeout(function() {
-			if (document.documentElement.scrollTop==0) {
-				scrollTo(document.documentElement, window.innerHeight, 1000)
-			}}, 1500)
-  } else if(window.timer) {
-		clearTimeout(window.timer);
-		window.timer = null;
-	}
-
-</script>
     </header>
     <div id="container">
       <div id="main" class="post" itemscope="" itemprop="blogPost">
@@ -118,11 +75,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2018/12/27/JS常用函数/" title="" itemprop="url"></a>
+      <a href="/2017/06/20/伪类与伪元素的区别/" title="伪类与伪元素的区别" itemprop="url">伪类与伪元素的区别</a>
   </h1>
-  
-  <p class="article-time">
-    <time datetime="2018-12-27T07:13:29.000Z" itemprop="datePublished"> Published 2018-12-27</time>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-06-20T12:10:07.000Z" itemprop="datePublished"> Published 2017-06-20</time>
     
   </p>
 </header>
@@ -131,33 +91,49 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#取整函数"><span class="toc-number">1.</span> <span class="toc-text">取整函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成随机数"><span class="toc-number">2.</span> <span class="toc-text">生成随机数</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#伪类-pseudo-classes"><span class="toc-number">1.</span> <span class="toc-text">伪类(pseudo-classes)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪元素-Pseudo-elements"><span class="toc-number">2.</span> <span class="toc-text">伪元素(Pseudo-elements)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪类与伪元素的区别"><span class="toc-number">3.</span> <span class="toc-text">伪类与伪元素的区别</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="取整函数"><a href="#取整函数" class="headerlink" title="取整函数"></a><strong>取整函数</strong></h3><ul>
-<li>向上取整: Math.ceil():</li>
-<li>向下取整: Math.floor():</li>
-<li>四舍五入: Math.round():</li>
-</ul>
-<h3 id="生成随机数"><a href="#生成随机数" class="headerlink" title="生成随机数"></a><strong>生成随机数</strong></h3><ul>
-<li><p>产生[m, n]的随机整数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Math.random产生[0, 1)的随机数</span><br><span class="line">const random = (m, n) =&gt; Math.ceil(Math.random() * (n - m)) + m;</span><br></pre></td></tr></table></figure>
+		<h3 id="伪类-pseudo-classes"><a href="#伪类-pseudo-classes" class="headerlink" title="伪类(pseudo-classes)"></a><strong>伪类(pseudo-classes)</strong></h3><p>官方定义:</p>
+<blockquote>
+<p>The pseudo-class concept is introduced to <font color="#0099ff">permit selection</font> based on information that lies <font color="#0099ff">outside of the document</font> tree or that cannot be expressed using the other <font color="#0099ff">simple selectors</font>.</p>
+</blockquote>
+<p>其核心就是用来选择那些<font color="#0099ff">不能够被普通选择器选择</font>的文档之外的元素，比如:hover。</p>
+<h3 id="伪元素-Pseudo-elements"><a href="#伪元素-Pseudo-elements" class="headerlink" title="伪元素(Pseudo-elements)"></a><strong>伪元素(Pseudo-elements)</strong></h3><p>官方定义:</p>
+<blockquote>
+<p>Pseudo-elements <font color="#0099ff">create abstractions</font> about the document tree beyond those specified by the document language. For instance, document languages do not offer mechanisms to access the first letter or first line of an element’s content. Pseudo-elements allow authors to refer to this otherwise inaccessible information. Pseudo-elements may also provide authors a way to refer to content that does not exist in the source document.</p>
+</blockquote>
+<p>其核心就是需要<font color="#0099ff">创建</font>通常不存在于文档中的元素，比如::before。</p>
+<h3 id="伪类与伪元素的区别"><a href="#伪类与伪元素的区别" class="headerlink" title="伪类与伪元素的区别"></a><strong>伪类与伪元素的区别</strong></h3><ul>
+<li><p>表示方法<br>CSS2中伪类、伪元素都是以单冒号<code>:</code>表示，CSS2.1后规定伪类用单冒号表示，伪元素用双冒号<code>::</code>表示，浏览器同样接受CSS2时代已经存在的伪元素(:before, :after, :first-line, :first-letter等)的单冒号写法。对于CSS2之后所有新增的伪元素(如::selection)，须采用双冒号的写法。但是因为兼容性问题，大部分还是用的单冒号。</p>
 </li>
-<li><p>产生(m, n]的随机整数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const random = (m, n) =&gt; &#123;</span><br><span class="line">  const value = Math.random();</span><br><span class="line">  return value === 0 ? m + 1 : Math.ceil(value * (n - m)) + m;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>定义不同</p>
+<p>伪类即假的类，可以通过添加类来达到效果，伪元素即假元素可以通过添加元素来达到效果。<br>来看下面的例子<br><strong>例1:将一行字符串的首字母变成红色</strong></p>
+<p>现在不用伪元素应该如何实现？用CSS slector选择？想了一晚上也没想出来，既然没法选择也就没法添加一个类来改变首字母的颜色。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;I am snow&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>添加元素试试，如下创建一个元素span将首字母包裹起来，进而改变其颜色，成功了。这里，关键点在于我们创建了新的元素达到了<code>::first-letter</code>的作用，且不能通过类来实现这一效果，因此将<code>::first-letter</code>叫做伪元素而不是伪类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;&lt;span style=&#123;&#123; color: red &#125;&#125;&gt;I&lt;span/&gt; am snow&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>例2: 如下要将I am snow这句话变为红色</strong></p>
+<p>很简单用<code>:first-child</code>，同样添加一个类试试，显然很容易达到同样效果，我们并没有创建新的元素只是添加了一个类，因此将<code>:first-child</code>叫做伪类而不是伪元素，尽管它和<code>::first-letter</code>在语义上十分相似。</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">div:first-child &#123;</span><br><span class="line"> color: red;</span><br><span class="line">&#125;</span><br><span class="line">或</span><br><span class="line">.red-line &#123;</span><br><span class="line">   color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;div class=&apos;red-line&apos;&gt;</span><br><span class="line"> &lt;p&gt;I am snow&lt;/p&gt;</span><br><span class="line">&lt;div&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>产生[m, n)的随机整数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const random = (m, n) =&gt; Math.floor(Math.random() * (n - m)) + m;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>产生(m, n)的随机整数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const random = (m, n) =&gt; &#123;</span><br><span class="line">  const value = Math.floor(Math.random() * (n - m));</span><br><span class="line">  return value === 0 ? m + 1 : value + m;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
 </ul>
   
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/html/">html</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/html/">html</a>
+  </div>
 
 </div>
 
@@ -165,7 +141,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2018/12/27/JS常用函数/" data-title="Xinghunm" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/06/20/伪类与伪元素的区别/" data-title="伪类与伪元素的区别 | Xinghunm" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -179,10 +155,10 @@
 <nav class="article-nav clearfix">
  
  <div class="prev">
- <a href="/2018/12/28/nginx配置/" title="">
+ <a href="/2017/06/27/树的深度遍历与广度遍历/" title="树的深度遍历与广度遍历">
   <strong>上一篇：</strong><br>
   <span>
-  (no title)</span>
+  树的深度遍历与广度遍历</span>
 </a>
 </div>
 
@@ -205,6 +181,8 @@
   </div>
 </section>
 
+
+
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
@@ -218,23 +196,39 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git</a></li>
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/JS/" title="JS">JS</a></li>
+			<li><a href="/categories/JS/" title="JS">JS<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/network/" title="network">network</a></li>
+			<li><a href="/categories/css/" title="css">css<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/react/" title="react">react</a></li>
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/subject/" title="subject">subject</a></li>
+			<li><a href="/categories/js/" title="js">js<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -245,7 +239,7 @@
   <br>
   <p class="asidetitle">微信</p>
   <p>我的微信号，和我一起成长：</p>
-  <img src="../img/author.jpg" width="230px">
+  <img src="/images/weixin.png" width="230px">
 </div>
 
 
@@ -286,13 +280,13 @@
 			
 		
 
-	<p class="copyright" style="margin-top: 10px;">
-	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
-	
-	<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
-	
-
-	</p>
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
 </div>
 </footer>
     <script src="/js/jquery-2.0.3.min.js"></script>
@@ -443,6 +437,8 @@ var disqus_shortname = 'xinghunm';
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 }());
 </script>
+
+
 
 
 

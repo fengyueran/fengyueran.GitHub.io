@@ -37,8 +37,7 @@
   <body>
     <header>
       
-
-<div id="xh">
+<div>
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
@@ -68,49 +67,6 @@
 				</ul>
 			</ul></nav>			
 </div>
-<script>
-	const isHome = document.getElementsByTagName('title')[0].text == 'Xinghunm';
-
-	function scrollTo(element, to, duration) {
-			var start = element.scrollTop,
-					change = to - start,
-					currentTime = 0,
-					increment = 20;
-					
-			var animateScroll = function(){        
-					currentTime += increment;
-					var val = Math.easeInOutQuad(currentTime, start, change, duration);
-					element.scrollTop = val;
-					if(currentTime < duration) {
-							setTimeout(animateScroll, increment);
-					}
-			};
-			animateScroll();
-	}
-
-	//t = current time
-	//b = start value
-	//c = change in value
-	//d = duration
-	Math.easeInOutQuad = function (t, b, c, d) {
-		t /= d/2;
-		if (t < 1) return c/2*t*t + b;
-		t--;
-		return -c/2 * (t*(t-2) - 1) + b;
-	};
-
-	if (isHome) {
-	  document.getElementById("xh").style.height = window.innerHeight + 'px';
-		window.timer =	setTimeout(function() {
-			if (document.documentElement.scrollTop==0) {
-				scrollTo(document.documentElement, window.innerHeight, 1000)
-			}}, 1500)
-  } else if(window.timer) {
-		clearTimeout(window.timer);
-		window.timer = null;
-	}
-
-</script>
     </header>
     <div id="container">
       <div id="main" class="post" itemscope="" itemprop="blogPost">
@@ -121,8 +77,11 @@
     
       <a href="/2017/06/20/react最佳实践/" title="React最佳实践" itemprop="url">React最佳实践</a>
   </h1>
-  
-  <p class="article-time">
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
     <time datetime="2017-06-20T12:10:07.000Z" itemprop="datePublished"> Published 2017-06-20</time>
     
   </p>
@@ -185,18 +144,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev">
- <a href="/2018/12/27/JS常用函数/" title="">
+ <a href="/2017/06/20/伪类与伪元素的区别/" title="伪类与伪元素的区别">
   <strong>上一篇：</strong><br>
   <span>
-  (no title)</span>
+  伪类与伪元素的区别</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/06/20/排序方法/" title="React最佳实践">
+<a href="/2017/02/25/正则表达式/" title="正则表达式">
  <strong>下一篇：</strong><br> 
- <span>React最佳实践
+ <span>正则表达式
 </span>
 </a>
 </div>
@@ -211,6 +170,8 @@
   </div>
 </section>
 
+
+
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
@@ -224,23 +185,39 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git</a></li>
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/JS/" title="JS">JS</a></li>
+			<li><a href="/categories/JS/" title="JS">JS<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/network/" title="network">network</a></li>
+			<li><a href="/categories/css/" title="css">css<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/react/" title="react">react</a></li>
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/subject/" title="subject">subject</a></li>
+			<li><a href="/categories/js/" title="js">js<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -251,7 +228,7 @@
   <br>
   <p class="asidetitle">微信</p>
   <p>我的微信号，和我一起成长：</p>
-  <img src="../img/author.jpg" width="230px">
+  <img src="/images/weixin.png" width="230px">
 </div>
 
 
@@ -292,13 +269,13 @@
 			
 		
 
-	<p class="copyright" style="margin-top: 10px;">
-	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
-	
-	<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
-	
-
-	</p>
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
 </div>
 </footer>
     <script src="/js/jquery-2.0.3.min.js"></script>
@@ -449,6 +426,8 @@ var disqus_shortname = 'xinghunm';
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 }());
 </script>
+
+
 
 
 

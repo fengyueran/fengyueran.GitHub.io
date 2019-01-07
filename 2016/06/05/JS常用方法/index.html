@@ -4,25 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>React最佳实践 | Xinghunm</title>
+    <title>JS常用方法 | Xinghunm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Xinghunm">
     
 
     
-    <meta name="description" content="在React应用的开发中遵循一定的基本准则，能使代码更加友好，提高代码质量。">
-<meta name="keywords" content="react">
+    <meta name="description" content="js中方法很多，在这里记录下自己容易忘记的一些较为重要的方法和技巧">
+<meta name="keywords" content="js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React最佳实践">
-<meta property="og:url" content="http://yoursite.com/2017/06/20/排序方法/index.html">
+<meta property="og:title" content="JS常用方法">
+<meta property="og:url" content="http://yoursite.com/2016/06/05/JS常用方法/index.html">
 <meta property="og:site_name" content="Xinghunm">
-<meta property="og:description" content="在React应用的开发中遵循一定的基本准则，能使代码更加友好，提高代码质量。">
+<meta property="og:description" content="js中方法很多，在这里记录下自己容易忘记的一些较为重要的方法和技巧">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-29T02:28:01.000Z">
+<meta property="og:updated_time" content="2019-01-07T08:46:58.932Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React最佳实践">
-<meta name="twitter:description" content="在React应用的开发中遵循一定的基本准则，能使代码更加友好，提高代码质量。">
+<meta name="twitter:title" content="JS常用方法">
+<meta name="twitter:description" content="js中方法很多，在这里记录下自己容易忘记的一些较为重要的方法和技巧">
 
     
     <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
@@ -37,8 +37,7 @@
   <body>
     <header>
       
-
-<div id="xh">
+<div>
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
@@ -68,49 +67,6 @@
 				</ul>
 			</ul></nav>			
 </div>
-<script>
-	const isHome = document.getElementsByTagName('title')[0].text == 'Xinghunm';
-
-	function scrollTo(element, to, duration) {
-			var start = element.scrollTop,
-					change = to - start,
-					currentTime = 0,
-					increment = 20;
-					
-			var animateScroll = function(){        
-					currentTime += increment;
-					var val = Math.easeInOutQuad(currentTime, start, change, duration);
-					element.scrollTop = val;
-					if(currentTime < duration) {
-							setTimeout(animateScroll, increment);
-					}
-			};
-			animateScroll();
-	}
-
-	//t = current time
-	//b = start value
-	//c = change in value
-	//d = duration
-	Math.easeInOutQuad = function (t, b, c, d) {
-		t /= d/2;
-		if (t < 1) return c/2*t*t + b;
-		t--;
-		return -c/2 * (t*(t-2) - 1) + b;
-	};
-
-	if (isHome) {
-	  document.getElementById("xh").style.height = window.innerHeight + 'px';
-		window.timer =	setTimeout(function() {
-			if (document.documentElement.scrollTop==0) {
-				scrollTo(document.documentElement, window.innerHeight, 1000)
-			}}, 1500)
-  } else if(window.timer) {
-		clearTimeout(window.timer);
-		window.timer = null;
-	}
-
-</script>
     </header>
     <div id="container">
       <div id="main" class="post" itemscope="" itemprop="blogPost">
@@ -119,11 +75,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/06/20/排序方法/" title="React最佳实践" itemprop="url">React最佳实践</a>
+      <a href="/2016/06/05/JS常用方法/" title="JS常用方法" itemprop="url">JS常用方法</a>
   </h1>
-  
-  <p class="article-time">
-    <time datetime="2017-06-20T12:10:07.000Z" itemprop="datePublished"> Published 2017-06-20</time>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-06-05T10:10:20.000Z" itemprop="datePublished"> Published 2016-06-05</time>
     
   </p>
 </header>
@@ -132,24 +91,43 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#快速排序法"><span class="toc-number">1.</span> <span class="toc-text">快速排序法</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#取整函数"><span class="toc-number">1.</span> <span class="toc-text">取整函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成随机数"><span class="toc-number">2.</span> <span class="toc-text">生成随机数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#快速排序法"><span class="toc-number">3.</span> <span class="toc-text">快速排序法</span></a></li></ol>
 		
 		</div>
 		
-		<h3 id="快速排序法"><a href="#快速排序法" class="headerlink" title="快速排序法"></a><strong>快速排序法</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const quickSort = (arr) =&gt; &#123;</span><br><span class="line">  if (arr.length &lt;= 1) return arr;</span><br><span class="line">  const pivotIndex = Math.floor(arr.length / 2);</span><br><span class="line">  const pivot = arr.splice(pivotIndex, 1);</span><br><span class="line">  const left = [];</span><br><span class="line">  const right = [];</span><br><span class="line"></span><br><span class="line">  for(let i = 0; i&lt; arr.length; i++) &#123;</span><br><span class="line">    const value = arr[i];</span><br><span class="line">    if (value &lt; pivot) &#123;</span><br><span class="line">      left.push(value);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      right.push(value);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return quickSort(left).concat(pivot, quickSort(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
+		<h3 id="取整函数"><a href="#取整函数" class="headerlink" title="取整函数"></a><strong>取整函数</strong></h3><ul>
+<li>向上取整: Math.ceil():</li>
+<li>向下取整: Math.floor():</li>
+<li>四舍五入: Math.round():</li>
+</ul>
+<h3 id="生成随机数"><a href="#生成随机数" class="headerlink" title="生成随机数"></a><strong>生成随机数</strong></h3><ul>
+<li><p>产生[m, n]的随机整数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Math.random产生[0, 1)的随机数</span><br><span class="line">const random = (m, n) =&gt; Math.ceil(Math.random() * (n - m)) + m;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>产生(m, n]的随机整数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const random = (m, n) =&gt; &#123;</span><br><span class="line">  const value = Math.random();</span><br><span class="line">  return value === 0 ? m + 1 : Math.ceil(value * (n - m)) + m;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>产生[m, n)的随机整数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">const random = (m, n) =&gt; Math.floor(Math.random() * (n - m)) + m;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>产生(m, n)的随机整数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const random = (m, n) =&gt; &#123;</span><br><span class="line">  const value = Math.floor(Math.random() * (n - m));</span><br><span class="line">  return value === 0 ? m + 1 : value + m;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="快速排序法"><a href="#快速排序法" class="headerlink" title="快速排序法"></a><strong>快速排序法</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const quickSort = (arr) =&gt; &#123;</span><br><span class="line">  if (arr.length &lt;= 1) return arr;</span><br><span class="line">  const pivotIndex = Math.floor(arr.length / 2);</span><br><span class="line">  const pivot = arr.splice(pivotIndex, 1);</span><br><span class="line">  const left = [];</span><br><span class="line">  const right = [];</span><br><span class="line"></span><br><span class="line">  for(let i = 0; i&lt; arr.length; i++) &#123;</span><br><span class="line">    const value = arr[i];</span><br><span class="line">    if (value &lt; pivot) &#123;</span><br><span class="line">      left.push(value);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      right.push(value);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return quickSort(left).concat(pivot, quickSort(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/react/">react</a>
+  <a class="article-category-link" href="/categories/js/">js</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/react/">react</a>
+  <span></span> <a href="/tags/js/">js</a>
   </div>
 
 </div>
@@ -158,7 +136,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2017/06/20/排序方法/" data-title="React最佳实践 | Xinghunm" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/06/05/JS常用方法/" data-title="JS常用方法 | Xinghunm" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -172,18 +150,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev">
- <a href="/2017/06/20/react最佳实践/" title="React最佳实践">
+ <a href="/2016/06/24/git的常用命令简介/" title="Git常用命令">
   <strong>上一篇：</strong><br>
   <span>
-  React最佳实践</span>
+  Git常用命令</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2017/02/25/正则表达式/" title="正则表达式">
+<a href="/2016/05/05/css选择器/" title="css选择器">
  <strong>下一篇：</strong><br> 
- <span>正则表达式
+ <span>css选择器
 </span>
 </a>
 </div>
@@ -198,6 +176,8 @@
   </div>
 </section>
 
+
+
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
@@ -211,23 +191,39 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git</a></li>
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/JS/" title="JS">JS</a></li>
+			<li><a href="/categories/JS/" title="JS">JS<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/network/" title="network">network</a></li>
+			<li><a href="/categories/css/" title="css">css<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/react/" title="react">react</a></li>
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/subject/" title="subject">subject</a></li>
+			<li><a href="/categories/js/" title="js">js<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -238,7 +234,7 @@
   <br>
   <p class="asidetitle">微信</p>
   <p>我的微信号，和我一起成长：</p>
-  <img src="../img/author.jpg" width="230px">
+  <img src="/images/weixin.png" width="230px">
 </div>
 
 
@@ -279,13 +275,13 @@
 			
 		
 
-	<p class="copyright" style="margin-top: 10px;">
-	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
-	
-	<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
-	
-
-	</p>
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
 </div>
 </footer>
     <script src="/js/jquery-2.0.3.min.js"></script>
@@ -436,6 +432,8 @@ var disqus_shortname = 'xinghunm';
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 }());
 </script>
+
+
 
 
 

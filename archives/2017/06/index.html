@@ -32,8 +32,7 @@
     <body>
       <header>
         
-
-<div id="xh">
+<div>
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
@@ -63,49 +62,6 @@
 				</ul>
 			</ul></nav>			
 </div>
-<script>
-	const isHome = document.getElementsByTagName('title')[0].text == 'Xinghunm';
-
-	function scrollTo(element, to, duration) {
-			var start = element.scrollTop,
-					change = to - start,
-					currentTime = 0,
-					increment = 20;
-					
-			var animateScroll = function(){        
-					currentTime += increment;
-					var val = Math.easeInOutQuad(currentTime, start, change, duration);
-					element.scrollTop = val;
-					if(currentTime < duration) {
-							setTimeout(animateScroll, increment);
-					}
-			};
-			animateScroll();
-	}
-
-	//t = current time
-	//b = start value
-	//c = change in value
-	//d = duration
-	Math.easeInOutQuad = function (t, b, c, d) {
-		t /= d/2;
-		if (t < 1) return c/2*t*t + b;
-		t--;
-		return -c/2 * (t*(t-2) - 1) + b;
-	};
-
-	if (isHome) {
-	  document.getElementById("xh").style.height = window.innerHeight + 'px';
-		window.timer =	setTimeout(function() {
-			if (document.documentElement.scrollTop==0) {
-				scrollTo(document.documentElement, window.innerHeight, 1000)
-			}}, 1500)
-  } else if(window.timer) {
-		clearTimeout(window.timer);
-		window.timer = null;
-	}
-
-</script>
       </header>
       <div id="container">
         
@@ -114,7 +70,7 @@
   <h2 class="archive-icon">2017/6</h2>
   
   <div class="archiveslist archive-float clearfix">
-   <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">Dec 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">Jun 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">Feb 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">Jan 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">Jul 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">Jun 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">Jan 2016</a><span class="archive-list-count">3</span></li></ul>
+   <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">Oct 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">Jun 2017</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">Feb 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">Jan 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">Jul 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/06/">Jun 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">Jan 2016</a><span class="archive-list-count">2</span></li></ul>
  </div>
   
 </div>
@@ -123,20 +79,33 @@
 
   <section class="post" itemscope="" itemprop="blogPost">
   
-    <a href="/2017/06/20/react最佳实践/" title="React最佳实践" itemprop="url">
+    <a href="/2017/06/27/树的深度遍历与广度遍历/" title="树的深度遍历与广度遍历" itemprop="url">
   
 
-    <time datetime="2017-06-20T12:10:07.000Z" itemprop="datePublished">2017-06-20</time>
+    <time datetime="2017-06-26T18:11:08.000Z" itemprop="datePublished">2017-06-27</time>
 
 
-    <h1 itemprop="name">React最佳实践</h1>
+    <h1 itemprop="name">树的深度遍历与广度遍历</h1>
 
   </a>
 </section>
 
   <section class="post" itemscope="" itemprop="blogPost">
   
-    <a href="/2017/06/20/排序方法/" title="React最佳实践" itemprop="url">
+    <a href="/2017/06/20/伪类与伪元素的区别/" title="伪类与伪元素的区别" itemprop="url">
+  
+
+    <time datetime="2017-06-20T12:10:07.000Z" itemprop="datePublished">2017-06-20</time>
+
+
+    <h1 itemprop="name">伪类与伪元素的区别</h1>
+
+  </a>
+</section>
+
+  <section class="post" itemscope="" itemprop="blogPost">
+  
+    <a href="/2017/06/20/react最佳实践/" title="React最佳实践" itemprop="url">
   
 
     <time datetime="2017-06-20T12:10:07.000Z" itemprop="datePublished">2017-06-20</time>
@@ -182,13 +151,13 @@
 			
 		
 
-	<p class="copyright" style="margin-top: 10px;">
-	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
-	
-	<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
-	
-
-	</p>
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
 </div>
 </footer>
       <script src="/js/jquery-2.0.3.min.js"></script>
@@ -240,6 +209,8 @@ $(document).ready(function(){
   });
 });
 </script>
+
+
 
 
 

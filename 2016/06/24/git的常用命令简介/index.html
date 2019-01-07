@@ -20,7 +20,7 @@
 <meta property="og:description" content="Git作为一种流行的版本管理系统已经广泛应用于我们的日常开发中，在这里记录下日常遇到的关于git的常见用法，以备后续查询。">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/assets/gitSketch.png">
-<meta property="og:updated_time" content="2018-12-13T06:20:42.000Z">
+<meta property="og:updated_time" content="2018-12-23T12:31:33.510Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git常用命令">
 <meta name="twitter:description" content="Git作为一种流行的版本管理系统已经广泛应用于我们的日常开发中，在这里记录下日常遇到的关于git的常见用法，以备后续查询。">
@@ -39,8 +39,7 @@
   <body>
     <header>
       
-
-<div id="xh">
+<div>
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
@@ -70,49 +69,6 @@
 				</ul>
 			</ul></nav>			
 </div>
-<script>
-	const isHome = document.getElementsByTagName('title')[0].text == 'Xinghunm';
-
-	function scrollTo(element, to, duration) {
-			var start = element.scrollTop,
-					change = to - start,
-					currentTime = 0,
-					increment = 20;
-					
-			var animateScroll = function(){        
-					currentTime += increment;
-					var val = Math.easeInOutQuad(currentTime, start, change, duration);
-					element.scrollTop = val;
-					if(currentTime < duration) {
-							setTimeout(animateScroll, increment);
-					}
-			};
-			animateScroll();
-	}
-
-	//t = current time
-	//b = start value
-	//c = change in value
-	//d = duration
-	Math.easeInOutQuad = function (t, b, c, d) {
-		t /= d/2;
-		if (t < 1) return c/2*t*t + b;
-		t--;
-		return -c/2 * (t*(t-2) - 1) + b;
-	};
-
-	if (isHome) {
-	  document.getElementById("xh").style.height = window.innerHeight + 'px';
-		window.timer =	setTimeout(function() {
-			if (document.documentElement.scrollTop==0) {
-				scrollTo(document.documentElement, window.innerHeight, 1000)
-			}}, 1500)
-  } else if(window.timer) {
-		clearTimeout(window.timer);
-		window.timer = null;
-	}
-
-</script>
     </header>
     <div id="container">
       <div id="main" class="post" itemscope="" itemprop="blogPost">
@@ -123,8 +79,11 @@
     
       <a href="/2016/06/24/git的常用命令简介/" title="Git常用命令" itemprop="url">Git常用命令</a>
   </h1>
-  
-  <p class="article-time">
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
     <time datetime="2016-06-24T15:30:09.000Z" itemprop="datePublished"> Published 2016-06-24</time>
     
   </p>
@@ -240,9 +199,9 @@ $ git merge [branch-name]
 
 
 <div class="next">
-<a href="/2016/01/01/AJAX是什么/" title="AJAX是什么">
+<a href="/2016/06/05/JS常用方法/" title="JS常用方法">
  <strong>下一篇：</strong><br> 
- <span>AJAX是什么
+ <span>JS常用方法
 </span>
 </a>
 </div>
@@ -257,6 +216,8 @@ $ git merge [branch-name]
   </div>
 </section>
 
+
+
 </div>  
       <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
 
@@ -270,23 +231,39 @@ $ git merge [branch-name]
 		<ul>
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git</a></li>
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/JS/" title="JS">JS</a></li>
+			<li><a href="/categories/JS/" title="JS">JS<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/network/" title="network">network</a></li>
+			<li><a href="/categories/css/" title="css">css<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/react/" title="react">react</a></li>
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/subject/" title="subject">subject</a></li>
+			<li><a href="/categories/js/" title="js">js<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
 		  
 		
 		</ul>
@@ -297,7 +274,7 @@ $ git merge [branch-name]
   <br>
   <p class="asidetitle">微信</p>
   <p>我的微信号，和我一起成长：</p>
-  <img src="../img/author.jpg" width="230px">
+  <img src="/images/weixin.png" width="230px">
 </div>
 
 
@@ -338,13 +315,13 @@ $ git merge [branch-name]
 			
 		
 
-	<p class="copyright" style="margin-top: 10px;">
-	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
-	
-	<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
-	
-
-	</p>
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
 </div>
 </footer>
     <script src="/js/jquery-2.0.3.min.js"></script>
@@ -495,6 +472,8 @@ var disqus_shortname = 'xinghunm';
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 }());
 </script>
+
+
 
 
 

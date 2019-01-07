@@ -19,12 +19,12 @@
 <meta property="og:site_name" content="Xinghunm">
 <meta property="og:description" content="80末程序员…微信:">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/assets/weixin.png">
-<meta property="og:updated_time" content="2018-12-05T14:07:29.561Z">
+<meta property="og:image" content="http://yoursite.com/about/images/weixin.png">
+<meta property="og:updated_time" content="2019-01-07T08:22:48.764Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="About me">
 <meta name="twitter:description" content="80末程序员…微信:">
-<meta name="twitter:image" content="http://yoursite.com/assets/weixin.png">
+<meta name="twitter:image" content="http://yoursite.com/about/images/weixin.png">
 
     
     <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
@@ -39,8 +39,7 @@
       <body>
         <header>
           
-
-<div id="xh">
+<div>
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
@@ -70,49 +69,6 @@
 				</ul>
 			</ul></nav>			
 </div>
-<script>
-	const isHome = document.getElementsByTagName('title')[0].text == 'Xinghunm';
-
-	function scrollTo(element, to, duration) {
-			var start = element.scrollTop,
-					change = to - start,
-					currentTime = 0,
-					increment = 20;
-					
-			var animateScroll = function(){        
-					currentTime += increment;
-					var val = Math.easeInOutQuad(currentTime, start, change, duration);
-					element.scrollTop = val;
-					if(currentTime < duration) {
-							setTimeout(animateScroll, increment);
-					}
-			};
-			animateScroll();
-	}
-
-	//t = current time
-	//b = start value
-	//c = change in value
-	//d = duration
-	Math.easeInOutQuad = function (t, b, c, d) {
-		t /= d/2;
-		if (t < 1) return c/2*t*t + b;
-		t--;
-		return -c/2 * (t*(t-2) - 1) + b;
-	};
-
-	if (isHome) {
-	  document.getElementById("xh").style.height = window.innerHeight + 'px';
-		window.timer =	setTimeout(function() {
-			if (document.documentElement.scrollTop==0) {
-				scrollTo(document.documentElement, window.innerHeight, 1000)
-			}}, 1500)
-  } else if(window.timer) {
-		clearTimeout(window.timer);
-		window.timer = null;
-	}
-
-</script>
         </header>
         <div id="container">
           <div id="main" class="page" itemscope="" itemprop="blogPost">
@@ -123,15 +79,18 @@
     
       <a href="/about/index.html" title="About me" itemprop="url">About me</a>
   </h1>
-  
-  <p class="article-time">
-    <time datetime="2018-12-05T14:07:29.561Z" itemprop="datePublished"> Published 2018-12-05</time>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2019-01-07T08:22:48.764Z" itemprop="datePublished"> Published 2019-01-07</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>80末程序员…<br>微信:<br><img src="../assets/weixin.png" alt=""></p>
+		<p>80末程序员…<br>微信:<br><img src="images/weixin.png" alt=""></p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -162,6 +121,8 @@
     <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   </div>
 </section>
+
+
 
 </div>  
         </div>
@@ -195,13 +156,13 @@
 			
 		
 
-	<p class="copyright" style="margin-top: 10px;">
-	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
-	
-	<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
-	
-
-	</p>
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
 </div>
 </footer>
         <script src="/js/jquery-2.0.3.min.js"></script>
@@ -326,6 +287,8 @@ var disqus_shortname = 'xinghunm';
   (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
 }());
 </script>
+
+
 
 
 

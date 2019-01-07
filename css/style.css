@@ -117,9 +117,6 @@ a img {
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
 }
-html {
-  height: 100%;
-}
 body {
   background: #ddd;
   font-family: "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
@@ -127,7 +124,20 @@ body {
   color: #817c7c;
   line-height: 1.5;
   min-height: 100vh;
-  height: 100%;
+  display: -webkit-flex;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: box;
+  display: flex;
+  -webkit-flex-direction: column;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  -o-box-orient: vertical;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 iframe {
   margin-top: 10px;
@@ -389,9 +399,6 @@ body >header {
 @media only screen and (min-width: 1024px) {
   body >header {
     padding: 1.8em 0 1.5em;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    background-size: cover;
   }
 }
 body >header >div {
@@ -439,24 +446,24 @@ body >header a {
 }
 #textlogo {
   float: left;
-  width: 65%;
+  width: 75%;
   margin-left: 0.5em;
 }
 #textlogo h1.site-name {
   width: 86%;
-  font-family: "covered_by_your_graceregular";
-  font-size: 200%;
+  font-family: "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
+  font-size: 160%;
   line-height: 1.9;
   font-weight: normal;
 }
 @media only screen and (min-width: 768px) {
   #textlogo h1.site-name {
-    font-size: 240%;
+    font-size: 190%;
   }
 }
 @media only screen and (min-width: 1024px) {
   #textlogo h1.site-name {
-    font-size: 300%;
+    font-size: 220%;
   }
 }
 #textlogo h2.blog-motto {
@@ -2051,7 +2058,7 @@ footer {
 }
 .copyright {
   font-family: "Helvetica Neue", "Helvetica", "Microsoft YaHei", "WenQuanYi Micro Hei", Arial, sans-serif;
-  font-size: 0.7em;
+  font-size: 0.6em;
   width: 100%;
   color: #fff;
   text-align: center;

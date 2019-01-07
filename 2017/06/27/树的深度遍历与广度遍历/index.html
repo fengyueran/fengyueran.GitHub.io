@@ -1,0 +1,539 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>树的深度遍历与广度遍历 | Xinghunm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xinghunm">
+    
+
+    
+    <meta name="description" content="作为一个非科班出生的前端开发人员，平时对数据结构与算法了解得相对较少，当谈到深度遍历与广度遍历时就一脸懵逼，于是查阅相关资料对其有一个基本认识并能够实现深度、广度遍历的方法。">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树的深度遍历与广度遍历">
+<meta property="og:url" content="http://yoursite.com/2017/06/27/树的深度遍历与广度遍历/index.html">
+<meta property="og:site_name" content="Xinghunm">
+<meta property="og:description" content="作为一个非科班出生的前端开发人员，平时对数据结构与算法了解得相对较少，当谈到深度遍历与广度遍历时就一脸懵逼，于是查阅相关资料对其有一个基本认识并能够实现深度、广度遍历的方法。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/tree.png">
+<meta property="og:updated_time" content="2019-01-04T08:12:13.525Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="树的深度遍历与广度遍历">
+<meta name="twitter:description" content="作为一个非科班出生的前端开发人员，平时对数据结构与算法了解得相对较少，当谈到深度遍历与广度遍历时就一脸懵逼，于是查阅相关资料对其有一个基本认识并能够实现深度、广度遍历的方法。">
+<meta name="twitter:image" content="http://yoursite.com/images/tree.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
+				<h2 class="blog-motto">Change the world or change yourself</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/06/27/树的深度遍历与广度遍历/" title="树的深度遍历与广度遍历" itemprop="url">树的深度遍历与广度遍历</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-06-26T18:11:08.000Z" itemprop="datePublished"> Published 2017-06-27</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-number">1.</span> <span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#树相关的术语"><span class="toc-number">2.</span> <span class="toc-text">树相关的术语</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作树"><span class="toc-number">3.</span> <span class="toc-text">操作树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#节点"><span class="toc-number">3.1.</span> <span class="toc-text">节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#树"><span class="toc-number">3.2.</span> <span class="toc-text">树</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Tree的方法"><span class="toc-number">3.3.</span> <span class="toc-text">Tree的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#树的完整实现"><span class="toc-number">3.4.</span> <span class="toc-text">树的完整实现</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a><strong>基本概念</strong></h3><p>树是一种数据结构，之所以称之为树是因为其结构类似于🌲，它的根在上，枝叶在下。<br>树中一个最基本的数据称为节点(Node)，对应于🌲中的每一个分叉。树具有一个根节点(root)，根节点之下可能具有多个节点，节点间通过边(edge)相连，表示它们之间的关系。这种结构类似于Html文档，公司的组织结构…</p>
+<p><center><img src="/images/tree.png" alt="结构树示意图]"><center></center></center></p>
+<p><center>图1.结构树示意图 <center></center></center></p>
+<h3 id="树相关的术语"><a href="#树相关的术语" class="headerlink" title="树相关的术语"></a><strong>树相关的术语</strong></h3><ul>
+<li>根结点: 树最顶层结点，也是树中唯一一个没有父节点的节点，如图1中的0节点</li>
+<li>边: 两个结点之间的连接</li>
+<li>父结点: 一个节点有子节点则称这个节点是其子结点的父节点</li>
+<li>兄弟结点: 具有相同父节点的节点互为兄弟节点，如图中的6、7、8</li>
+<li>叶子结点: 树中没有子结点的结点(树得末端)，如图1中的6、7、8、9、5</li>
+<li>层次: 节点的层次从根开始定义，根为第一层，根的子节点为第二层，依次类推</li>
+<li>深度: 树中结点的最大层次称为树的深度</li>
+</ul>
+<h3 id="操作树"><a href="#操作树" class="headerlink" title="操作树"></a><strong>操作树</strong></h3><p>在计算机科学中树是一种用来模拟分层数据的数据结构，树由多个节点构成，而每个节点都有自身的数据(data)及指向其他节点(parent、children)的指针，如下定义了节点和树。</p>
+<h4 id="节点"><a href="#节点" class="headerlink" title="节点"></a>节点</h4><ul>
+<li>data: 节点的数据</li>
+<li>parent: 节点的父亲</li>
+<li>children: 节点的子节点</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">class Node &#123;</span><br><span class="line">  constructor(data) &#123;</span><br><span class="line">    this.data = data;</span><br><span class="line">    this.parent = null;</span><br><span class="line">    this.children = [];</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="树"><a href="#树" class="headerlink" title="树"></a>树</h4><p>树有一个根节点root<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Tree &#123;</span><br><span class="line">  constructor(data) &#123;</span><br><span class="line">    this._root = new Node(data);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Tree的方法"><a href="#Tree的方法" class="headerlink" title="Tree的方法"></a>Tree的方法</h4><p>接下来我们将要创建以下五种方法。</p>
+<ul>
+<li><p>traverseDF(callback)</p>
+</li>
+<li><p>traverseBF(callback)</p>
+</li>
+<li><p>contains(callback, traversalType)</p>
+</li>
+<li><p>add(data, toId, traversalType)</p>
+</li>
+<li><p>remove(node, parent)</p>
+</li>
+</ul>
+<p><strong>方法1/5: traverseDF(callback)</strong><br>这种方法以深度优先遍历树：从根节点出发，沿着左子树方向进行遍历，直到找到叶子节点为止。然后回溯到前一个节点，进行右子树的遍历，直到遍历完所有可到达的节点为止。对于图1来说深度优先遍历的结果是:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">traverseDF(callback) &#123;</span><br><span class="line">  const recuseNode = (node) =&gt; &#123;</span><br><span class="line">    for (let i = 0; i &lt; node.children.length; i++) &#123;</span><br><span class="line">      recuseNode(node.children[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    callback(node);</span><br><span class="line">  &#125;;</span><br><span class="line">  recuseNode(this._root);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>方法2/5: traverseBF(callback)</strong></p>
+<p>这种方法以广度优先遍历树：从根节点出发，对每一层节点依次访问，访问一层进入下一层，而且每个节点只能访问一次。对于图1来说广度优先遍历的结果是:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Queue &#123;</span><br><span class="line">  constructor() &#123;</span><br><span class="line">      this.dataStore = [];</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  add(element) &#123;</span><br><span class="line">      this.dataStore.push(element);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  pop() &#123;</span><br><span class="line">      return this.dataStore.shift();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">traverseBF(callback) &#123;</span><br><span class="line">  let currentTree = this._root;</span><br><span class="line">  const queue = new Queue();</span><br><span class="line">  while (currentTree) &#123;</span><br><span class="line">    for (let i = 0; i &lt; currentTree.children.length; i++) &#123;</span><br><span class="line">      queue.add(currentTree.children[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    callback(currentTree);</span><br><span class="line">    currentTree = queue.pop();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>方法3/5: contains(callback, traversalType)</strong><br>contains方法用于在树中搜索特定的值，它有两个参数，第一个为回调函数，每遍历到一个节点就会以该节点为回调参数回调，第二个为遍历的类型(深度遍历或广度遍历)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">contains(callback, traversalType) &#123;</span><br><span class="line">   const traverse = this[traversalType];</span><br><span class="line">   traverse.call(this, callback);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<p>搜索特定id的节点就可以这样写：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tree.contains((node) =&gt; &#123;</span><br><span class="line">  if (node.id === &apos;12345&apos;) &#123;</span><br><span class="line">    console.log(node);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;, &apos;traverseDF&apos;);</span><br></pre></td></tr></table></figure></p>
+<p><strong>方法4/5: add(data, toId, traversalType)</strong></p>
+<p>该方法用于在指定节点添加节点。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">add(data, toId, traversalType) &#123;</span><br><span class="line">  let parent = null;</span><br><span class="line">  //遍历是否有目标节点</span><br><span class="line">  this.contains((node) =&gt; &#123;</span><br><span class="line">    if (node.data === toId) &#123;</span><br><span class="line">      parent = node.parent;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, traversalType);</span><br><span class="line">  //有目标节点则添加节点</span><br><span class="line">  if (parent) &#123;</span><br><span class="line">    const newNode = new Node(data);</span><br><span class="line">    newNode.parent = parent;</span><br><span class="line">    parent.children.push(newNode);</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    throw new Error(`can&apos;t find the target node`);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><strong>方法5/5: remove(fromId, traversalType)</strong></p>
+<p>该方法用于在指定节点下的节点。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">remove(fromId, traversalType) &#123;</span><br><span class="line">  let parent = null;</span><br><span class="line">  let deleteNode = null;</span><br><span class="line">  //遍历是否有目标节点</span><br><span class="line">  this.contains((node) =&gt; &#123;</span><br><span class="line">    if (node.id === fromId) &#123;</span><br><span class="line">      parent = node.parent;</span><br><span class="line">      deleteNode = node;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;, traversalType);</span><br><span class="line"></span><br><span class="line">  //有目标节点则遍历目标节点的子节点是否有要删除的节点，有则删除</span><br><span class="line">  if (parent) &#123;</span><br><span class="line">    const findIndex = parent.children.findIndex(node =&gt; deleteNode.id === node.id);</span><br><span class="line">    if (findIndex &gt;= 0) &#123;</span><br><span class="line">      parent.children.splice(findIndex, 1);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; else &#123;</span><br><span class="line">    throw new Error(`can&apos;t find the target node`);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="树的完整实现"><a href="#树的完整实现" class="headerlink" title="树的完整实现"></a>树的完整实现</h4><p><code>`</code><br>class Queue {<br>  constructor() {<br>    this.dataStore = [];<br>  }</p>
+<p>  add(element) {<br>    this.dataStore.push(element);<br>  }</p>
+<p>  pop() {<br>    return this.dataStore.shift();<br>  }<br>}</p>
+<p>class Node {<br>  constructor(data) {<br>    this.data = data;<br>    this.parent = null;<br>    this.children = [];<br>  }<br>}</p>
+<p>class Tree {<br>  constructor(data) {<br>    this._root = new Node(data);<br>  }</p>
+<p>  traverseDF(callback) {<br>    const recuseNode = (node) =&gt; {<br>      for (let i = 0; i &lt; node.children.length; i++) {<br>        recuseNode(node.children[i]);<br>      }<br>      callback(node);<br>    };<br>    recuseNode(this._root);<br>  }</p>
+<p>  traverseBF(callback) {<br>    let currentTree = this._root;<br>    const queue = new Queue();<br>    while (currentTree) {<br>      for (let i = 0; i &lt; currentTree.children.length; i++) {<br>        queue.add(currentTree.children[i]);<br>      }<br>      callback(currentTree);<br>      currentTree = queue.pop();<br>    }<br>  }</p>
+<p>  contains(callback, traversalType) {<br>    const traverse = this[traversalType];<br>    traverse.call(this, callback);<br>  }</p>
+<p>  add(data, toId, traversalType) {<br>    let parent = null;<br>    this.contains((node) =&gt; {<br>      if (node.data === toId) {<br>        parent = node.parent;<br>      }<br>    }, traversalType);<br>    if (parent) {<br>      const newNode = new Node(data);<br>      newNode.parent = parent;<br>      parent.children.push(newNode);<br>    } else {<br>      throw new Error(<code>can&#39;t find the target node</code>);<br>    }<br>  }</p>
+<p>  remove(fromId, traversalType) {<br>    let parent = null;<br>    let deleteNode = null;<br>    this.contains((node) =&gt; {<br>      if (node.id === fromId) {<br>        parent = node.parent;<br>        deleteNode = node;<br>      }<br>    }, traversalType);</p>
+<pre><code>if (parent) {
+  const findIndex = parent.children.findIndex(node =&gt; deleteNode.data === node.data);
+  if (findIndex &gt;= 0) {
+    parent.children.splice(findIndex, 1);
+  }
+} else {
+  throw new Error(`can&apos;t find the target node`);
+}
+</code></pre><p>  }<br>}</p>
+<p>/*<br>遍历文件夹<br>RootDir<br>   ┆——DirA<br>   ┆       ┆──DirA1<br>   ┆       └──DirA2<br>   ┆            └──DirA21<br>   ┆——DirB<br>   ┆        └──DirB1<br>   └──——DirC</p>
+<p>*/</p>
+<p>const tree = new Tree(‘RootDir’);</p>
+<p>const nodeDirA = new Node(‘DirA’);<br>const nodeDirA1 = new Node(‘DirA1’);<br>const nodeDirA2 = new Node(‘DirA2’);<br>const nodeDirA21 = new Node(‘DirA21’);<br>nodeDirA.children.push(nodeDirA1);<br>nodeDirA1.parent = nodeDirA;<br>nodeDirA.children.push(nodeDirA2);<br>nodeDirA2.parent = nodeDirA;<br>nodeDirA2.children.push(nodeDirA21);<br>nodeDirA21.parent = nodeDirA2;<br>nodeDirA.parent = tree._root;<br>tree._root.children.push(nodeDirA);</p>
+<p>const nodeDirB = new Node(‘DirB’);<br>const nodeDirB1 = new Node(‘DirB1’);<br>nodeDirB.children.push(nodeDirB1);<br>nodeDirB1.parent = nodeDirB;<br>nodeDirB.parent = tree._root;<br>tree._root.children.push(nodeDirB);</p>
+<p>const nodeDirC = new Node(‘DirC’);<br>nodeDirC.parent = tree._root;<br>tree._root.children.push(nodeDirC);</p>
+<p>tree.traverseDF((node) =&gt; {<br>  console.log(node.data);<br>  /<em><br>  =&gt;<br>      DirA1<br>        DirA21<br>      DirA2<br>    DirA<br>      DirB1<br>    DirB<br>    DirC<br>  RootDir
+  </em>/<br>});</p>
+<p>tree.traverseBF((node) =&gt; {<br>  console.log(node.data);<br>  /<em><br>  =&gt;<br>  RootDir<br>    DirA<br>    DirB<br>    DirC<br>      DirA1<br>      DirA2<br>      DirB1<br>        DirA21
+  </em>/<br>});</p>
+<p>tree.contains((node) =&gt; {<br>  if (node.data === ‘DirA1’) {<br>    console.log(node);<br>  }<br>}, ‘traverseDF’);</p>
+<p>tree.add(‘DirC1’, ‘DirC’, ‘traverseBF’);<br>tree.traverseDF((node) =&gt; {<br>  console.log(node.data);<br>});<br>tree.remove(‘DirC1’, ‘traverseBF’);<br>tree.traverseDF((node) =&gt; {<br>  console.log(node.data);<br>});</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/js/">js</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/js/">js</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/06/27/树的深度遍历与广度遍历/" data-title="树的深度遍历与广度遍历 | Xinghunm" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2017/10/11/10.nginx基本配置及常用命令/" title="nginx基本配置及常用命令">
+  <strong>上一篇：</strong><br>
+  <span>
+  nginx基本配置及常用命令</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/06/20/伪类与伪元素的区别/" title="伪类与伪元素的区别">
+ <strong>下一篇：</strong><br> 
+ <span>伪类与伪元素的区别
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/css/" title="css">css<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/js/" title="js">js<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="/images/weixin.png" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xinghunm <br>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:316032603@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'xinghunm';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', '');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

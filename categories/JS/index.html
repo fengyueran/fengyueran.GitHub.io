@@ -4,7 +4,7 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>Categories : JS | Xinghunm</title>
+    <title>Categories : js | Xinghunm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Xinghunm">
@@ -13,7 +13,7 @@
     
     <meta property="og:type" content="website">
 <meta property="og:title" content="Xinghunm">
-<meta property="og:url" content="http://yoursite.com/categories/JS/index.html">
+<meta property="og:url" content="http://yoursite.com/categories/js/index.html">
 <meta property="og:site_name" content="Xinghunm">
 <meta property="og:locale" content="default">
 <meta name="twitter:card" content="summary">
@@ -32,8 +32,7 @@
     <body>
       <header>
         
-
-<div id="xh">
+<div>
 		
 			<div id="textlogo">
 				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
@@ -63,55 +62,12 @@
 				</ul>
 			</ul></nav>			
 </div>
-<script>
-	const isHome = document.getElementsByTagName('title')[0].text == 'Xinghunm';
-
-	function scrollTo(element, to, duration) {
-			var start = element.scrollTop,
-					change = to - start,
-					currentTime = 0,
-					increment = 20;
-					
-			var animateScroll = function(){        
-					currentTime += increment;
-					var val = Math.easeInOutQuad(currentTime, start, change, duration);
-					element.scrollTop = val;
-					if(currentTime < duration) {
-							setTimeout(animateScroll, increment);
-					}
-			};
-			animateScroll();
-	}
-
-	//t = current time
-	//b = start value
-	//c = change in value
-	//d = duration
-	Math.easeInOutQuad = function (t, b, c, d) {
-		t /= d/2;
-		if (t < 1) return c/2*t*t + b;
-		t--;
-		return -c/2 * (t*(t-2) - 1) + b;
-	};
-
-	if (isHome) {
-	  document.getElementById("xh").style.height = window.innerHeight + 'px';
-		window.timer =	setTimeout(function() {
-			if (document.documentElement.scrollTop==0) {
-				scrollTo(document.documentElement, window.innerHeight, 1000)
-			}}, 1500)
-  } else if(window.timer) {
-		clearTimeout(window.timer);
-		window.timer = null;
-	}
-
-</script>
       </header>
       <div id="container">
         
 
 <div class="archive-title">
-  <h2 class="category-icon">JS</h2>
+  <h2 class="category-icon">js</h2>
   
 </div>
 <div id="main" class="archive-part clearfix">
@@ -119,13 +75,39 @@
 
   <section class="post" itemscope="" itemprop="blogPost">
   
-    <a href="/2017/02/25/正则表达式/" title="正则表达式" itemprop="url">
+    <a href="/2017/06/27/树的深度遍历与广度遍历/" title="树的深度遍历与广度遍历" itemprop="url">
   
 
-    <time datetime="2017-02-25T12:10:00.000Z" itemprop="datePublished">2017-02-25</time>
+    <time datetime="2017-06-26T18:11:08.000Z" itemprop="datePublished">2017-06-27</time>
 
 
-    <h1 itemprop="name">正则表达式</h1>
+    <h1 itemprop="name">树的深度遍历与广度遍历</h1>
+
+  </a>
+</section>
+
+  <section class="post" itemscope="" itemprop="blogPost">
+  
+    <a href="/2016/06/05/JS常用方法/" title="JS常用方法" itemprop="url">
+  
+
+    <time datetime="2016-06-05T10:10:20.000Z" itemprop="datePublished">2016-06-05</time>
+
+
+    <h1 itemprop="name">JS常用方法</h1>
+
+  </a>
+</section>
+
+  <section class="post" itemscope="" itemprop="blogPost">
+  
+    <a href="/2016/01/02/JavaScript中的this/" title="JavaScript中的this" itemprop="url">
+  
+
+    <time datetime="2016-01-02T08:17:25.000Z" itemprop="datePublished">2016-01-02</time>
+
+
+    <h1 itemprop="name">JavaScript中的this</h1>
 
   </a>
 </section>
@@ -165,13 +147,13 @@
 			
 		
 
-	<p class="copyright" style="margin-top: 10px;">
-	Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019
-	
-	<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
-	
-
-	</p>
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
 </div>
 </footer>
       <script src="/js/jquery-2.0.3.min.js"></script>
@@ -223,6 +205,8 @@ $(document).ready(function(){
   });
 });
 </script>
+
+
 
 
 
