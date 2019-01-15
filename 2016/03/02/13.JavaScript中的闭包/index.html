@@ -1,0 +1,481 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>JavaScript中的闭包 | Xinghunm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xinghunm">
+    
+
+    
+    <meta name="description" content="闭包，相信第一次接触到这个词的同学，都会觉得一脸懵逼，这是啥玩意儿，好高端的样子。看看书看看报，闭包似乎没有那么难。">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中的闭包">
+<meta property="og:url" content="http://yoursite.com/2016/03/02/13.JavaScript中的闭包/index.html">
+<meta property="og:site_name" content="Xinghunm">
+<meta property="og:description" content="闭包，相信第一次接触到这个词的同学，都会觉得一脸懵逼，这是啥玩意儿，好高端的样子。看看书看看报，闭包似乎没有那么难。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-09T08:39:01.502Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中的闭包">
+<meta name="twitter:description" content="闭包，相信第一次接触到这个词的同学，都会觉得一脸懵逼，这是啥玩意儿，好高端的样子。看看书看看报，闭包似乎没有那么难。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
+				<h2 class="blog-motto">Change the world or change yourself</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/02/13.JavaScript中的闭包/" title="JavaScript中的闭包" itemprop="url">JavaScript中的闭包</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-03-02T07:15:21.000Z" itemprop="datePublished"> Published 2016-03-02</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包的概念"><span class="toc-number">1.</span> <span class="toc-text">闭包的概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包的应用"><span class="toc-number">2.</span> <span class="toc-text">闭包的应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#闭包使用的注意事项"><span class="toc-number">3.</span> <span class="toc-text">闭包使用的注意事项</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a><strong>闭包的概念</strong></h3><p>闭包简单的说就是能够读取其他函数内部变量的函数，更确切的说，闭包不是指某一个具体的东西，而是指由这个函数以及创建创该函数的词法环境(包含了创建时所能访问到的所有局部变量)共同组成的一个抽象的概念。<br>来看下面的例子:<br>显然，函数log可以访问函数外的全局变量name，但是直接在函数外访问函数内部的局部变量age则不行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var name = &apos;xhm&apos;;</span><br><span class="line">function log &#123;</span><br><span class="line">  var age = 18;</span><br><span class="line">  console.log(name)</span><br><span class="line">&#125;</span><br><span class="line">log();</span><br></pre></td></tr></table></figure></p>
+<p>实在想访问函数中的局部变量怎么办呢？既然直接在函数外边不行那我们就在函数内部访问。<br>如下，函数getAge放到了log函数的内部，由于JS的作用域链，getAge函数在寻找age时会先在自己的作用域下寻找，如果没有则一级一级往上寻找，直到找完所有父对象的变量，因此getAge可以访问到父对象log函数的局部变量，根据前述闭包的概念，getAge函数就是一个闭包。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function log &#123;</span><br><span class="line">  var age = 18;</span><br><span class="line">  function getAge() &#123;// 闭包</span><br><span class="line">    console.log(age) // 能够读取函数log的局部变量age</span><br><span class="line">  &#125;</span><br><span class="line">  getAge();</span><br><span class="line">&#125;</span><br><span class="line">log();</span><br></pre></td></tr></table></figure></p>
+<h3 id="闭包的应用"><a href="#闭包的应用" class="headerlink" title="闭包的应用"></a><strong>闭包的应用</strong></h3><p>根据闭包的特性，我们可以利用闭包将函数和操作环境联系起来，类似于OOP编程的效果。<br>来看下面的例子:<br>本钱有1800，earnMoney()、earnMoney()每天都能赚一块钱，苦逼😫，我想静静。<br>可以看到局部变量money一直都在，并没有在函数makeMoney执行完后清空，为什么呢？因为saveMoney函数的作用域链仍然引用着这个变量，直到saveMoney函数被销毁后，闭包作用域链上的变量才会被销毁。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function makeMoney() &#123;</span><br><span class="line">  var money = 1800;</span><br><span class="line">  return function saveMoney() &#123;</span><br><span class="line">    return ++money;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">// 通过闭包，使在函数外部能够访问函数内部的变量</span><br><span class="line">const earnMoney = makeMoney();</span><br><span class="line">console.log(earnMoney());// 1801</span><br><span class="line">console.log(earnMoney());// 1802</span><br></pre></td></tr></table></figure></p>
+<h3 id="闭包使用的注意事项"><a href="#闭包使用的注意事项" class="headerlink" title="闭包使用的注意事项"></a><strong>闭包使用的注意事项</strong></h3><ul>
+<li>性能考量<br>闭包在处理速度和内存消耗方面都对脚本性能有负面影响。</li>
+<li><p>循环中创建闭包<br>下列中因为i是五次循环共享的，循环五次后i已经变成5了，所以会输出5个5。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;5;i++)&#123;</span><br><span class="line">  setTimeout(function()&#123;</span><br><span class="line">      console.log(i); // 5个5</span><br><span class="line">  &#125;,1000)</span><br><span class="line">&#125;</span><br><span class="line">等同于</span><br><span class="line">var i = 0;</span><br><span class="line">for(;i&lt;5;i++)&#123;</span><br><span class="line">  setTimeout(function()&#123;</span><br><span class="line">      console.log(i); // 5个5</span><br><span class="line">  &#125;,1000)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>避免方法</p>
+<ul>
+<li><p>用let声明变量<br>es6中的let使得声明的变量具有块级作用域，i并不共享，因此循环后可以得到正确的值。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">for(let i=0;i&lt;5;i++)&#123;</span><br><span class="line">  setTimeout(function()&#123;</span><br><span class="line">      console.log(i); // 0 1 2 3 4</span><br><span class="line">  &#125;,1000)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>添加闭包<br>通过创建匿名闭包将事件回调同循环时的i值关联起来。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">for(var i=0;i&lt;5;i++)&#123;</span><br><span class="line">  ((j) =&gt; &#123; </span><br><span class="line">    setTimeout(function()&#123;</span><br><span class="line">      console.log(j); // 0 1 2 3 4</span><br><span class="line">  &#125;,1000)&#125;)(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/js/">js</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/js/">js</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/03/02/13.JavaScript中的闭包/" data-title="JavaScript中的闭包 | Xinghunm" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2016/05/05/8.css选择器/" title="css选择器">
+  <strong>上一篇：</strong><br>
+  <span>
+  css选择器</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/03/01/12.函数的防抖与节流/" title="函数的防抖与节流">
+ <strong>下一篇：</strong><br> 
+ <span>函数的防抖与节流
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/css/" title="css">css<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/js/" title="js">js<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="/images/weixin.png" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xinghunm <br>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:316032603@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'xinghunm';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', '');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

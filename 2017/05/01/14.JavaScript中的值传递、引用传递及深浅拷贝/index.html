@@ -1,0 +1,475 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>JavaScript中的值传递、引用传递及深浅拷贝 | Xinghunm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xinghunm">
+    
+
+    
+    <meta name="description" content="在JavaScript编程中经常会遇到改变了一个变量另一个变量情况，即使传给函数的参数的改变都可能导致原值被改变，这和其他某些语言并不太一样，值得去探究一下。">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript中的值传递、引用传递及深浅拷贝">
+<meta property="og:url" content="http://yoursite.com/2017/05/01/14.JavaScript中的值传递、引用传递及深浅拷贝/index.html">
+<meta property="og:site_name" content="Xinghunm">
+<meta property="og:description" content="在JavaScript编程中经常会遇到改变了一个变量另一个变量情况，即使传给函数的参数的改变都可能导致原值被改变，这和其他某些语言并不太一样，值得去探究一下。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/14-1-value.png">
+<meta property="og:image" content="http://yoursite.com/images/14-2-reference.png">
+<meta property="og:updated_time" content="2019-01-11T07:05:53.534Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript中的值传递、引用传递及深浅拷贝">
+<meta name="twitter:description" content="在JavaScript编程中经常会遇到改变了一个变量另一个变量情况，即使传给函数的参数的改变都可能导致原值被改变，这和其他某些语言并不太一样，值得去探究一下。">
+<meta name="twitter:image" content="http://yoursite.com/images/14-1-value.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
+				<h2 class="blog-motto">Change the world or change yourself</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/05/01/14.JavaScript中的值传递、引用传递及深浅拷贝/" title="JavaScript中的值传递、引用传递及深浅拷贝" itemprop="url">JavaScript中的值传递、引用传递及深浅拷贝</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-05-01T10:10:20.000Z" itemprop="datePublished"> Published 2017-05-01</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#值传递"><span class="toc-number">1.</span> <span class="toc-text">值传递</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#引用传递"><span class="toc-number">2.</span> <span class="toc-text">引用传递</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#深拷贝"><span class="toc-number">3.</span> <span class="toc-text">深拷贝</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#浅拷贝"><span class="toc-number">4.</span> <span class="toc-text">浅拷贝</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="值传递"><a href="#值传递" class="headerlink" title="值传递"></a><strong>值传递</strong></h3><p>JS中值传递是对于基本数据而言的，包括boolean、null、undefined、String以及Number类型。在某些经典的系统语言(C等)中基本数据都是在栈空间分配，而JS这种动态语言不同，它没有明确的堆栈概念，变量如何分配内存依赖于具体的解释器。<br>如果将一个基本类型的数据绑定到一个变量，则该认为变量包含这个基本数据类型的值。如果我们将一个变量赋值给另一个变量，实际是将对应的值拷贝了一份给另一个变量。他们在内存中存在于不同的区域，一个变量的改变不会影响另一个变量。<br>如下，a赋值给b后，a值的改变并不会影响b值。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var b = a;</span><br><span class="line">a = 2;</span><br><span class="line">console.log(a); // 2</span><br><span class="line">console.log(b); // 1</span><br></pre></td></tr></table></figure></p>
+<p><center><img src="/images/14-1-value.png" width="500"><center></center></center></p>
+<h3 id="引用传递"><a href="#引用传递" class="headerlink" title="引用传递"></a><strong>引用传递</strong></h3><p>引用传递是对于非基本类型而言的，包括Array, Function以及Object。<br>如果将一个非基本类型的数据绑定到一个变量，实际上是将非基本类型的数据地址赋值给了该变量，这个变量只包含了一个地址并没有包含实际的数据，这与值传递时拥有数据本身不同，这种赋值方式叫做引用传递。<br>如下，将变量m赋值给变量n后，m和n的值都为指向对象{ a:1, b: 2 }的地址，修改n，则m也会改变。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var m = &#123; a:1, b: 2 &#125;;</span><br><span class="line">var n = m;</span><br><span class="line">n.a = 3;</span><br><span class="line">console.log(m.a); // 3</span><br><span class="line">console.log(n.a); // 3</span><br></pre></td></tr></table></figure>
+<p><center><img src="/images/14-2-reference.png" width="500"><center></center></center></p>
+<p>如果将一个已经赋值的变量重新赋值，那么它将包含新的数据或地址。<br>如下，在函数updateAgeAndRef内部，参数girl的age被修改为18，因为对象为引用传递，所以参数girl1的age也变成了18，接着又将新的对象赋值给了参数girl，因此girl指向了新的对象{ name: ‘lucy’, age: 20 }，所以girl2的age为20。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">function updateAgeAndRef(girl) &#123;</span><br><span class="line">    girl.age = 18;</span><br><span class="line">    girl = &#123;</span><br><span class="line">        name: &apos;lucy&apos;,</span><br><span class="line">        age: 20</span><br><span class="line">    &#125;;</span><br><span class="line">    return girl;</span><br><span class="line">&#125;</span><br><span class="line">var girl1 = &#123;</span><br><span class="line">    name: &apos;lily&apos;,</span><br><span class="line">    age: 17</span><br><span class="line">&#125;;</span><br><span class="line">var girl2 = updateAgeAndRef(girl1);</span><br><span class="line">console.log(girl1.age); // -&gt; 18</span><br><span class="line">console.log(girl2.age); // -&gt; 20</span><br></pre></td></tr></table></figure></p>
+<h3 id="深拷贝"><a href="#深拷贝" class="headerlink" title="深拷贝"></a><strong>深拷贝</strong></h3><p>深拷贝，其关键字就是深，原有对象在进行深拷贝时会将各层属性拷贝到新的内存，新实例的每一层属性都都不和原对象属性共享内存，也就是说新的实例和旧的实例是互不影响的。<br>深拷贝简单实现:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function deepCopy(target)&#123;</span><br><span class="line">  if (typeof target === &apos;object&apos;) &#123;</span><br><span class="line">    var copyTarget = target.constructor === &apos;Array&apos; ? [] : &#123;&#125;;</span><br><span class="line">    for (key in target) &#123;</span><br><span class="line">      copyTarget[key] = target[key];</span><br><span class="line">      if (typeof target[key] === &apos;object&apos;) &#123;</span><br><span class="line">         copyTarget[key] = deepCopy(target[key]);</span><br><span class="line">      &#125; else &#123;</span><br><span class="line">        copyTarget[key] = target[key];</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return copyTarget;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var obj = &#123; a: 1, b: &#123; c: 2, d: 3 &#125;&#125;;</span><br><span class="line">var copyObj = deepCopy(obj);</span><br><span class="line">obj.b.c = 6;</span><br><span class="line">console.log(obj.b.c); // 6</span><br><span class="line">console.log(copyObj.b.c); // 2</span><br><span class="line">console.log(obj === copyObj); // false</span><br><span class="line">console.log(obj.b === copyObj.b); // false</span><br></pre></td></tr></table></figure></p>
+<h3 id="浅拷贝"><a href="#浅拷贝" class="headerlink" title="浅拷贝"></a><strong>浅拷贝</strong></h3><p>浅拷贝只拷贝对象的地址，通过地址来指向原对象。前述的引用传递就是一种浅拷贝，此外在对对象进行拷贝时只对第一层进行深拷贝，其他层级对对象仍然采用拷贝地址的方式进行复制，这也称为浅拷贝。</p>
+<p>浅拷贝简单实现:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">function shallowCopy(target)&#123;</span><br><span class="line">  if (typeof target === &apos;object&apos;) &#123;</span><br><span class="line">    var copyTarget = target.constructor === &apos;Array&apos; ? [] : &#123;&#125;;</span><br><span class="line">    for (key in target) &#123;</span><br><span class="line">      copyTarget[key] = target[key];</span><br><span class="line">    &#125;</span><br><span class="line">    return copyTarget;</span><br><span class="line">  &#125; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var obj = &#123; a: 1, b: &#123; c: 2, d: 3 &#125;&#125;;</span><br><span class="line">var copyObj = shallowCopy(obj);</span><br><span class="line">obj.a = 5;</span><br><span class="line">obj.b.c = 6;</span><br><span class="line">console.log(obj.a); // 5</span><br><span class="line">console.log(copyObj.a); // 1</span><br><span class="line">console.log(obj.b.c); // 6</span><br><span class="line">//只对第一层进行了独立的复制，因此obj的b.c改变会造成copyObj的b.c改变</span><br><span class="line">console.log(copyObj.b.c); // 6</span><br><span class="line">//第一层深拷贝</span><br><span class="line">console.log(obj === copyObj); // false</span><br><span class="line">//第二层浅拷贝</span><br><span class="line">console.log(obj.b === copyObj.b); // true</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JS/">JS</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JS/">JS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/05/01/14.JavaScript中的值传递、引用传递及深浅拷贝/" data-title="JavaScript中的值传递、引用传递及深浅拷贝 | Xinghunm" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2017/06/20/3.react最佳实践/" title="React最佳实践">
+  <strong>上一篇：</strong><br>
+  <span>
+  React最佳实践</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/02/25/6.正则表达式/" title="正则表达式">
+ <strong>下一篇：</strong><br> 
+ <span>正则表达式
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/css/" title="css">css<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/js/" title="js">js<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="/images/weixin.png" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xinghunm <br>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:316032603@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'xinghunm';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', '');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

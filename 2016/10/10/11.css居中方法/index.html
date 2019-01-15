@@ -1,0 +1,524 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>css居中方法 | Xinghunm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xinghunm">
+    
+
+    
+    <meta name="description" content="居中布局是前端布局当中很常见的一种设计，该如何实现呢？相信大多数同学都能说出几种，当然总有你还不知道的方法，于是查漏补缺对对常用的css居中的常用方法作一个总结。">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css居中方法">
+<meta property="og:url" content="http://yoursite.com/2016/10/10/11.css居中方法/index.html">
+<meta property="og:site_name" content="Xinghunm">
+<meta property="og:description" content="居中布局是前端布局当中很常见的一种设计，该如何实现呢？相信大多数同学都能说出几种，当然总有你还不知道的方法，于是查漏补缺对对常用的css居中的常用方法作一个总结。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/11-1-flex.png">
+<meta property="og:image" content="http://yoursite.com/images/11-2-text-align.png">
+<meta property="og:image" content="http://yoursite.com/images/11-3-margin-auto.png">
+<meta property="og:image" content="http://yoursite.com/images/11-3-margin-auto.png">
+<meta property="og:image" content="http://yoursite.com/images/11-3-margin-auto.png">
+<meta property="og:image" content="http://yoursite.com/images/11-3-margin-auto.png">
+<meta property="og:image" content="http://yoursite.com/images/11-4-fit-content.png">
+<meta property="og:image" content="http://yoursite.com/images/11-5-flex-vertical.png">
+<meta property="og:image" content="http://yoursite.com/images/11-6-position.png">
+<meta property="og:image" content="http://yoursite.com/images/11-6-position.png">
+<meta property="og:image" content="http://yoursite.com/images/11-6-position.png">
+<meta property="og:image" content="http://yoursite.com/images/11-6-position.png">
+<meta property="og:image" content="http://yoursite.com/images/11-7-vertical-align.png">
+<meta property="og:image" content="http://yoursite.com/images/11-8-inline-block.png">
+<meta property="og:image" content="http://yoursite.com/images/11-9-line-height.png">
+<meta property="og:updated_time" content="2019-01-08T06:24:24.183Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css居中方法">
+<meta name="twitter:description" content="居中布局是前端布局当中很常见的一种设计，该如何实现呢？相信大多数同学都能说出几种，当然总有你还不知道的方法，于是查漏补缺对对常用的css居中的常用方法作一个总结。">
+<meta name="twitter:image" content="http://yoursite.com/images/11-1-flex.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
+				<h2 class="blog-motto">Change the world or change yourself</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/10/10/11.css居中方法/" title="css居中方法" itemprop="url">css居中方法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-10-10T10:10:20.000Z" itemprop="datePublished"> Published 2016-10-10</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#水平居中方法"><span class="toc-number">1.</span> <span class="toc-text">水平居中方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#垂直居中方法"><span class="toc-number">2.</span> <span class="toc-text">垂直居中方法</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="水平居中方法"><a href="#水平居中方法" class="headerlink" title="水平居中方法"></a><strong>水平居中方法</strong></h3><ul>
+<li><p>1) flex</p>
+<ul>
+<li><p>flex 2009</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display: box;</span><br><span class="line">box-pack: center;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>flex 2012<br><img src="/images/11-1-flex.png" width="500"><br>A: display: flex; justify-content: center; 子元素B水平居中<br>B: display: flex; justify-content: center; 子元素C水平居中</p>
+</li>
+</ul>
+</li>
+<li><p>2) text-align<br>只对内联元素有效，块级元素想要通过text-align来居中可以将其display属性设置为inline。<br><img src="/images/11-2-text-align.png" width="500"><br>A: text-align: center; 行内元素B水平居中</p>
+</li>
+<li><p>3) margin-auto<br>对块级元素有效，需要设置宽度，行内元素若要通过margin居中可以设置其display属性为block。<br><img src="/images/11-3-margin-auto.png" width="500"><br>B(子元素): width: 200px; margin: 0 auto; 块级元素B水平居中，</p>
+</li>
+<li><p>4) position<br>子元素B相对于父元素A的left为父元素宽度减去子元素宽度的一半， 因此必须知道父子元素的宽度。<br><img src="/images/11-3-margin-auto.png" width="500"><br>A:width: 500px; position: relative;<br>B: position: absolute; left: 180px; width: 140px;</p>
+</li>
+<li><p>5) position + margin-left<br>不需要知道父子元素的宽度，通过margin-left设置为自身的一半宽度的负值达到向左偏移自身的一半宽度， 与4)中的实现方法本质是一样的，但只需要知道子元素B的宽度。<br><img src="/images/11-3-margin-auto.png" width="500"><br>A: position: relative;<br>B: position: absolute; left: 50%; margin-left: -70px; width: 140px;</p>
+</li>
+<li><p>6) position + transform<br>不需要知道父子元素的宽度，先定位到父元素的水平中心位置再通过transform向左偏移自身的一半宽度， 与4)中的实现方法本质是一样的。transform只对块级元素有效。<br><img src="/images/11-3-margin-auto.png" width="500"><br>A: position: relative;<br>B: position: absolute; left: 50%; transform: translateX(-50%);</p>
+</li>
+</ul>
+<ul>
+<li><p>7) margin-auto + fit-content<br>fit-content是CSS3中给width新加的一个值，表示将元素宽度收缩为内容宽度。<br>如下，li为浮动元素，要让导航栏ul居中，尝试3)中的方法，设置ul的margin为<code>margin: 0 auto</code>，然而并没有什么用，why？因为ul并没有设置宽度，但是这种情况下我们很难去计算ul的宽度，fit-content闪亮登场，设置width为fit-content即给width设置了一个宽度，从而达到了效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// li &#123; float: left &#125;</span><br><span class="line"> &lt;div&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">       &lt;Li&gt;&lt;a href=&quot;/&quot;&gt;Meat&lt;/a&gt;&lt;/Li&gt;</span><br><span class="line">       &lt;Li&gt;&lt;a href=&quot;/&quot;&gt;Fruits&lt;/a&gt;&lt;/Li&gt;</span><br><span class="line">       &lt;Li&gt;&lt;a href=&quot;/&quot;&gt;Vegetables&lt;/a&gt;&lt;/Li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line"> &lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/11-4-fit-content.png" width="500"><br>A(div): width: 500px;<br>B(ul): width: fit-content; margin: 0 auto;</p>
+</li>
+</ul>
+<h3 id="垂直居中方法"><a href="#垂直居中方法" class="headerlink" title="垂直居中方法"></a><strong>垂直居中方法</strong></h3><ul>
+<li><p>1) flex 2012<br><img src="/images/11-5-flex-vertical.png" width="500"><br>A: display: flex; align-items: center; 子元素B垂直居中<br>B: display: flex; align-items: center; 子元素C垂直居中</p>
+</li>
+<li><p>2) position<br>子元素B相对于父元素A的高top为父元素高度减去子元素高度的一半，因此必须知道父子元素的高度<br><img src="/images/11-6-position.png" width="500"><br>A: position: relative; height:150px;<br>B: position: absolute; top: 50; height: 50px;</p>
+</li>
+<li><p>3) position + margin-top<br>子元素B相对于父元素A的top为父元素高度的一半，margin-top为子元素高度一半的负值，因此必须知道子元素的高度。<br><img src="/images/11-6-position.png" width="500"><br>A: position: relative; height:150px;<br>B: position: absolute; top: 50%; margin-top: -25px; height: 50px;</p>
+</li>
+<li><p>4) position + transform<br>子元素B相对于父元素A的top为父元素高度的一半，通过translateY(-50%)使子元素向上偏移自己一半的高度，本质上与3）、4）中的方法一样。 不需要知道父子元素的高度。<br><img src="/images/11-6-position.png" width="500"><br>A: position: relative;<br>B: position: absolute; top: 50%; transform: translateY(-50%);</p>
+</li>
+<li><p>5) position + margin-auto<br>如下，父元素A为相对定位，子元素B为绝对定位，设置B的top、bottom都为0，并设置其margin为auto 0即可使子元素B(高度固定)垂直居中。<br><img src="/images/11-6-position.png" width="500"><br>A: position: relative;<br>B: position: absolute; top: 0; bottom: 0; height: 50px; margin: auto 0;</p>
+</li>
+<li><p>6) vertical-align<br>vertical-align用于对齐行内元素(inline、inline-block、inline-table)，当父元素为td、th且高度固定时可以设置vertical-align为middle来垂直对齐子元素。<br><img src="/images/11-7-vertical-align.png" width="500"><br>结构: <div><table> <td> <th> <b> </b></th> </td> </table><div><br>A(th): height: 70px; vertical-align: middle;</div></div></p>
+</li>
+<li><p>7) inline-block + vertical-align<br>父元素A添加伪元素，伪元素与父元素同高且为行内块级元素、居中对齐，子元素B设置为行内块级元素，居中对齐。<br><img src="/images/11-8-inline-block.png" width="500"><br>A(div): &amp;:after { content: “”; height: 100%; vertical-align: middle; display: inline-block; }<br>B(div) : vertical-align: middle; display: inline-block;</p>
+</li>
+<li><p>8) line-height<br>对于单行文本，我们可以通过设置其line-height为父元素高度，使其垂直居中。<br><img src="/images/11-9-line-height.png" width="500"><br>A(div): height: 100px;<br>B(span): line-height: 100px; </p>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/css/">css</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/css/">css</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/10/10/11.css居中方法/" data-title="css居中方法 | Xinghunm" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2017/01/04/每日一题/" title="每日一题">
+  <strong>上一篇：</strong><br>
+  <span>
+  每日一题</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/07/24/2.git submodule的使用/" title="Git submodule的使用">
+ <strong>下一篇：</strong><br> 
+ <span>Git submodule的使用
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/css/" title="css">css<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/js/" title="js">js<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="/images/weixin.png" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xinghunm <br>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:316032603@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'xinghunm';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', '');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

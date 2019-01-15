@@ -20,7 +20,7 @@
 <meta property="og:description" content="前端题集">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/mark_sweep.gif">
-<meta property="og:updated_time" content="2019-01-07T06:33:56.768Z">
+<meta property="og:updated_time" content="2019-01-14T04:55:27.335Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每日一题">
 <meta name="twitter:description" content="前端题集">
@@ -111,7 +111,7 @@
 </ul>
 <p><strong>3、</strong>js遍历li的内容<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">  &lt;li&gt;1&lt;/li&gt;</span><br><span class="line">  &lt;li&gt;2&lt;/li&gt;</span><br><span class="line">&lt;/ul&gt;</span><br></pre></td></tr></table></figure></p>
 <p>=&gt;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const u = document.querySelector(&apos;ul&apos;);</span><br><span class="line">const lis = u.children;</span><br><span class="line">for(let i = 0; i &lt; lis.length; i++) &#123;</span><br><span class="line">  const li = lis[i];</span><br><span class="line">  console.log(li.innerText);</span><br><span class="line">&#125;</span><br><span class="line">或</span><br><span class="line">const realArr = [].slice.call(lis);</span><br><span class="line">realArr.forEach((li) =&gt; &#123;</span><br><span class="line">  console.log(li.innerText)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure></p>
-<p><strong>4、</strong> JavaScript<code>===</code>和<code>==</code>的区别<br><code>===</code>即严格相等，它会比较等式两边值的类型和值是否相等，不会进行隐式转换<br><code>==</code>即宽松相等，进行比较前会将等式两边值转换为同一类型(两边都可能被转换)，再进行值的比较，如相等则相等。<br>需要指出的是NaN不等于任何值包括它自己(如正无穷不应该等于负无穷)，+0等于(==或===)-0(对于0而言没有正负之分)。</p>
+<p><strong>4、</strong> JavaScript<code>===</code>和<code>==</code>的区别<br><code>===</code>即严格相等，它会比较等式两边值的类型和值是否相等，不会进行隐式转换<br><code>==</code>即宽松相等，进行比较前会将等式两边值转换为同一类型(两边都可能被转换)，再进行值的比较，如相等则相等。<br>需要指出的是NaN不等于任何值包括它自己(如正无穷不应该等于负无穷)，+0等于(==或===)-0(对于0而言没有正负之分)。<br>对于引用类型的变量，==和===都只会判断引用地址是否相等，而不会判断对象具体里的属性以及值是否相等。判断两个对象是否相等，一个简单的方法就是将他们转换为字符串再进行比较。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var obj1Str = Json.stringify(obj1);</span><br><span class="line">var obj2Str = Json.stringify(obj2);</span><br><span class="line">console.log(obj1Str === obj2Str);</span><br></pre></td></tr></table></figure></p>
 <p><strong>5、</strong> JavaScript中null和undefined的区别<br>由于历史原因JavaScript中有null和undefined两个表示无的值，其区别很小，主要在于：</p>
 <ul>
 <li>null的类型为Object，undefined的类型为undefined</li>
@@ -175,9 +175,10 @@
 </ul>
 <p><strong>8、</strong>  html代码中让链接在新窗口中打开的写法</p>
 <p>通过设置a标签的target属性为_blank可以在新窗口打开链接，但是由于新页面与原页面在一个进程上，如果新页面开销极大则会对原页面性能造成影响。此外新页面还可通过window.openner访问原页面的窗口对象，并且可以通过window.opener.location = newURL将原页面导航至不同的网址。因此需要通过ref=”noopenner”来禁用window.opener。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;a href=&quot;http://www.xinghunm.com&quot;&gt;Welcome -  old window&lt;/a&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">      &lt;a href=&quot;http://www.xinghunm.com&quot; target=&quot;_blank&quot; ref=&quot;noopenner&quot;&gt;Welcome -  new window&lt;/a&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
-<p><strong>9、</strong>  html5有哪些新特性，移除的元素有哪些<br>新增:</p>
+<p><strong>9、</strong>  html5有哪些新特性，移除的元素有哪些<br>html5现在已经不是标准通用标记语言SGML的子集了，主要是关于图像、位置、存储、多任务功能的增加。<br>新增:</p>
 <ul>
 <li>WebSocket</li>
+<li>webworker</li>
 <li>用于绘画的canvas元素</li>
 <li>用于媒介回放的vedio和audio元素</li>
 <li>新增sessionStorage和localStorage对离线缓存更好的支持</li>
@@ -281,7 +282,7 @@
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//当一个字符串中某个数字后跟着n对三个数字(\d&#123;3&#125;)就匹配这个数字</span><br><span class="line">const formateNum = (num) =&gt; &#123;</span><br><span class="line">  const numStr = num.toString();</span><br><span class="line">  //替换小数点左边的数字</span><br><span class="line">  return numStr.replace(/\d+/, (match) =&gt; &#123;</span><br><span class="line">    //替换目标数字为`$&#123;matchNum&#125;,`</span><br><span class="line">    return match.replace(/(\d)(?=(\d&#123;3&#125;+$))/, (s1) =&gt; `$&#123;s1&#125;,`);</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">formateNum(435345.656)</span><br><span class="line">=&gt; &quot;435,345.656&quot;</span><br></pre></td></tr></table></figure>
-<p><strong>22、</strong> HTML常见的内联元素和块级元素</p>
+<p><strong>22、</strong> HTML常见的内联元素、块级元素以及空元素有哪些？</p>
 <ul>
 <li><p>内联元素</p>
 <ul>
@@ -307,6 +308,16 @@
 <li>table</li>
 <li>option</li>
 <li>li</li>
+</ul>
+</li>
+<li><p>空元素</p>
+<ul>
+<li><code>&lt;br&gt;</code></li>
+<li><code>&lt;hr&gt;</code></li>
+<li><code>&lt;img&gt;</code></li>
+<li><code>&lt;input&gt;</code></li>
+<li><code>&lt;link&gt;</code></li>
+<li><code>&lt;meta&gt;</code></li>
 </ul>
 </li>
 </ul>
@@ -358,7 +369,7 @@
 <li>缺点<br>依赖SPM打包，模块的加载逻辑偏重。</li>
 </ul>
 </li>
-<li><p>ES6模块化<br>前面的模块化方法都是社区自己实现的，而ES6的模块化方案是真正的规范。在ES6中通过import关键字引入模块，export关键字导出模块，目前浏览器尚不支持es6因此需要用babel将代码转换为广泛支持的require。</p>
+<li><p>ES6模块化<br>前面的模块化方法都是社区自己实现的，而ES6的模块化方案是真正的规范。在ES6中通过import关键字引入模块，export关键字导出模块，目前浏览器尚不支持ES6因此需要用babel将代码转换为广泛支持的require。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; Component &#125; from &apos;react&apos;;</span><br><span class="line">import Counter from &apos;../counter&apos;;</span><br><span class="line"></span><br><span class="line">class Home extends Component &#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    return (</span><br><span class="line">      &lt;div&gt;</span><br><span class="line">        &lt;Counter /&gt;</span><br><span class="line">      &lt;/div&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">export default Home;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -426,14 +437,50 @@
 <p><strong>34、</strong> JavaScript的垃圾回收机制</p>
 <p>JavaScript有自动垃圾回收机制，当然这并不意味着你不需要关心内存管理。<br>内存的生命周期大致分为内存的分配、内存的使用以及不需要时内存的释放。因此只要追踪内存的生命周期就能自动的对内存进行分配回收了，但是这并不容易，尤其要确定某块内存是否真的不需要了。因此，垃圾回收只能有限制的解决一般问题，主要有两种方法，引用计数和标记清除算法。</p>
 <ul>
-<li><p>引用计数法<br>在内存管理环境中，如果一个对象(包括函数作用域、全局词法作用域等)有访问另一个对象的权限，叫做一个对象访问另一个对象。当对象被引用的次数为0时就被回收。</p>
+<li><p>引用计数法<br>在内存管理环境中，如果一个对象(包括函数作用域、全局词法作用域等)有访问另一个对象的权限，叫做一个对象引用另一个对象。当对象被引用的次数为0时就被回收。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123; v: 1 &#125;; // 对象&#123; v: 1 &#125;被变量a引用一次，引用计数为1</span><br><span class="line">var b = a; // 同样，对象&#123; v: 1 &#125;被变量b引用一次，引用计数为2</span><br><span class="line">a = null; // 对象引用次数减1</span><br><span class="line">b = null;// 对象引用次数减1，此时引用计数为0，对象可以被释放</span><br></pre></td></tr></table></figure>
 <p>引用计数有一个潜在的问题，就是无法解决循环引用的问题。<br>如下，a、b互相引用，引用计数一直为1，导致不能自动回收。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function f() &#123;</span><br><span class="line">  var a = &#123;&#125;;</span><br><span class="line">  var b = &#123;&#125;;</span><br><span class="line">  a.value = b;</span><br><span class="line">  b.value = a;</span><br><span class="line">&#125;</span><br><span class="line">f();</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>标记清除算法</p>
 <p>这个算法假定有一个叫跟(root)的对象(js中为window， node js为global)，垃圾回收器定期从根开始，找所有从根开始引用的对象，然后找这些引用对象引用的对象…将这些对象标记为active，其他的不能被根引用或间接引用的将被标记为garbage，最终将这些垃圾清除。<br>循环引用将不再是问题，上例中函数f执行完后，全局window就无法访问到对象a和b了，因此对象a、b将会被回收。<br><center><img src="/images/mark_sweep.gif" alt="标记清除意图]"><center><br><center>标记清除意图 <center></center></center></center></center></p>
+<p><strong>35、</strong> JavaScript中var和let去区别</p>
 </li>
+</ul>
+<p>let为ES6新增的命令，用来声明变量，用法与var类似，其区别如下:</p>
+<ul>
+<li><p>有效范围<br>在ES6之前，JS函数只有函数作用域和全局作用域，没有块级作用域，所以<code>{}</code>不能限制var所声明的变量的访问范围，而let声明的变量只在let声明时的代码块内有效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  let a = 1;</span><br><span class="line">  var b = 2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">a // ReferenceError: a is not defined.</span><br><span class="line">b // 2</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>变量提升<br>let不存在变量提升，var存在变量提升</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">console.log(a); // undefined</span><br><span class="line">var a = 1;</span><br><span class="line"></span><br><span class="line">console.log(b); // Uncaught ReferenceError</span><br><span class="line">let b = 2;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重复声明<br>let不能重复声明，var可以重复声明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">var a = 2;</span><br><span class="line"></span><br><span class="line">let b = 1;</span><br><span class="line">let b = 2; //Identifier &apos;b&apos; has already been declared</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>暂时性死区<br>let有暂时性死区约束，如下在全局声明了变量a，又在块级作用域用let声明了a，ES6明确规定，如果块级作用域内存在let或const命令，这个区块对这些命令声明的变量，从一开始就形成了封闭区域。凡是在声明之前使用这些变量，就会报错，这在语法上称为暂时性死区。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">var a = 1;</span><br><span class="line">if (true) &#123;</span><br><span class="line">  a = 2;// ReferenceError</span><br><span class="line">  let a;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>36、</strong> Doctype作用？标准模式与兼容模式各有什么区别?</p>
+<ul>
+<li>作用<br><code>&lt;!DOCTYPE&gt;</code>声明位于HTML文档的第一行，处于<code>&lt;html&gt;</code>标签之前。用于告诉浏览器以什么文档标准来解析这个文档，DOCTYPE不存在或格式错误会导致浏览器用兼容模式来解析文档。</li>
+<li>区别<br>标准模式是以浏览器支持的最高标准来运行，兼容模式中页面以宽松的向后兼容的模式进行显示，以防止老式浏览器无法正常工作。</li>
+</ul>
+<p><strong>37、</strong>  HTML5为什么只需要写<code>&lt;!DOCTYPE HTML&gt;</code>？<br>HTML5不是基于SGML的，因此不需要对DTD进行引用，但是需要Doctype来规范浏览器的行为(让浏览器按照他们应该的方式来运行)。HTML4.01是基于SGML的，因此需要对DTD进行引用，才能告知浏览器所使用的文档类型。</p>
+<p><strong>38、</strong>  介绍一下你对浏览器内核的理解</p>
+<p>主要分为两部分，渲染引擎和JS引擎。</p>
+<ul>
+<li>渲染引擎<br>主要负责获取网页内容(HTML、XML、图像等)、整理信息(CSS等)以及计算网页的显示方式，然后输出至显示器或打印机。不同的浏览器内核对网页的解释不同，所渲染出的网页效果也就不一样。</li>
+<li>JS引擎<br>解析和执行javascript来实现网页的动态效果。<br>最初渲染引擎和JS引擎并没有区分地很明确，后来JS引擎越来越独立，内核就倾向于指渲染引擎。</li>
+</ul>
+<p><strong>39、</strong>  简述一下你对HTML语义化的理解</p>
+<p>用正确的标签做正确的事情。</p>
+<ul>
+<li>html语义化使页面结构更加清晰，便于对浏览器搜索引擎解析。</li>
+<li>在没有CSS的情况下也以一种文档格式显示。</li>
+<li>搜索引擎的爬虫也依赖于HTML的标签来确定上下文和各个关键字的权重，利于SEO。</li>
+<li>有利于阅读代码的人理解网站的分块</li>
 </ul>
   
 	</div>
@@ -471,18 +518,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev">
- <a href="/2017/02/25/正则表达式/" title="正则表达式">
+ <a href="/2017/02/01/16.JS中的原型/" title="JS中的原型">
   <strong>上一篇：</strong><br>
   <span>
-  正则表达式</span>
+  JS中的原型</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2016/07/24/git submodule的使用/" title="Git submodule的使用">
+<a href="/2016/10/10/11.css居中方法/" title="css居中方法">
  <strong>下一篇：</strong><br> 
- <span>Git submodule的使用
+ <span>css居中方法
 </span>
 </a>
 </div>
@@ -516,11 +563,11 @@
 		  
 		
 		  
-			<li><a href="/categories/JS/" title="JS">JS<sup>1</sup></a></li>
+			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/css/" title="css">css<sup>1</sup></a></li>
+			<li><a href="/categories/css/" title="css">css<sup>2</sup></a></li>
 		  
 		
 		  
@@ -528,7 +575,7 @@
 		  
 		
 		  
-			<li><a href="/categories/js/" title="js">js<sup>3</sup></a></li>
+			<li><a href="/categories/js/" title="js">js<sup>5</sup></a></li>
 		  
 		
 		  

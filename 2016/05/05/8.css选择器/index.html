@@ -1,0 +1,573 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>css选择器 | Xinghunm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xinghunm">
+    
+
+    
+    <meta name="description" content="css选择器用法较多，不常用的选择器容易遗忘，于是在这里整理出css选择器的基本用法，以备查用。">
+<meta name="keywords" content="css">
+<meta property="og:type" content="article">
+<meta property="og:title" content="css选择器">
+<meta property="og:url" content="http://yoursite.com/2016/05/05/8.css选择器/index.html">
+<meta property="og:site_name" content="Xinghunm">
+<meta property="og:description" content="css选择器用法较多，不常用的选择器容易遗忘，于是在这里整理出css选择器的基本用法，以备查用。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-01-11T07:07:48.911Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="css选择器">
+<meta name="twitter:description" content="css选择器用法较多，不常用的选择器容易遗忘，于是在这里整理出css选择器的基本用法，以备查用。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
+				<h2 class="blog-motto">Change the world or change yourself</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/05/05/8.css选择器/" title="css选择器" itemprop="url">css选择器</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-05-05T10:10:20.000Z" itemprop="datePublished"> Published 2016-05-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本选择器"><span class="toc-number">1.</span> <span class="toc-text">基本选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性选择器"><span class="toc-number">2.</span> <span class="toc-text">属性选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪类选择器"><span class="toc-number">3.</span> <span class="toc-text">伪类选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#伪元素选择器"><span class="toc-number">4.</span> <span class="toc-text">伪元素选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#多级选择器"><span class="toc-number">5.</span> <span class="toc-text">多级选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优先级"><span class="toc-number">6.</span> <span class="toc-text">优先级</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="基本选择器"><a href="#基本选择器" class="headerlink" title="基本选择器"></a>基本选择器</h3><ul>
+<li><p><code>*</code>: 通配符，匹配任何元素<br>例：<code>* { color: red }</code></p>
+</li>
+<li><p><code>#id</code>: id选择器<br>例：匹配所有id属性为app的元素<br><code>#app { color: red }</code></p>
+</li>
+<li><p><code>.class</code>: class选择器<br>匹配所有class属性为btn的元素<br>例：<code>.btn { color: red }</code></p>
+</li>
+<li><p><code>element</code>: 元素选择器<br>匹配所有div标签<br>例：<code>div { color: red }</code></p>
+</li>
+</ul>
+<p>优先级: <code>#</code> &gt; <code>.</code> &gt; <code>element</code> <code>*</code></p>
+<h3 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h3><p>HTML:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div title=&quot;myBtn Button&quot; lang=&quot;en-us&quot; /&gt;</span><br></pre></td></tr></table></figure></p>
+<p>CSS 2.1</p>
+<ul>
+<li><p><code>[attribute]</code>: 匹配所有带有attribute属性的元素<br><code>[title] { color: red; }</code></p>
+</li>
+<li><p><code>[attribute=&quot;x&quot;]</code>: 匹配所有attribute属性为x的元素<br><code>[title=myBtn] { color: red; }</code></p>
+</li>
+<li><p><code>[attribute~=&quot;x&quot;]</code>: 匹配所有attribute属性具有多个空格分隔的值，其中一个值等于x的元素<br><code>[title~=&quot;Button&quot;] { color: red; }</code></p>
+</li>
+<li><p><code>[attribute|=&quot;x&quot;]</code>: 匹配所有attribute属性具有连字符<code>-</code>分隔的值，其中一个值以x开头的元素</p>
+<p><code>[lang|=&quot;en&quot;] { color: red; }</code></p>
+</li>
+</ul>
+<p>CSS 3</p>
+<ul>
+<li><p><code>[attribute^=&quot;x&quot;]</code>: 匹配属性attribute的值以x开头的元素<br><code>[title^=my] { color: red; }</code></p>
+</li>
+<li><p><code>[attribute$=&quot;x&quot;]</code>: 匹配属性attribute的值以x结尾的元素<br><code>[title$=Button] { color: red; }</code></p>
+</li>
+<li><p><code>[attribute*=&quot;x&quot;]</code>: 匹配属性attribute的值包含x的元素<br>  <code>[title*=Btn] { color: red; }</code></p>
+</li>
+</ul>
+<h3 id="伪类选择器"><a href="#伪类选择器" class="headerlink" title="伪类选择器"></a>伪类选择器</h3><p>HTML：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;a lang=&quot;en&quot; href=&quot;http://xinghunm.com&quot; target=&quot;_blank&quot;&gt;Xinghunm.com&lt;/a&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>CSS 2.1<br>以下的E、F指selector匹配到的元素，其本身就是selector。</p>
+<ul>
+<li><p><code>E:first-child</code>: 匹配元素E当它是其父元素的第一个子元素<br><code>a:first-child { color: red; }</code></p>
+</li>
+<li><p><code>E:link</code>: 匹配未被访问(未点击或跳转)的元素<br><code>a:link { color: black; }</code></p>
+</li>
+<li><p><code>E:visited</code>: 匹配未被访问(未跳转)的元素<br><code>a:visited { color: green; }</code></p>
+</li>
+<li><p><code>E:hover</code>: 匹配鼠标悬停其上的元素<br><code>:hover</code>必须在:link和:visited之后才能看到效果。<br><code>a:hover { color: blue; }</code></p>
+</li>
+<li><p><code>E:active</code>: 匹配鼠标按下还未抬起的元素<br><code>:active</code>必须在<code>:hover</code>之后才能看到效果。<br><code>a:active { color: red; }</code></p>
+</li>
+<li><p><code>E:focus</code>: 匹配获取当前焦点的元素<br><code>a:focus { color: yellow; }</code></p>
+</li>
+<li><p><code>E:lang(x)</code>: 匹配lang属性等于x的元素<br><code>a:lang(en) { color: red; }</code></p>
+</li>
+</ul>
+<p>CSS 3</p>
+<p>HTML：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;h1&gt;this is h1&lt;/h1&gt;</span><br><span class="line">    &lt;h3&gt;first-of-type h3&lt;/h3&gt;</span><br><span class="line">    &lt;h3&gt;last-of-type h3&lt;/h3&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#tab1&quot;&gt;tab1&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#tab2&quot;&gt;tab2&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;div id=&quot;tab1&quot;&gt;this is tab1&lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;tab2&quot;&gt;this is tab2&lt;/div&gt;</span><br><span class="line">    &lt;p&gt;&lt;span&gt;only child&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p><code>E:target</code>: URL后跟锚点#，指向文档内某个具体的元素，这个被链接的元素就是目标元素，       <code>E:target</code>选择器用于选取当前活动的目标元素<br>当我们点击列表tab1时，因为其锚点链接的元素就是id为tab1的元素，所以此时活动的目标元素就是id为tab1的div，通过div:target就可以获取此目标元素。<br><code>div:target { background: red; }</code></p>
+</li>
+<li><p><code>:not(selector)</code>: 匹配与selector选择器描述不相符的元素<br><code>div :not(div) { color: red; }</code></p>
+</li>
+</ul>
+<p><strong>结构性伪类</strong></p>
+<ul>
+<li><p><code>:root</code>: 匹配根元素，对应HTML文档就是html元素<br><code>:root { color: red; }</code></p>
+</li>
+<li><p><code>E:nth-child(n)</code>: 匹配元素E当它是其父元素的第n(从1开始)个子元素<br>列表tab1是其父元素ul的第一个元素，因此可以匹配到列表tab1<br><code>li:nth-child(1) { color: red; }</code></p>
+</li>
+<li><p><code>E:nth-last-child(n)</code>: 匹配元素E当它是其父元素的倒数第n(从1开始)个子元素<br>列表tab2是其父元素ul的倒数第一个子元素，因此可以匹配到列表tab2<br><code>li:nth-last-child(1) { color: red; }</code></p>
+</li>
+<li><p><code>E:last-child</code>: 匹配元素E当它是其父元素的倒数第1个子元素<br><code>li:last-child() { color: red; }</code></p>
+</li>
+<li><p><code>E:only-child</code>: 匹配元素E当它是其父元素的唯一一个子元素<br><code>span:only-child() { color: red; }</code></p>
+</li>
+<li><p><code>E:nth-of-type(n)</code>: 匹配元素E当它是其父元素的第n(从1开始)个出现的与E类型相同的子元素<br>匹配<code>&lt;div id=&quot;tab2&quot;&gt;this is tab2&lt;/div&gt;</code><br><code>div:nth-of-type(2) { color: red; }</code></p>
+</li>
+<li><p><code>E:nth-last-of-type(n)</code>: 匹配元素E当它是其父元素的倒数第n(从1开始)个出现的与E类型相同的子元素<br>匹配<code>&lt;div id=&quot;tab1&quot;&gt;this is tab1&lt;/div&gt;</code><br><code>div:nth-last-of-type(2) { color: red; }</code></p>
+</li>
+<li><p><code>E:first-of-type</code>: 匹配元素E当它是其父元素的第1个出现的与E类型相同的元素子元素(可能有多个)<br><code>h3:first-of-type { color: red; }</code></p>
+</li>
+<li><p><code>E:last-of-type</code>: 匹配元素E当它是其父元素的倒数第1个出现的与E类型相同的元素子元素(可能有多个)<br><code>h3:last-of-type { color: red; }</code></p>
+</li>
+<li><p><code>E:only-of-type</code>: 匹配元素E当它是其父元素下唯一一个E类型的元素<br><code>h1:only-of-type { color: red; }</code></p>
+</li>
+<li><p><code>E:empty</code>: 匹配元素E当没有子元素或内容时<br><code>p:empty{ color: red; }</code></p>
+</li>
+</ul>
+<h3 id="伪元素选择器"><a href="#伪元素选择器" class="headerlink" title="伪元素选择器"></a>伪元素选择器</h3><p>HTML：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;p&gt;12&lt;br&gt;34&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>CSS 2.1</p>
+<ul>
+<li><p><code>::first-line</code>: 匹配元素的第一行<br><code>p::first-line { color: red; }</code></p>
+</li>
+<li><p><code>::first-letter</code>: 匹配元素的第一个字母<br><code>p::first-letter { color: red; }</code></p>
+</li>
+<li><p><code>::before</code>: 在元素前通过content属性插入内容<br><code>p::before {  content: &quot;*&quot;; }</code></p>
+</li>
+<li><p><code>::after</code>: 在元素后通过content属性插入内容<br><code>p::after {  content: &quot;*&quot;; }</code></p>
+</li>
+</ul>
+<h3 id="多级选择器"><a href="#多级选择器" class="headerlink" title="多级选择器"></a>多级选择器</h3><p>HTML:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;div1&quot;&gt;</span><br><span class="line">    &lt;div id=&quot;div2&quot;&gt;</span><br><span class="line">      &lt;h1&gt;this is dev2 &gt; h1&lt;/h1&gt;</span><br><span class="line">      &lt;h2&gt;this is dev2 &gt; h2&lt;/h2&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">     &lt;div id=&quot;div3&quot;&gt;this is dev3&lt;/div&gt;</span><br><span class="line">     &lt;div id=&quot;div4&quot;&gt;this is dev4&lt;/div&gt;</span><br><span class="line">     &lt;h1&gt;this is div1 &gt; h1&lt;/h1&gt;</span><br><span class="line">  &lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li><p><code>E, F</code>: 多元素选择器，同时匹配E元素和F元素<br><code>h1, h2 { color: red; }</code></p>
+</li>
+<li><p><code>E &gt; F</code>: 子元素选择器，匹配E元素的子元素F<br><code>#div2 &gt; h1 { color: red; }</code></p>
+</li>
+<li><p><code>E  F</code>: 后代元素选择器，匹配E元素的后代元素F<br><code>#div1 h2 { color: red; }</code></p>
+</li>
+<li><p><code>E + F</code>: 相邻元素选择器，匹配所有紧随E元素之后的F元素<br>匹配div3<br><code>#div2 + div { color: red; }</code></p>
+</li>
+<li><p><code>E ~ F</code>: 同级元素选择器，匹配所有E元素之后的同级元素F<br>匹配div3，div4<br><code>#div2 ~ div { color: red; }</code></p>
+</li>
+</ul>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p><code>!important &gt; 行内样式 &gt; ID &gt; 类、伪类、属性 &gt; 标签名 &gt; 继承 &gt; 通配符</code></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/css/">css</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/css/">css</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/05/05/8.css选择器/" data-title="css选择器 | Xinghunm" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2016/06/05/4.JS常用方法/" title="JS常用方法">
+  <strong>上一篇：</strong><br>
+  <span>
+  JS常用方法</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/03/02/13.JavaScript中的闭包/" title="JavaScript中的闭包">
+ <strong>下一篇：</strong><br> 
+ <span>JavaScript中的闭包
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/css/" title="css">css<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/js/" title="js">js<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="/images/weixin.png" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xinghunm <br>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:316032603@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'xinghunm';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', '');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

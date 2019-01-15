@@ -1,0 +1,507 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>JS中的原型 | Xinghunm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xinghunm">
+    
+
+    
+    <meta name="description" content="在面向对象编程中，类之间共享是通过继承实现的，而在JavaScript中万物皆对象，并没有类的概念(ES6中类仅仅是一个语法糖)，对象之间的共享是通过一个叫做原型的东西实现的。">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS中的原型">
+<meta property="og:url" content="http://yoursite.com/2017/02/01/16.JS中的原型/index.html">
+<meta property="og:site_name" content="Xinghunm">
+<meta property="og:description" content="在面向对象编程中，类之间共享是通过继承实现的，而在JavaScript中万物皆对象，并没有类的概念(ES6中类仅仅是一个语法糖)，对象之间的共享是通过一个叫做原型的东西实现的。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/16-1-chain.png">
+<meta property="og:image" content="http://yoursite.com/images/16-2-prototype.png">
+<meta property="og:updated_time" content="2019-01-15T06:43:48.246Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS中的原型">
+<meta name="twitter:description" content="在面向对象编程中，类之间共享是通过继承实现的，而在JavaScript中万物皆对象，并没有类的概念(ES6中类仅仅是一个语法糖)，对象之间的共享是通过一个叫做原型的东西实现的。">
+<meta name="twitter:image" content="http://yoursite.com/images/16-1-chain.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
+				<h2 class="blog-motto">Change the world or change yourself</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2017/02/01/16.JS中的原型/" title="JS中的原型" itemprop="url">JS中的原型</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2017-02-01T10:10:20.000Z" itemprop="datePublished"> Published 2017-02-01</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#prototype"><span class="toc-number">1.</span> <span class="toc-text">[[prototype]]</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proto"><span class="toc-number">2.</span> <span class="toc-text">proto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#prototype-1"><span class="toc-number">3.</span> <span class="toc-text">prototype</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#通过不同的方法来创建对象和生成原型链"><span class="toc-number">4.</span> <span class="toc-text">通过不同的方法来创建对象和生成原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li></ol>
+		
+		</div>
+		
+		<p>对于原型我们通过[[prototype]]、<strong>proto</strong>以及prototype这三个概念理解其实现继承的思路。</p>
+<h3 id="prototype"><a href="#prototype" class="headerlink" title="[[prototype]]"></a><strong>[[prototype]]</strong></h3><p>在ECMAScript标准中规定每个对象都有一个内置的属性[[prototype]]，它指向一个对象的原型(也是一个对象即原型对象)，而这个对象会继承它的原型对象的所有属性。当查找一个对象的属性或方法时，如果在当前对象找不到，则在其原型对象上寻找，如果原型对象上也没有，则在原型对象的原型对象上寻找，如此继续直到一个对象的原型对象为null(null没有原型)。可以看到，这样一种层层向上的查找是一种链式查找，在每一层上的对象都有一个指向其原型对象的链接，由这些链接组成的整个链条就叫做原型链。</p>
+<p>基于原型的继承思路大致如下: obj拥有属性[[Prototype]]，它指向原型对象proto，从而对象obj通过原型链可以使用原型对象的方法getName。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">var proto = &#123;</span><br><span class="line">    getName: function () &#123;</span><br><span class="line">        return &apos;name: &apos;+this.name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    [[Prototype]]: proto,</span><br><span class="line">    name: &apos;obj&apos;</span><br><span class="line">&#125;;</span><br><span class="line">&gt; obj.getName</span><br><span class="line">[Function]</span><br><span class="line">&gt; obj.getName()</span><br><span class="line">&apos;name: obj&apos;</span><br></pre></td></tr></table></figure></p>
+<p><center><img src="/images/16-1-chain.png" alt="链式查找示意图]"><center></center></center></p>
+<p><center>图1.链式查找示意图 <center></center></center></p>
+<h3 id="proto"><a href="#proto" class="headerlink" title="proto"></a><strong><strong>proto</strong></strong></h3><p>前述中的[[Prototype]]是一个内置属性，由于我们并不能直接获取，为了操作属性的便利性很多浏览器都实现了Object.prototype.<strong>proto</strong>，因此可以通过obj.<strong>proto</strong>来访问对象的原型对象。<br>另一方面，设置[[Prototype]]是一个缓慢的操作，影响性能，因此使用<strong>proto</strong>是有争议的，更推荐使用Object.getPrototypeOf和Object.setPrototypeOf来访问原型对象。但为了保持浏览器的兼容性，在ES6中支持了这一规范。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">let Animal = function () &#123;&#125;;</span><br><span class="line">let dog = &#123;&#125;;</span><br><span class="line">let animal = new Animal();</span><br><span class="line"> </span><br><span class="line">dog.__proto__ = animal;</span><br><span class="line">console.log(dog.__proto__);</span><br></pre></td></tr></table></figure></p>
+<h3 id="prototype-1"><a href="#prototype-1" class="headerlink" title="prototype"></a><strong>prototype</strong></h3><p>prototype是一个拥有constructor内部方法的对象才有的属性，比如函数(非箭头函数)，ES6中的类。这个所谓的prototype，其实可以认为是构造函数内部一个普通的对象(或者说指向这个普通对象)，只是很不幸的是叫做prototype(原型)而已，我们可以叫他baseObj，当调用构造函数时，会自动将baseObj赋值给<strong>proto</strong>，这样在新的实例上通过原型链就可以共享构造函数baseObj及其原型链上的属性了。</p>
+<p>来看下面的例子:<br>函数Animal通过new实例化的对象能够访问到函数prototype属性的food和eat，这是如何做到的呢？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var Animal = function(name) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">&#125;;</span><br><span class="line">Animal.prototype.food = &apos;meat&apos;;</span><br><span class="line">Animal.prototype.eat = function() &#123;</span><br><span class="line">  console.log(this.name + &apos; eat &apos; + this.food);</span><br><span class="line">&#125;;</span><br><span class="line">var panda = new Animal(&apos;panda&apos;);</span><br><span class="line">var dog = new Animal(&apos;dog&apos;);</span><br><span class="line">console.log(panda.eat()); // panda eat meat</span><br><span class="line">console.log(dog.eat()); // dog eat meat</span><br><span class="line">console.log(panda.__proto__=== Animal.prototype); // true</span><br></pre></td></tr></table></figure></p>
+<p>如下图所示，实例对象panda和dog之所以能够访问Animal原型上的food和eat属性是因为在调用构造函数时Animal的prototype对象赋值给了实例对象的<strong>proto</strong>属性，实例对象在访问自己的方法(panda.eat)时首先在其原型对象上寻找，即在<strong>proto</strong>指向的对象上寻找，而这个对象正好是Animal的原型prototype对象，它拥有eat方法，所以可以成功访问eat方法。<br>说明: 图中builts-in为构建内置函数比如toString()、valueOf等。</p>
+<p><center><img src="/images/16-2-prototype.png" alt="prototype继承示意图]"><center></center></center></p>
+<p><center>图2.prototype继承示意图 <center></center></center></p>
+<p>来看另一个例子:<br>如下将函数Fish的prototype赋值为Animal，以此，通过fish的实例来访问Animal原型prototype上的方法，可结果是Uncaught TypeError: nimo.eat is not a function，为什么会这样呢？前述我们已经知道继承是通过原型链来实现的，而原型链又是通过<strong>proto</strong>(指向内置对象[[prototype]]])来串联的。当函数Fish的prototype赋值为Animal后，生成的实例对象nimo的<strong>proto</strong>为Animal，所以访问nimo.eat会现在Animal上寻找eat方法，如图2，Animal函数并没有eat方法，从而继续向上寻找，直到顶层对象Object，结果还是没有，因此报错。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">var Animal = function(name) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">&#125;;</span><br><span class="line">Animal.prototype.food = &apos;meat&apos;;</span><br><span class="line">Animal.prototype.eat = function() &#123;</span><br><span class="line">  console.log(&apos;I can eat&apos; + this.food);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">var Fish = function(name) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">&#125;;</span><br><span class="line">Fish.prototype = Animal;</span><br><span class="line"></span><br><span class="line">var nimo = new Fish(&apos;nimo&apos;);</span><br><span class="line">console.log(nimo.eat()); // Uncaught TypeError: nimo.eat is not a function</span><br></pre></td></tr></table></figure></p>
+<h3 id="通过不同的方法来创建对象和生成原型链"><a href="#通过不同的方法来创建对象和生成原型链" class="headerlink" title="通过不同的方法来创建对象和生成原型链"></a><strong>通过不同的方法来创建对象和生成原型链</strong></h3><ul>
+<li><p>语法结构创建对象</p>
+<ul>
+<li><p>对象字面量<br>通过对象字面量创建的对象其原型链为obj –&gt; Object.prototype –&gt; null</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123; a: 1 &#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>数组字面量<br>通过数组字面量创建的对象其原型链为arr –&gt; Array.prototype –&gt; Object.prototype –&gt; null</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var arr = [1, 2];</span><br></pre></td></tr></table></figure>
+<ul>
+<li>函数字面量<br>通过函数字面量创建的对象其原型链为f –&gt; Function.prototype –&gt; Object.prototype –&gt; null<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">function f()&#123; console.log(&apos;func&apos;);&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>构造器创建对象<br>通过构造函数创建的对象其原型链为instance –&gt; func.prototype –&gt; Function.prototype –&gt; Object.prototype –&gt; null</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var Animal = function(name) &#123;</span><br><span class="line">  this.name = name;</span><br><span class="line">&#125;;</span><br><span class="line">Animal.prototype.food = &apos;meat&apos;;</span><br><span class="line">Animal.prototype.eat = function() &#123;</span><br><span class="line">  console.log(&apos;I can eat&apos; + this.food);</span><br><span class="line">&#125;;</span><br><span class="line">//实例对象panda的__proto__指向Animal.prototype</span><br><span class="line">var panda = new Animal(&apos;panda&apos;);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Object.create创建对象<br>在ES5中引入了一个新的方法来创建对象，就是Object.create，新对象的原型就是该方法传入的第一个参数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var a = &#123; x: 1 &#125;; </span><br><span class="line">// a --&gt; Object.prototype --&gt; null</span><br><span class="line"></span><br><span class="line">var b = Object.create(a);</span><br><span class="line">// b --&gt; a --&gt; Object.prototype --&gt; null</span><br><span class="line">console.log(b.__proto__ === a); // true</span><br><span class="line">console.log(b.x); // 1 </span><br><span class="line"></span><br><span class="line">var c = Object.create(b);</span><br><span class="line">// c --&gt; b --&gt; a --&gt; Object.prototype --&gt; null</span><br><span class="line">console.log(c.__proto__ === b); // true</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><ul>
+<li>任何对象都可以成为其他对象的原型(原型对象)。</li>
+<li>[[Prototype]]为一个对象的指向原型对象的内置属性，不能直接访问。</li>
+<li><strong>proto</strong>为一个非标准的，只是为了方便访问原型对象而实现的一个属性，它和[[Prototype]]本质上一样都<br>是指向原型对象，是所有对象都有的属性。</li>
+<li>prototype为拥有constructor内部方法的对象才有的属性，它本身只是一个普通对象，只是正好叫做原型      (prototype)，它的作用是在构造函数生成新的实例时将这个所谓的原型赋值给实例的<strong>proto</strong>属性，这样新<br>的实例就可以通过<strong>proto</strong>来继承构造函数原型里的方法。可以看到，这和<strong>proto</strong>所指的原型对象是完全不同的概念。</li>
+<li>实例对象没有prototype属性，</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JS/">JS</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JS/">JS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2017/02/01/16.JS中的原型/" data-title="JS中的原型 | Xinghunm" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2017/02/25/6.正则表达式/" title="正则表达式">
+  <strong>上一篇：</strong><br>
+  <span>
+  正则表达式</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2017/01/04/每日一题/" title="每日一题">
+ <strong>下一篇：</strong><br> 
+ <span>每日一题
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/css/" title="css">css<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/js/" title="js">js<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="/images/weixin.png" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xinghunm <br>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:316032603@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'xinghunm';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', '');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
