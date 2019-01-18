@@ -20,7 +20,7 @@
 <meta property="og:description" content="前端题集">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/mark_sweep.gif">
-<meta property="og:updated_time" content="2019-01-14T04:55:27.335Z">
+<meta property="og:updated_time" content="2019-01-18T07:58:28.648Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每日一题">
 <meta name="twitter:description" content="前端题集">
@@ -126,7 +126,7 @@
 </li>
 <li>成功(2xx)<br>表示服务器成功接收请求并处理返回<ul>
 <li>200 Ok: 请求正常处理完毕。一般用于GET与POST请求</li>
-<li>202 Accepted: 服务器已经接受到消息，当时尚未处理</li>
+<li>202 Accepted: 服务器已经接受到消息，但尚未处理</li>
 <li>204 No Content: 服务器成功处理了请求但未返回任何内容</li>
 <li>206 Partial Content: 服务器成功处理了部分get请求</li>
 </ul>
@@ -175,10 +175,12 @@
 </ul>
 <p><strong>8、</strong>  html代码中让链接在新窗口中打开的写法</p>
 <p>通过设置a标签的target属性为_blank可以在新窗口打开链接，但是由于新页面与原页面在一个进程上，如果新页面开销极大则会对原页面性能造成影响。此外新页面还可通过window.openner访问原页面的窗口对象，并且可以通过window.opener.location = newURL将原页面导航至不同的网址。因此需要通过ref=”noopenner”来禁用window.opener。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;a href=&quot;http://www.xinghunm.com&quot;&gt;Welcome -  old window&lt;/a&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">      &lt;a href=&quot;http://www.xinghunm.com&quot; target=&quot;_blank&quot; ref=&quot;noopenner&quot;&gt;Welcome -  new window&lt;/a&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
-<p><strong>9、</strong>  html5有哪些新特性，移除的元素有哪些<br>html5现在已经不是标准通用标记语言SGML的子集了，主要是关于图像、位置、存储、多任务功能的增加。<br>新增:</p>
+<p><strong>9、</strong>  html5有哪些新特性，移除的元素有哪些？</p>
+<p>html5现在已经不是标准通用标记语言SGML的子集了，主要是关于图像、位置、存储、多任务功能的增加。<br>新增:</p>
 <ul>
 <li>WebSocket</li>
-<li>webworker</li>
+<li>Webworker</li>
+<li>SharedWorker</li>
 <li>用于绘画的canvas元素</li>
 <li>用于媒介回放的vedio和audio元素</li>
 <li>新增sessionStorage和localStorage对离线缓存更好的支持</li>
@@ -196,14 +198,12 @@
 <li>tt</li>
 </ul>
 <p><strong>10、</strong>  谈谈对盒模型的理解</p>
-<p>  浏览器在对文档进行布局时，会根据盒模型(CSS Basic Box model)将所有元素表示成一个矩形盒子，矩形盒子的组成由内容区域、边框、内边距及外边距组成。如下盒模型分为W3C标准盒模型和IE盒模型，W3C标准盒模型的大小由内容区域(content)、边框(border)、内边距(padding)决定，而IE盒模型的大小只由内容区域的大小(自定义的width和height)决定。css可以通过box-sizing来切换两种盒模型。</p>
+<p>浏览器在对文档进行布局时，会根据盒模型(CSS Basic Box model)将所有元素表示成一个矩形盒子，矩形盒子的组成由内容区域、边框、内边距及外边距组成。如下盒模型分为W3C标准盒模型和IE盒模型，W3C标准盒模型的大小由内容区域(content)、边框(border)、内边距(padding)决定，而IE盒模型的大小只由内容区域的大小(自定义的width和height)决定。css可以通过box-sizing来切换两种盒模型。<br>矩形盒子</p>
 <ul>
-<li>矩形盒子<ul>
 <li>W3C标准盒模型(box-sizing: content-box)<br>size = content + border + padding</li>
-<li>IE盒模型(box-sizing: border-box)<br>size = content<br>我们在编写html时若不声明DOCTYPE类型，IE浏览器会将盒子模型解释为IE盒模型，FireFox等会将其解释为W3C盒子模型，从而渲染出不同的结果。</li>
+<li>IE盒模型(box-sizing: border-box)<br>size = content</li>
 </ul>
-</li>
-</ul>
+<p>我们在编写html时若不声明DOCTYPE类型，IE浏览器会将盒子模型解释为IE盒模型，FireFox等会将其解释为W3C盒子模型，从而渲染出不同的结果。</p>
 <p><strong>11、</strong>  主流的浏览器内核有哪些</p>
 <ul>
 <li>Trident<br>Trident为在早期的IE内核，没有使用W3C标准，国内多数浏览器(360、腾讯、搜狗等)都采用过该内核。</li>
@@ -321,8 +321,8 @@
 </ul>
 </li>
 </ul>
-<p><strong>23、</strong> 移动开发中使用rem的优点</p>
-<p>rem是CSS3新增的一个单位即root em，它与em的区别在于em是相对父元素的font-size，而rem相对的是HTML根元素。这个单位可谓集相对大小和绝对大小的优点于一身，通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应。因此对于移动开发而言，只要通过媒体查询来根据不同的屏幕宽度设置<code>&lt;html&gt;</code>元素的字体大小，就可以适配不同的屏幕。</p>
+<p><strong>23、</strong> 移动开发中使用rem的优缺点</p>
+<p>rem是CSS3新增的一个单位即root em，它与em的区别在于em是相对父元素的font-size，而rem相对的是HTML根元素。这个单位可谓集相对大小和绝对大小的优点于一身，通过它既可以做到只修改根元素就成比例地调整所有字体大小，又可以避免字体大小逐层复合的连锁反应。因此对于移动开发而言，只要通过媒体查询来根据不同的屏幕宽度设置<code>&lt;html&gt;</code>元素的字体大小，就可以适配不同的屏幕。rem布局需要计算大小，相对麻烦，此外在引用第三方库时也适配也比较麻烦。</p>
 <p><strong>24、</strong> js模块化分哪些阶段</p>
 <ul>
 <li><p>无模块化</p>
@@ -444,9 +444,9 @@
 </li>
 <li><p>标记清除算法</p>
 <p>这个算法假定有一个叫跟(root)的对象(js中为window， node js为global)，垃圾回收器定期从根开始，找所有从根开始引用的对象，然后找这些引用对象引用的对象…将这些对象标记为active，其他的不能被根引用或间接引用的将被标记为garbage，最终将这些垃圾清除。<br>循环引用将不再是问题，上例中函数f执行完后，全局window就无法访问到对象a和b了，因此对象a、b将会被回收。<br><center><img src="/images/mark_sweep.gif" alt="标记清除意图]"><center><br><center>标记清除意图 <center></center></center></center></center></p>
-<p><strong>35、</strong> JavaScript中var和let去区别</p>
 </li>
 </ul>
+<p><strong>35、</strong> JavaScript中var和let去区别</p>
 <p>let为ES6新增的命令，用来声明变量，用法与var类似，其区别如下:</p>
 <ul>
 <li><p>有效范围<br>在ES6之前，JS函数只有函数作用域和全局作用域，没有块级作用域，所以<code>{}</code>不能限制var所声明的变量的访问范围，而let声明的变量只在let声明时的代码块内有效。</p>
@@ -482,6 +482,197 @@
 <li>搜索引擎的爬虫也依赖于HTML的标签来确定上下文和各个关键字的权重，利于SEO。</li>
 <li>有利于阅读代码的人理解网站的分块</li>
 </ul>
+<p><strong>40、</strong> iframe有哪些优缺点？<br>优点:</p>
+<ul>
+<li>用来实现长连接，在websocket不可用的时候作为一种替代。</li>
+<li>跨域通信</li>
+<li>无刷新上传文件，在FormData不可用时作为替代方案</li>
+<li>创建一个全新的独立的宿主环境。</li>
+</ul>
+<p>缺点:</p>
+<ul>
+<li>搜索引擎的爬虫还不能很好的处理iframe的内容，不利于SEO。</li>
+<li>iframe会阻塞页面的加载，onload事件不能及时触发(动态的给iframe添加src值可解决) 。</li>
+<li>iframe和主页面共享连接池，而浏览器对同域的连接有限制，所以会影响页面的并行加载(动态的给iframe添加<br>src值可解决)。</li>
+<li>样式和脚本需要额外链入，增加服务器的http请求。</li>
+<li>多数小型的移动设备无法完全显示框架。</li>
+<li>浏览器的后退按钮无效。</li>
+</ul>
+<p><strong>41、</strong> label的作用是什么？是怎么用的？<br>label标签用来定义表单控制间的关系，当用户选择该标签时，浏览器会自动将焦点转移到和改标签相关联的表单控件上。<br>如下: 通过将label标签的属性for的值设置为input的id就可以将label和input关联起来，点击label时就可以选中radio类型的表单了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;label for=&quot;Name&quot;&gt;Number:&lt;/label&gt;  </span><br><span class="line">  &lt;input type=&quot;radio&quot; id=&quot;Name&quot;/&gt;  </span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>42、</strong> 如何实现浏览器内多个标签页之间的通信? (阿里)</p>
+<ul>
+<li>WebSocket</li>
+<li>SharedWorker</li>
+<li>localstorage、cookies等本地存储方式</li>
+</ul>
+<p><strong>43、</strong> webSocket如何兼容低浏览器？(阿里)</p>
+<ul>
+<li>Adobe Flash Socket</li>
+<li>ActiveX HTMLFile(IE)</li>
+<li>基于mutipart编码发送XHR</li>
+<li>基于长轮询的XHR</li>
+</ul>
+<p><strong>44、</strong> 页面可见性Page Visibility API 可以有哪些用途？</p>
+<p>在web页面的开发中，如何判断用户是不是还在与页面交互是一个重要的问题，比如页面最小化了或隐藏在其他标签页后面，这时我们就可以做关闭页面正在播放的音乐或其他什么事情。<br>Page Visibility API由三部分构造:</p>
+<ul>
+<li>document.hidden: 表示页面是否隐藏的布尔值</li>
+<li>document.visibilityState: 有4个可能的状态值<ul>
+<li>hidden: 页面在后台标签页或浏览器最小化，此时页面对用户不可见</li>
+<li>visible: 页面在前台标签页，此时页面至少有部分是可见的</li>
+<li>prerender: 页面正在进行预渲染处理，文档只能从这个状态开始，不可能由其它状态变为这个状态，此时<br>document.hidden为true，</li>
+<li>unloaded: 页面从内存中卸载清除</li>
+</ul>
+</li>
+<li>visibilitychange事件: document.visibilityState状态发生变化时触发</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">document.addEventListener(&apos;visibilitychange&apos;, () =&gt; &#123;</span><br><span class="line">  console.log(document.visibilityState);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p><strong>45、</strong> 网页验证码是干嘛的，是为了解决什么安全问题。</p>
+<p>为了区分用户是机器还是人，验证码对于人而言很容易识别，对于计算机则难以识别，这可以防止恶意的破解密码、刷票、论坛灌水或者利用特定的程序暴力破解方式进行不断的登录尝试。</p>
+<p><strong>46、</strong> title与h1的区别、b与strong的区别、i与em的区别？</p>
+<ul>
+<li><p>title vs h1<br>title是关于元素的额外信息，当鼠标移动元素上时显示一段提示文本，而h1表示层次明确的标题，对页面信息的抓取也有很大影响。</p>
+</li>
+<li><p>b vs strong<br>b表示粗体文本，并没有明确的语义，而strong表示强调，有语气加强的含义，使用阅读设备阅读时<code>&lt;strong&gt;</code>会重读。</p>
+</li>
+<li><p>i vs em<br>i表示斜体，em表示强调的内容。</p>
+</li>
+</ul>
+<p>以上主要是自然样式标签和语义样式标签的差别，应该多用语义样式标签，但不能滥用。</p>
+<ul>
+<li><p>自然样式标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">b, i, u, s, pre</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>语义样式标签</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">strong, em, ins, del, code</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>47、</strong> CSS选择符有哪些？哪些属性可以继承？哪些属性不可以继承？CSS3新增伪类有哪些？</p>
+<p><strong>CSS选择符</strong></p>
+<ul>
+<li>id选中器(# id)</li>
+<li>类选择器(. class)</li>
+<li>标签选择器(div、p)</li>
+<li>相邻元素选择器(E + F)</li>
+<li>子元素选择器(E &gt; F)</li>
+<li>后代元素选择器(E F)</li>
+<li>属性选择器([attribute])</li>
+<li>伪类选择器(E:)</li>
+<li>通配符选择器(*)</li>
+</ul>
+<p><strong>可继承属性</strong></p>
+<ul>
+<li>color</li>
+<li>text-align、text-indent、text-transform</li>
+<li>font、font-family、font-size、font-style、font-weight</li>
+<li>line-height</li>
+<li>cursor</li>
+<li>visibility</li>
+<li>word-spacing<br>…</li>
+</ul>
+<p><strong>不可继承属性</strong></p>
+<ul>
+<li>display</li>
+<li>margin</li>
+<li>padding</li>
+<li>border</li>
+<li>position</li>
+<li>z-index</li>
+<li>height、min-height、max-height</li>
+<li>width、min-width、max-width</li>
+<li>left、top、right、bottom<br>…</li>
+</ul>
+<p><strong>新增伪类</strong></p>
+<ul>
+<li>:enabled</li>
+<li>:disabled</li>
+<li>:checked</li>
+<li>:only-child</li>
+<li>:nth-child(n)</li>
+<li>:first-of-type</li>
+<li>:last-of-type<br>…</li>
+</ul>
+<p><strong>48、</strong> display有哪些值？说明他们的作用。</p>
+<ul>
+<li>none: 元素不显示，并从文档流中移除</li>
+<li>inline: 显示为行内元素类型，同行显示，宽高不能设置</li>
+<li>block: 显示为块级元素类型，换行显示，可设置宽高，默认宽度为父元素宽度</li>
+<li>inline-block: 显示为行内块级元素类型，同行显示，可以设置宽高</li>
+<li>list-item: 像块级元素一样显示并添加列表标记</li>
+<li>table: 像table一样显示</li>
+<li>inherit: 从父元素继承display属性值</li>
+</ul>
+<p><strong>49、</strong> css多列等高(高度不固定)如何实现？<br><strong>padding补偿法</strong><br>如下: 父容器(container)的高度是由子元素div中高的那一列(叫做higher)决定的，而子元素的高度有内容、边框、内边距、外边距的高度共同决定的，当设置子元素的底内边距padding-bottom和底外边距为相等的正负值后，高度相抵为0，此时父容器的高度由higher的内容和边框决定，当higher的高度增加时父容器的高度也跟着增加，子元素中较矮的那列则会用padding-bottom来补偿这部分高度差(因为padding足够大)，再设置父容器overflow: hidden则可以正好截取higher的高度进行显示，表面看上去就是两列等高。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .container &#123;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">  &#125;</span><br><span class="line">  .div1 &#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width: 200px;</span><br><span class="line">    background: blue;</span><br><span class="line">    padding-bottom: 2000px;</span><br><span class="line">    margin-bottom: -2000px;</span><br><span class="line">  &#125;</span><br><span class="line">  .div2 &#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width: 200px;</span><br><span class="line">    background: red;</span><br><span class="line">    padding-bottom: 2000px;</span><br><span class="line">    margin-bottom: -2000px;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div class=&quot;container&quot;&gt;</span><br><span class="line">  &lt;div1 class=&quot;div1&quot;&gt;</span><br><span class="line">  Most of the discussion was on what needed to be done now as we transitioned from the security issues to the challenging economic issues.</span><br><span class="line">  &lt;/div1&gt;</span><br><span class="line">  &lt;div2 class=&quot;div2&quot;&gt;</span><br><span class="line">  Most of the discussion was on what needed to be done now as we transitioned from the security issues to the challenging economic issues. Most of the discussion was on what needed to be done now as we transitioned from the security issues to the challenging economic issues.</span><br><span class="line">  &lt;/div2&gt;</span><br><span class="line">&lt;/Box&gt;</span><br></pre></td></tr></table></figure></p>
+<p><strong>50、</strong> li与li之间有看不见的空白间隔是什么原因引起的？有什么解决办法？</p>
+<p>由于浏览器默认会把行内元素间的空白字符(空格、换行、tab)渲染为一个空格，因此li之间就产生了空白间隔。<br>解决方法是书写li时写为一行或设置font-size为0。</p>
+<p><strong>51、</strong> 为什么要初始化CSS样式。</p>
+<p>因为浏览器兼容问题，不同的浏览器对有些标签的默认值是不一致的，如果没有初始化可能导致浏览器渲染的结果差异，但是初始化样式对SEO有一定影响，力求影响最小的情况下初始化。</p>
+<p><strong>52、</strong> CSS里的visibility属性有个collapse属性值是干嘛用的？在不同浏览器下以后什么区别？</p>
+<p>对普通元素设置visibility: collapse后这个元素会完全隐藏，但会占据局部空间，与visibility: hidden的效果一样，相当于此元素透明，如果元素为table，collapse会让table会隐藏但不会占据局部空间。<br>不同浏览器不同版本的表现并不一致，不建议使用。</p>
+<p><strong>53、</strong> 请解释一下为什么需要清除浮动？清除浮动的方式</p>
+<p>清除浮动是为了清除使用浮动元素带来的影响，浮动的元素高度会塌陷，而高度的塌陷是我们后面的布局不能正常显示。<br>清除浮动的方式:</p>
+<ul>
+<li><p>利用clear属性</p>
+<p>如下，设置box的clear的属性为left或both即可消除兄弟元素浮动的影响，因为clear的本质是添加外边距，所有该方法不能解决父元素高度塌陷的问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .float-left &#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: blue;</span><br><span class="line">  &#125;</span><br><span class="line">  .box &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: gray;</span><br><span class="line">    clear: both;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div class=&quot;float-left&quot; /&gt;</span><br><span class="line">  &lt;div class=&quot;box&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>添加空块级元素<br>如下在浮动元素后添加空块级元素div，并设置其clear属性为both或left即可以清除浮动，父元素高度塌陷的问题也得到了解决。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .clear &#123;</span><br><span class="line">    clear: both;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div class=&quot;float-left&quot; /&gt;</span><br><span class="line">  &lt;div class=&quot;clear&quot;/&gt;</span><br><span class="line">  &lt;div class=&quot;box&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>伪元素::after和::before(作用于浮动元素的父类)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .float-father &#123;</span><br><span class="line">    &amp;::after &#123;</span><br><span class="line">      content: &quot;&quot;;</span><br><span class="line">      display: block;</span><br><span class="line">      clear: both;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div class=&quot;float-father&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;float-left&quot; /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;box&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>overflow的方法(作用于浮动元素的父类)<br>设置浮动元素父类的overflow为auto或hidden即可清除浮动，该方法是利用BFC的特性达到的效果，这与前述几种方法通过设置clear属性的本质是不一样的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .float-father &#123;</span><br><span class="line">    overflow: auto;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div class=&quot;float-father&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;float-left&quot; /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;box&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><strong>53、</strong> 浏览器是怎样解析CSS选择器的？</p>
+<p>样式系统从关键选择器开始匹配，然后从右向左查找选择器的的祖先祖先元素，如果匹配，则继续左移查询父元素，不匹配则放弃查找，相比从左到右的正向查找效率大大提高。</p>
+<p><strong>54、</strong> 在网页中的应该使用奇数还是偶数的字体？为什么呢？<br>使用偶数字体更好，主要原因如下:</p>
+<ul>
+<li>比例关系<br>相对来说偶数字号容易和web页面的其他部分构成比例关系，如使用14号为正文字号，使用14 <em> 0.5 = 7px作为margin，14 </em> 1.5 = 21px作为标题。</li>
+<li>ie6中会把13px的字号渲染为14px</li>
+<li>汉字更均衡<br>比如14号的汉字，会去掉1px的间距，字体的实际宽度就是13px，这样汉字的中竖线正好平分汉字，使汉字显得更加均衡。</li>
+</ul>
+<p><strong>55、</strong> 元素竖向的百分比设定是相对于容器的高度吗？</p>
+<p>高度是相对于父容器高度，padding-top,padding-bottom,margin-top,margin-bottom是相对于父容器宽度。</p>
+<p><strong>56、</strong> 什么是响应式设计？响应式设计的基本原理是什么？如何兼容低版本的IE？</p>
+<p>响应式设计就是根据设备环境(系统平台、屏幕尺寸)来进行相应的响应和调整。其主要原理就是通过媒体查询来适配不同环境下的UI，对于低版本IE来说不能使用媒体查询，则可以通过监听window resize事件添加新的类来实现PC端的响应式布局，此外还可以通过Respond.js来实现媒体查询。</p>
+<p><strong>57、</strong> 如果需要手动写动画，你认为最小时间间隔是多久，为什么？（阿里）</p>
+<p>多数显示器的默认频率是60Hz，即一秒钟刷新60次，因此理论上动画最小时间间隔是1 / 60 * 1000ms = 16.7ms。</p>
+<p><strong>58、</strong> overflow: scroll时不能平滑滚动的问题怎么处理</p>
+<p>开启硬件加速，-webkit-overflow-scrolling: touch  </p>
+<p><strong>59、</strong> png、jpg、gif 这些图片格式解释一下，分别什么时候用。有没有了解过webp？</p>
+<ul>
+<li><p>png(Portable Network Graphics)<br>直译就是便携式网络图片，简称PNG，是一种无损压缩的位图图形格式式，支持索引、灰度、RGB三种颜色方案以及Alpha通道等特性。PNG的开发目标是改善并取代GIF作为适合网络传输的格式而不需要专利许可。<br>特性</p>
+<ul>
+<li>支持256色调色板技术以产生小体积文件</li>
+<li>支持最高24位真彩色图像以及8位灰度图像</li>
+<li>支持Alpha通道的透明/与半透明特性</li>
+<li>支持无损压缩</li>
+<li>支持存储附加信息，以保留图像名称、作者等信息</li>
+<li>支持图像亮度的Gamma校准信息</li>
+<li>渐进显示和流式读写，适合在网络传输中快速显示预览效果后再展示全貌<br>…</li>
+</ul>
+</li>
+<li><p>jpg(Joint Photographic Experts Group)<br>jpg即jpeg，由于早期的DOS、Windows95只支持最长3字符的扩展名，为了兼容采用了.jpg，一直沿用到今天，JPEG是一种针对照片视频而广泛使用的有损压缩标准方法。支持24位真彩色，颜色丰富并且适合那些允许轻微失真的像素色彩丰富的图片(相片)不支持动画，不支持透明色，不适合logo和线条。</p>
+</li>
+<li><p>gif(Graphics Interchange Format)<br>是一种位图图形文件格式，它采用无损压缩技术，以8位色(即2556种颜色)重现真彩色的图像，它既可以减少文件的大小，又保持成像质量。GIF图片可以动并且拥有透明度(透明或不透明，并没有alpha通道)。适合logo、线条图。</p>
+</li>
+<li><p>webp<br>是一种同时提供了有损压缩和无损压缩(可逆压缩)的图片文件格式。它的优势在于拥有更优的图像数据压缩算法，能带来更新的图片提交，而且拥有肉眼识别无差异的图像质量，此外它还具备Alpha透明以及动画特性。</p>
+</li>
+</ul>
+<p><strong>60、</strong> style标签写在body后与body前有什么区别</p>
+<p>写在body前有利于浏览器逐步渲染(resources download=&gt;CSSOM+DOM=&gt;RenderTree=&gt;Layout=&gt;Paint)，写在body标签后由于浏览器逐行方式对html文档进行解析，当解析到写在尾部的样式表时会导致浏览器停止之前的渲染，等待加载且解析样式表完成后重新渲染，在windows的IE下可能会出现FOUC现象(即样式失效导致的页面闪烁问题)。</p>
+<p><strong>61、</strong> 什么是CSS 预处理器 / 后处理器？</p>
+<ul>
+<li><p>预处理器<br>CSS预处理器定义了一种新的语言，其基本思想是，用一种专门的编程语言，为CSS增加一些编程的特性，并将CSS作为目标生成文件。比如LESS、Sass、Stylus等用来预编译CSS，他们具有层级、mixin、变量、循环、函数等特性，极大的提高了UI开发效率。</p>
+</li>
+<li><p>后处理器<br>对CSS进行处理，属于广义上的CSS预处理器，我们很久以前就在用预处理器了，最典型的例子就是CSS压缩工具clean-css，目前最常用的后处理器就是PostCSS，用来在完成的样式表中根据CSS规范处理CSS，如给CSS属性添加浏览器私有前缀，实现各个浏览器的兼容。</p>
+</li>
+</ul>
+<p><strong>62、</strong> 什么是Cookie隔离？</p>
+<p>cookie隔离就是在http请求的时候不带cookie，如果静态文件都放在主域名下，那么在静态文件请求时都会把带有cookie的请求提交给server，非常浪费资源，所以不如隔离开。<br>因为cookie有域的限制，因此不能跨域请求，因此使用非主域名的时候，请求头中就不会带有cookie，这样就可以降低请求头的大小，降低请求时间，从而达到降低整体请求延时的目的。</p>
+<p><strong>83、</strong> 对BFC规范(块级格式化上下文：block formatting context)的理解？<br>lineheight<br>BFC是CSS2.1里的概念，它决定了元素如何对其内容进行定位以及与其他元素的关系和相互作用。通俗来说BFC是一个独立的环境，在这个环境中按着一定规则进行物品摆放，而不会对其他环境的物品造成影响。利用这个特性可以用来清除浮动元素对其非浮动兄弟元素和其子元素带来的影响。</p>
   
 	</div>
 		<footer class="article-footer clearfix">

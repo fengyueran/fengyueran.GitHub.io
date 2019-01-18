@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="Xinghunm">
 <meta property="og:description" content="css选择器用法较多，不常用的选择器容易遗忘，于是在这里整理出css选择器的基本用法，以备查用。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-11T07:07:48.911Z">
+<meta property="og:updated_time" content="2019-01-16T05:00:21.620Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css选择器">
 <meta name="twitter:description" content="css选择器用法较多，不常用的选择器容易遗忘，于是在这里整理出css选择器的基本用法，以备查用。">
@@ -147,14 +147,20 @@
 </li>
 </ul>
 <p>CSS 3</p>
-<p>HTML：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;h1&gt;this is h1&lt;/h1&gt;</span><br><span class="line">    &lt;h3&gt;first-of-type h3&lt;/h3&gt;</span><br><span class="line">    &lt;h3&gt;last-of-type h3&lt;/h3&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#tab1&quot;&gt;tab1&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#tab2&quot;&gt;tab2&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;div id=&quot;tab1&quot;&gt;this is tab1&lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;tab2&quot;&gt;this is tab2&lt;/div&gt;</span><br><span class="line">    &lt;p&gt;&lt;span&gt;only child&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;&lt;/p&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>HTML：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;div&gt;</span><br><span class="line">    &lt;h1&gt;this is h1&lt;/h1&gt;</span><br><span class="line">    &lt;h3&gt;first-of-type h3&lt;/h3&gt;</span><br><span class="line">    &lt;h3&gt;last-of-type h3&lt;/h3&gt;</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#tab1&quot;&gt;tab1&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">        &lt;li&gt;&lt;a href=&quot;#tab2&quot;&gt;tab2&lt;/a&gt;&lt;/li&gt;</span><br><span class="line">    &lt;/ul&gt;</span><br><span class="line">    &lt;div id=&quot;tab1&quot;&gt;this is tab1&lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;tab2&quot;&gt;this is tab2&lt;/div&gt;</span><br><span class="line">    &lt;p&gt;&lt;span&gt;only child&lt;/span&gt;&lt;/p&gt;</span><br><span class="line">    &lt;p&gt;&lt;/p&gt;</span><br><span class="line">    &lt;input id=&quot;input1&quot; /&gt;  </span><br><span class="line">    &lt;input id=&quot;input2&quot; disabled=&quot;disable&quot; /&gt; </span><br><span class="line">    &lt;input id=&quot;input3&quot; type=&quot;checkbox&quot; /&gt; </span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
 <ul>
-<li><p><code>E:target</code>: URL后跟锚点#，指向文档内某个具体的元素，这个被链接的元素就是目标元素，       <code>E:target</code>选择器用于选取当前活动的目标元素<br>当我们点击列表tab1时，因为其锚点链接的元素就是id为tab1的元素，所以此时活动的目标元素就是id为tab1的div，通过div:target就可以获取此目标元素。<br><code>div:target { background: red; }</code></p>
+<li><p><code>E:target</code>: URL后跟锚点#，指向文档内某个具体的元素，这个被链接的元素就是目标元素，<code>E:target</code>选<br>择器用于选取当前活动的目标元素<br>当我们点击列表tab1时，因为其锚点链接的元素就是id为tab1的元素，所以此时活动的目标元素就是id为tab1的div，通过div:target就可以获取此目标元素。<br><code>div:target { background: red; }</code></p>
 </li>
 <li><p><code>:not(selector)</code>: 匹配与selector选择器描述不相符的元素<br><code>div :not(div) { color: red; }</code></p>
 </li>
+<li><p><code>E:enabled</code>: 匹配表单中激活的元素<br><code>#input1:enabled { background: red; }</code></p>
+</li>
+<li><p><code>E:disabled</code>: 匹配表单中禁用的元素<br><code>#input2:disabled { background: black; }</code></p>
+</li>
+<li><p><code>E:checked</code>: 匹配表单中被选中的radio(单选框)或checkbox(复选框)<br><code>#input3:checked { margin: 20px; }</code>  </p>
+</li>
 </ul>
-<p><strong>结构性伪类</strong></p>
+<p><strong>CSS3结构性伪类</strong></p>
 <ul>
 <li><p><code>:root</code>: 匹配根元素，对应HTML文档就是html元素<br><code>:root { color: red; }</code></p>
 </li>
@@ -190,6 +196,10 @@
 </li>
 <li><p><code>::after</code>: 在元素后通过content属性插入内容<br><code>p::after {  content: &quot;*&quot;; }</code></p>
 </li>
+</ul>
+<p>CSS 3</p>
+<ul>
+<li><code>::selection</code>: 匹配鼠标框选的元素<br><code>::selection {  color: red; }</code></li>
 </ul>
 <h3 id="多级选择器"><a href="#多级选择器" class="headerlink" title="多级选择器"></a>多级选择器</h3><p>HTML:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div id=&quot;div1&quot;&gt;</span><br><span class="line">    &lt;div id=&quot;div2&quot;&gt;</span><br><span class="line">      &lt;h1&gt;this is dev2 &gt; h1&lt;/h1&gt;</span><br><span class="line">      &lt;h2&gt;this is dev2 &gt; h2&lt;/h2&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">     &lt;div id=&quot;div3&quot;&gt;this is dev3&lt;/div&gt;</span><br><span class="line">     &lt;div id=&quot;div4&quot;&gt;this is dev4&lt;/div&gt;</span><br><span class="line">     &lt;h1&gt;this is div1 &gt; h1&lt;/h1&gt;</span><br><span class="line">  &lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
 <ul>
