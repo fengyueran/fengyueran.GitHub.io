@@ -20,7 +20,7 @@
 <meta property="og:description" content="前端题集">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/mark_sweep.gif">
-<meta property="og:updated_time" content="2019-01-18T07:58:28.648Z">
+<meta property="og:updated_time" content="2019-01-24T11:43:44.065Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每日一题">
 <meta name="twitter:description" content="前端题集">
@@ -333,10 +333,10 @@
 <li>缺点<br>污染全局作用域，文件间依赖关系不明显。</li>
 </ul>
 </li>
-<li><p>CommonJS规范<br>CommonJS是一个JavaScript模块化规范，最初用于服务端的node。根据这个规范一个文件就是一个模块，其内部定义的变量函数只属于这个模块而不对外暴露。CommonJS通过export或module.exports来导出需要对外提供的接口，通过require方法来同步加载所要依赖的模块。</p>
+<li><p>CommonJS规范<br>CommonJS是一个JavaScript模块化规范，最初用于服务端的node。根据这个规范一个文件就是一个模块，其内部定义的变量函数只属于这个模块而不对外暴露。CommonJS通过exports或module.exports来导出需要对外提供的接口，通过require方法来同步加载所要依赖的模块。</p>
 <ul>
 <li><p>模块定义</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// util.js</span><br><span class="line">var x = 0;</span><br><span class="line">var add = function (value) &#123;</span><br><span class="line">  return value + x;</span><br><span class="line">&#125;;</span><br><span class="line">module.exports.x = x;</span><br><span class="line">module.exports.add = add;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// util.js</span><br><span class="line">var x = 0;</span><br><span class="line">var add = function (value) &#123;</span><br><span class="line">  return value + x;</span><br><span class="line">&#125;;</span><br><span class="line">exports.x = x;</span><br><span class="line">module.exports.add = add;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>模块使用</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var util = require(./util.js); </span><br><span class="line">console.log(util.x); // 0</span><br><span class="line">console.log(util.add(1)); // 1</span><br></pre></td></tr></table></figure>
@@ -383,7 +383,7 @@
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">  var a = 5; // 二进制101</span><br><span class="line">  var b = 6; // 二进制110</span><br><span class="line">  a = a^b;</span><br><span class="line">=&gt; </span><br><span class="line">  a = 101</span><br><span class="line">      110</span><br><span class="line">      ---</span><br><span class="line">      011</span><br><span class="line"></span><br><span class="line">  b = a^b;</span><br><span class="line"></span><br><span class="line">=&gt;</span><br><span class="line">  b = 011</span><br><span class="line">      110</span><br><span class="line">      ---</span><br><span class="line">      101</span><br><span class="line">  </span><br><span class="line">  a = a^b;</span><br><span class="line">=&gt;</span><br><span class="line">  a = 011</span><br><span class="line">      101</span><br><span class="line">      ---</span><br><span class="line">      110</span><br><span class="line"></span><br><span class="line">  console.log(a); // 6</span><br><span class="line">  console.log(b); // 5</span><br></pre></td></tr></table></figure>
 <p><strong>26、</strong> CSS创建平移动画</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">width: 100px;</span><br><span class="line">  height: 30px;</span><br><span class="line">  position: absolute;</span><br><span class="line">  background: blue;</span><br><span class="line">  left: 0;</span><br><span class="line">  top: 0;</span><br><span class="line">  animation: move 3s ease infinite; </span><br><span class="line"></span><br><span class="line">  @keyframes move &#123;</span><br><span class="line">    50% &#123;</span><br><span class="line">      left: 100px;</span><br><span class="line">      top: 100px;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  或</span><br><span class="line">  @keyframes move &#123;</span><br><span class="line">    50% &#123;</span><br><span class="line">      transform: translate(100px, 100px);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  width: 100px;</span><br><span class="line">  height: 30px;</span><br><span class="line">  position: absolute;</span><br><span class="line">  background: blue;</span><br><span class="line">  left: 0;</span><br><span class="line">  top: 0;</span><br><span class="line">  animation: move 3s ease infinite; </span><br><span class="line"></span><br><span class="line">  @keyframes move &#123;</span><br><span class="line">    50% &#123;</span><br><span class="line">      left: 100px;</span><br><span class="line">      top: 100px;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  // 或</span><br><span class="line">  @keyframes move &#123;</span><br><span class="line">    50% &#123;</span><br><span class="line">      transform: translate(100px, 100px);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>27、</strong> js选择select下的option</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;select&gt;</span><br><span class="line">  &lt;option value=&quot;option1&quot;&gt;1&lt;/option&gt;</span><br><span class="line">  &lt;option value=&quot;option2&quot;&gt;2&lt;/option&gt;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line"></span><br><span class="line">const selectNode = document.querySelector(&apos;select&apos;);</span><br><span class="line">// 1.设置value的值等于option的value来选中option</span><br><span class="line">selectNode.value = option2;</span><br><span class="line"></span><br><span class="line">// 2.设置selectedIndex来选中option</span><br><span class="line">selectNode.selectedIndex = 1;</span><br></pre></td></tr></table></figure>
 <p><strong>28、</strong> CSS实现超出部分内容显示<code>...</code></p>
@@ -396,7 +396,7 @@
 </li>
 <li><p>fixed<br>fixed定位即固定定位，类似于绝对定位，但它是相对于浏览器窗口进行定位的，元素的位置通过left、top、right以及bottom 属性进行设置。</p>
 </li>
-<li><p>relative<br>relative定位即相对定位，相对的参考位置为元素自身所在文档流的位置(static定位时的位置)，通过left、top、right以及bottom属性进行设置。相对定位虽然脱离了文档流，但计算其他元素在文档流中的位置时仍会以该元素正常的文档流位置进行计算，就好像元素还在原来的位置。</p>
+<li><p>relative<br>relative定位即相对定位，相对的参考位置为元素自身所在文档流的位置(不管这个元素是否脱离正常文档流)，通过left、top、right以及bottom属性进行设置。相对定位虽然脱离了文档流，但计算其他元素在文档流中的位置时仍会以该元素正常的文档流位置进行计算，就好像元素还在原来的位置。</p>
 </li>
 <li><p>inherit<br>继承父类的postion值，不会继承其left、top、right及bottom值</p>
 </li>
@@ -672,7 +672,6 @@
 </ul>
 <p><strong>62、</strong> 什么是Cookie隔离？</p>
 <p>cookie隔离就是在http请求的时候不带cookie，如果静态文件都放在主域名下，那么在静态文件请求时都会把带有cookie的请求提交给server，非常浪费资源，所以不如隔离开。<br>因为cookie有域的限制，因此不能跨域请求，因此使用非主域名的时候，请求头中就不会带有cookie，这样就可以降低请求头的大小，降低请求时间，从而达到降低整体请求延时的目的。</p>
-<p><strong>83、</strong> 对BFC规范(块级格式化上下文：block formatting context)的理解？<br>lineheight<br>BFC是CSS2.1里的概念，它决定了元素如何对其内容进行定位以及与其他元素的关系和相互作用。通俗来说BFC是一个独立的环境，在这个环境中按着一定规则进行物品摆放，而不会对其他环境的物品造成影响。利用这个特性可以用来清除浮动元素对其非浮动兄弟元素和其子元素带来的影响。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -748,6 +747,10 @@
 <div class="categorieslist">
 	<p class="asidetitle">Categories</p>
 		<ul>
+		
+		  
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>2</sup></a></li>
+		  
 		
 		  
 			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>

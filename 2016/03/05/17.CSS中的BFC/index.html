@@ -1,0 +1,531 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>CSS中的BFC | Xinghunm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xinghunm">
+    
+
+    
+    <meta name="description" content="BFC(Block formatting context)，即块级格式化上下文，是CSS布局中的概念，在之前的编程中并没有显示地接触到这一概念，但是很可能无形中运用到了BFC，那究竟什么是BFC呢？我们来一探究竟。">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS中的BFC">
+<meta property="og:url" content="http://yoursite.com/2016/03/05/17.CSS中的BFC/index.html">
+<meta property="og:site_name" content="Xinghunm">
+<meta property="og:description" content="BFC(Block formatting context)，即块级格式化上下文，是CSS布局中的概念，在之前的编程中并没有显示地接触到这一概念，但是很可能无形中运用到了BFC，那究竟什么是BFC呢？我们来一探究竟。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/17-1-margin-un-collapse.png">
+<meta property="og:image" content="http://yoursite.com/images/17-2-margin-collapse.png">
+<meta property="og:image" content="http://yoursite.com/images/17-3-column-layout.png">
+<meta property="og:image" content="http://yoursite.com/images/17-4-column-layout.png">
+<meta property="og:image" content="http://yoursite.com/images/17-5-clear-float.png">
+<meta property="og:image" content="http://yoursite.com/images/17-6-clear-float.png">
+<meta property="og:updated_time" content="2019-01-23T05:31:26.890Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS中的BFC">
+<meta name="twitter:description" content="BFC(Block formatting context)，即块级格式化上下文，是CSS布局中的概念，在之前的编程中并没有显示地接触到这一概念，但是很可能无形中运用到了BFC，那究竟什么是BFC呢？我们来一探究竟。">
+<meta name="twitter:image" content="http://yoursite.com/images/17-1-margin-un-collapse.png">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
+				<h2 class="blog-motto">Change the world or change yourself</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/05/17.CSS中的BFC/" title="CSS中的BFC" itemprop="url">CSS中的BFC</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-03-05T05:10:27.000Z" itemprop="datePublished"> Published 2016-03-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#BFC"><span class="toc-number">1.</span> <span class="toc-text">BFC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BFC触发条件"><span class="toc-number">2.</span> <span class="toc-text">BFC触发条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#BFC的应用"><span class="toc-number">3.</span> <span class="toc-text">BFC的应用</span></a></li></ol>
+		
+		</div>
+		
+		<p>在谈BFC之前我们需要了解两个概念: Box和Formatting context。</p>
+<ul>
+<li><p>Box<br>它是CSS布局中的最小单位，可以认为一个页面就是有这些不同大小、位置以及属性各异的盒子组成，这些盒子大致分为两类，块级盒子(block-level box)和行内级盒子(inline-level box)。</p>
+<ul>
+<li>block-level box<br>块级盒子，由块级元素生成，一个块级元素至少会生成一个块级盒子。每个块级盒子都会参与块级格式化上下文BFC(Block formatting context)。</li>
+<li>inline-level box<br>行内级盒子，由行内元素生成。行内级盒子包括行内盒子和原子行内盒子两种，行内盒子参与格式化上下文IFC(Inline formatting context)，而原子行内盒子不参与格式化上下文。</li>
+</ul>
+</li>
+<li><p>Formatting context<br>它是页面中的一块渲染区域，在这个区域内有一套渲染规则，区域内的元素根据这套规则进行渲染，不同的display有不同的层级(block-level box、inline-level box等)，不同的层级会参与不同的Formatting context，它决定了元素如何对其内容进行定位以及与其他元素的关系和相互作用。通俗来说FC是一个独立的环境，像个沙盒，在这个沙盒中按着一定规则进行物品摆放，而不会对其他环境的物品造成影响。</p>
+</li>
+</ul>
+<h3 id="BFC"><a href="#BFC" class="headerlink" title="BFC"></a>BFC</h3><p>块级格式化上下文，即块级+格式化上下文，它规定了块级盒子渲染布局的规则。规则如下:</p>
+<ul>
+<li>1) 内部的盒子在垂直方向排列。</li>
+<li>2) 每个元素margin box的左边与包含块的左边相接触(对于从左往右的格式化，否则相反)，浮动元<br>   素也不例外。</li>
+<li>3) 盒子垂直方向的距离由margin决定，同一个BFC下的两个相邻的Box会产生margin collapse      (外边距合并)。</li>
+<li>4) BFC区域不会与float box重叠。</li>
+<li>5) 计算BFC的高度时，考虑BFC所包含的所有子元素，浮动元素也不例外。</li>
+</ul>
+<h3 id="BFC触发条件"><a href="#BFC触发条件" class="headerlink" title="BFC触发条件"></a>BFC触发条件</h3><p>在日常的布局中，我们可能不知不觉地就触发了BFC，而BFC默默的在后边做着贡献，那有哪些条件会触发BFC呢？</p>
+<ul>
+<li>根元素<code>&lt;html&gt;</code></li>
+<li>float的属性不为none</li>
+<li>position为absolute或fixed</li>
+<li>display为inline-block, table-cell, table-caption, flex, inline-flex</li>
+<li>overflow不为visible</li>
+</ul>
+<h3 id="BFC的应用"><a href="#BFC的应用" class="headerlink" title="BFC的应用"></a>BFC的应用</h3><ul>
+<li><p>防止margin collapse<br>由BFC特性3我们知道在同一BFC下会产生外边距合并，那么，是不是让元素处在不同的BFC就可以避免外边距合并了呢？let me try!<br>如下，通过设置overflow的值为hidden给box2创建了新的BFC环境，以此来避免外边距合并。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .box1 &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: #7F80FF;</span><br><span class="line">    margin-bottom: 50px;</span><br><span class="line">  &#125;</span><br><span class="line">  .box2 &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: #7F80FF;</span><br><span class="line">    margin-top: 20px;</span><br><span class="line">    overflow: hidden;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div class=&quot;box1 &quot; /&gt;</span><br><span class="line">  &lt;div class=&quot;box2&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>很遗憾，并没有成功，找了半天资料，来看一下w3c怎么说的(还是亲爹靠谱)，注意了，扔家说的是创建了新BFC的元素与其子元素不会发生外边距合并，因此直接在box1的兄弟元素box2上创建新的BFC并不能阻止外边距合并。</p>
+<blockquote>
+<p>Margins of elements that establish new block formatting contexts (such as floats and elements with ‘overflow’ other than ‘visible’) do not collapse with their <font color="#0099ff">in-flow children<font>.<br><img src="/images/17-1-margin-un-collapse.png" width="500"></font></font></p>
+</blockquote>
+<p>这该如何是好？如下，给box2添加父类box2-father，并设置box2-father的overflow为hidden。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .box2-father &#123;</span><br><span class="line">    overflow: hidden; // 触发新的BFC</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div class=&quot;box1 &quot; /&gt;</span><br><span class="line">  &lt;div class=&quot;box2-father&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;box2&quot; /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>奇迹出现了，如下图，box1、box2并没有发生外边距合并，这是什么原因呢？由前述我们已经知道触发box2-father生成新的BFC后box2-father与其第一个子元素box不会发生外边距合并，也就是说此时box2的外边距不会溢出到父元素外，也就不会和box1产生外边距合并。<br><img src="/images/17-2-margin-collapse.png" width="500"></p>
+<ul>
+<li><p>实现两列布局<br>如下，当box1为float时，box1的兄弟元素box2的内容会环绕着box1，但有时我们并不希望这样，而是希望box1和box2为两列布局。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .box1 &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: gray;</span><br><span class="line">    float: left;</span><br><span class="line">  &#125;</span><br><span class="line">  .box2 &#123;</span><br><span class="line">    width: 400px;</span><br><span class="line">    height: 240px;</span><br><span class="line">    background: #2196F3;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div class=&quot;box1 &quot; /&gt;</span><br><span class="line">  &lt;div class=&quot;box2&quot;&gt;</span><br><span class="line">    我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1，我环绕着box1。</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/17-3-column-layout.png" width="500"></p>
+</li>
+</ul>
+<p>由BFC特性4知道BFC的区域不会与float box重叠，因此，可以通过触发box2产生新的BFC来达到两列布局的目的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.box2 &#123;</span><br><span class="line">    width: 400px;</span><br><span class="line">    height: 240px;</span><br><span class="line">    background: #2196F3;</span><br><span class="line">    overflow: hidden;//触发新的BFC</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>两列布局效果如下图:<br><img src="/images/17-4-column-layout.png" width="500"></p>
+<ul>
+<li>清除浮动</li>
+</ul>
+<p>如下，由于box1、box2浮动导致容器container的高度塌陷，其兄弟元素box3不能正确的布局。根据BFC特性5，则可以考虑用BFC来解决高度塌陷的问题。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .container &#123;</span><br><span class="line">    border: solid red;</span><br><span class="line">    width: 400px;</span><br><span class="line">  &#125;</span><br><span class="line">  .box1 &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: gray;</span><br><span class="line">    float: left;</span><br><span class="line">  &#125;</span><br><span class="line">  .box2 &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: black;</span><br><span class="line">    float: left;</span><br><span class="line">  &#125;</span><br><span class="line">  .box3 &#123;</span><br><span class="line">    width: 410px;</span><br><span class="line">    height: 120px;</span><br><span class="line">    background: #2196F3;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div class=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;box1 &quot; /&gt;</span><br><span class="line">    &lt;div class=&quot;box2&quot; /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;box3&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="/images/17-5-clear-float.png" width="500"></p>
+<p>设置容器overflow为hidden来触发生成新的BFC，进而清除浮动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.container &#123;</span><br><span class="line">  border: solid red;</span><br><span class="line">  width: 400px;</span><br><span class="line">  overflow: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>效果如下:<br><img src="/images/17-6-clear-float.png" width="500"></p>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/CSS/">CSS</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CSS/">CSS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/03/05/17.CSS中的BFC/" data-title="CSS中的BFC | Xinghunm" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2016/03/07/18.圣杯布局与双飞翼布局/" title="圣杯布局与双飞翼布局">
+  <strong>上一篇：</strong><br>
+  <span>
+  圣杯布局与双飞翼布局</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/03/02/13.JavaScript中的闭包/" title="JavaScript中的闭包">
+ <strong>下一篇：</strong><br> 
+ <span>JavaScript中的闭包
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/css/" title="css">css<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/js/" title="js">js<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="/images/weixin.png" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xinghunm <br>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:316032603@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'xinghunm';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', '');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

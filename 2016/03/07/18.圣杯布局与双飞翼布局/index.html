@@ -1,0 +1,519 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>圣杯布局与双飞翼布局 | Xinghunm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xinghunm">
+    
+
+    
+    <meta name="description" content="最近在浏览多列等高的布局实现中总是看到圣杯布局与双飞翼布局，而对这两个概念还是第一次听说，作为一个前端，这怎么能逃过我的魔爪呢！！！">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="圣杯布局与双飞翼布局">
+<meta property="og:url" content="http://yoursite.com/2016/03/07/18.圣杯布局与双飞翼布局/index.html">
+<meta property="og:site_name" content="Xinghunm">
+<meta property="og:description" content="最近在浏览多列等高的布局实现中总是看到圣杯布局与双飞翼布局，而对这两个概念还是第一次听说，作为一个前端，这怎么能逃过我的魔爪呢！！！">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/images/18-1-three-column.gif">
+<meta property="og:image" content="http://yoursite.com/images/18-2-holygrail.gif">
+<meta property="og:image" content="http://yoursite.com/images/18-3-holygrail.gif">
+<meta property="og:image" content="http://yoursite.com/images/18-4-holygrail.gif">
+<meta property="og:image" content="http://yoursite.com/images/18-5-holygrail.gif">
+<meta property="og:image" content="http://yoursite.com/images/18-6-holygrail.gif">
+<meta property="og:image" content="http://yoursite.com/images/18-7-holygrail.gif">
+<meta property="og:updated_time" content="2019-01-24T11:41:09.479Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="圣杯布局与双飞翼布局">
+<meta name="twitter:description" content="最近在浏览多列等高的布局实现中总是看到圣杯布局与双飞翼布局，而对这两个概念还是第一次听说，作为一个前端，这怎么能逃过我的魔爪呢！！！">
+<meta name="twitter:image" content="http://yoursite.com/images/18-1-three-column.gif">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
+				<h2 class="blog-motto">Change the world or change yourself</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/07/18.圣杯布局与双飞翼布局/" title="圣杯布局与双飞翼布局" itemprop="url">圣杯布局与双飞翼布局</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-03-07T05:10:27.000Z" itemprop="datePublished"> Published 2016-03-07</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#圣杯布局"><span class="toc-number">1.</span> <span class="toc-text">圣杯布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#双飞翼布局"><span class="toc-number">2.</span> <span class="toc-text">双飞翼布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#圣杯布局与双飞翼布局的异同"><span class="toc-number">3.</span> <span class="toc-text">圣杯布局与双飞翼布局的异同</span></a></li></ol>
+		
+		</div>
+		
+		<p>圣杯布局与双飞翼布局在效果上并没有区别，都是指三列布局，两边定宽，中间自适应的布局。之所以叫不同的名字是因为他们的出处、实现方式不同，作者给他们取了他们认为合适的名字而流传于江湖。</p>
+<p>大致瞄了眼圣杯布局的方式，好像很复杂的样子，闭目一想，不就是两边等宽中间自适应的布局吗，只需要把中间的宽度用calc计算出来不就好了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .box-left &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: gray;</span><br><span class="line">    float: left;</span><br><span class="line">  &#125;</span><br><span class="line">  .box-center &#123;</span><br><span class="line">    width: calc(100% - 200px - 250px);</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: blue;</span><br><span class="line">    float: left;</span><br><span class="line">  &#125;</span><br><span class="line">  .box-right &#123;</span><br><span class="line">    width: 100px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: #2196F3;</span><br><span class="line">    float: left;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div class=&quot;box-left&quot; /&gt;</span><br><span class="line">  &lt;div class=&quot;box-center&quot; /&gt;</span><br><span class="line">  &lt;div class=&quot;box-right&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>如下图，中间自适应得很好嘛，而且CSS也很简单，就一个calc便能实现自适应布局，那为什么还要讨论复杂的圣杯双飞翼，原因是时代不同了，现在有calc，有flex，那个年代可没有，只能通过那些奇淫技巧来实现。</p>
+<p><center><img src="/images/18-1-three-column.gif" width="500"><center><br>还是来看看正题吧，圣杯&amp;&amp;双飞翼！！！</center></center></p>
+<h3 id="圣杯布局"><a href="#圣杯布局" class="headerlink" title="圣杯布局"></a>圣杯布局</h3><p>圣杯布局最早来源于Matthew Levine 2006年的一篇文章<a href="https://alistapart.com/article/holygrail" target="_blank" rel="noopener">In Search of the Holy Grail</a>，圣杯是西方表达渴求之物的意思，不是对页面的形象表达，作者称之为圣杯也是对这种广泛而简单布局的认同。<br>下面来看作者是如何实现圣杯布局的(本节的静态图都来自原文)。</p>
+<ul>
+<li><p>1) 建立框架<br>如下，先建立header、container、footer的基本结构，并通过设置container的padding来预留三列布局两边的宽度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  #container &#123;</span><br><span class="line">    padding-left: 200px;   /* Left Column width */</span><br><span class="line">    padding-right: 150px;  /* Right Column width */</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div id=&quot;header&quot; /&gt;</span><br><span class="line">  &lt;div id=&quot;container&quot; /&gt;</span><br><span class="line">  &lt;div id=&quot;footer&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>现在的布局看起来应该是下图的样子:<br><center><img src="/images/18-2-holygrail.gif" width="500"><center></center></center></p>
+</li>
+<li><p>2) 添加左中右三列<br>先在container中添加左中右三列，接着给他们添加合适的宽高并设为浮动。此外还需清除footer上下的浮动以保证footer能够正确布局。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  #container .column &#123;</span><br><span class="line">      float: left;</span><br><span class="line">      height: 200px;</span><br><span class="line">    &#125;</span><br><span class="line">  #center &#123;</span><br><span class="line">    width: 100%;</span><br><span class="line">    background: gray;</span><br><span class="line">  &#125;</span><br><span class="line">  #left &#123;</span><br><span class="line">    width: 200px;  /* LC width */</span><br><span class="line">    background: #77BBDD;</span><br><span class="line">  &#125;</span><br><span class="line">  #right &#123;</span><br><span class="line">    width: 150px;  /* RC width */</span><br><span class="line">    background: #FF6633;</span><br><span class="line">  &#125;</span><br><span class="line">  #footer &#123;</span><br><span class="line">    clear: both;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div id=&quot;header&quot; /&gt;</span><br><span class="line">  &lt;div id=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div id=&quot;center&quot; class=&quot;column&quot; /&gt;</span><br><span class="line">    &lt;div id=&quot;left&quot; class=&quot;column&quot; /&gt;</span><br><span class="line">    &lt;div id=&quot;right&quot; class=&quot;column&quot; /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div id=&quot;footer&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<p>现在的布局看起来应该是下图的样子，可以看到center由于宽度为100%，导致其兄弟元素left和right被挤到了它的下面。<br><center><img src="/images/18-3-holygrail.gif" width="500"><center></center></center></p>
+<ul>
+<li><p>3) 将左列放到container的左侧<br>分两步进行，首先将left的margin-left设置为-100%，我们知道当margin-left设置为负值时元素会向左移动，又由于left是因为center的100%的宽度而被挤了下来，所以left向左移动时相当于紧贴着center的水平右侧开始向左移动父元素100%的宽度，正好移动到container的内容框左侧，其效果如下图所示。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#left &#123;</span><br><span class="line">  width: 200px; </span><br><span class="line">  background: #77BBDD;</span><br><span class="line">  margin-left: -100%;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><center><img src="/images/18-4-holygrail.gif" width="500"><center></center></center></p>
+<p>此时left距离container内边距框左侧正好是container的左内边距的长度，因此left向左移动左内边距的长度就好了。显然，通过relative很容易办到，将left的position设置relative，并设置其right为container左内边距的长度200px，这样left就正确的挪到了container的边框的左侧，达到了预期效果。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#left &#123;</span><br><span class="line">  width: 200px; </span><br><span class="line">  background: #77BBDD;</span><br><span class="line">  margin-left: -100%;</span><br><span class="line">  position: relative;</span><br><span class="line">  right: 200px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><center><img src="/images/18-5-holygrail.gif" width="500"><center></center></center></p>
+<ul>
+<li>4) 将右列放到container的右侧<br>left搞定了，就该轮到right了，怎么把它挪到container右侧呢？如下，将right的右外边距设置为container的右内边距长度的负值它就上去了。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#right &#123;</span><br><span class="line">  width: 150px;</span><br><span class="line">  float: left;</span><br><span class="line">  background: #FF6633;</span><br><span class="line">  height: 200px;</span><br><span class="line">  margin-right: -150px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>这是什么骚操作，仔细想想，我们知道当元素的右外边距为负时，它右边的兄弟元素会向左移，像是左边的元素被抠掉了一部分，而这一部分的长度正好等于该元素负右边距的长度。所以当right的margin-right为负，且长度为right的长度时，相当于整个right都被抠掉了，right长度为0，此时，由于浮动right就可以浮动到container右侧了(因为right已经足够小)。</p>
+<p><center><img src="/images/18-6-holygrail.gif" width="500"><center></center></center></p>
+<p>至此，我们完成了圣杯布局，不过圣杯布局有个缺点，就是当窗口太小，小到container的宽度比它的左内边距(即left的宽度)还小时(container空间太小，left外边距设置为-100%已不再能让left挪到container左侧)，布局就会乱掉。<br><center><img src="/images/18-7-holygrail.gif" width="500"><center></center></center></p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="双飞翼布局"><a href="#双飞翼布局" class="headerlink" title="双飞翼布局"></a>双飞翼布局</h3><p>双飞翼布局来源于淘宝UED，传说是玉伯提出来的，双飞翼是对这种布局的一种形象表达，其实现方式和圣杯布局有所区别，它是通过在带有margin的center上包裹一个宽度为100%div，并设置左右两列的margin为负值来实现的。双飞翼布局实现如下:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  #container &#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width: 100%;</span><br><span class="line">  &#125;</span><br><span class="line">  #center &#123;</span><br><span class="line">    background: gray;</span><br><span class="line">    margin-left: 200px;</span><br><span class="line">    margin-right: 150px;</span><br><span class="line">    height: 200px;</span><br><span class="line">  &#125;</span><br><span class="line">  #left &#123;</span><br><span class="line">    width: 200px; </span><br><span class="line">    float: left;</span><br><span class="line">    background: #77BBDD;</span><br><span class="line">    height: 200px;</span><br><span class="line">    margin-left: -100%;</span><br><span class="line">  &#125;</span><br><span class="line">  #right &#123;</span><br><span class="line">    width: 150px;  </span><br><span class="line">    float: left;</span><br><span class="line">    background: #FF6633;</span><br><span class="line">    height: 200px;</span><br><span class="line">    margin-left: -150px;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div id=&quot;container&quot;&gt;</span><br><span class="line">    &lt;div id=&quot;center&quot; class=&quot;column&quot; /&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">  &lt;div id=&quot;left&quot; class=&quot;column&quot; /&gt;</span><br><span class="line">  &lt;div id=&quot;right&quot; class=&quot;column&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<h3 id="圣杯布局与双飞翼布局的异同"><a href="#圣杯布局与双飞翼布局的异同" class="headerlink" title="圣杯布局与双飞翼布局的异同"></a>圣杯布局与双飞翼布局的异同</h3><p>相同点:</p>
+<ul>
+<li>达到的效果相同。</li>
+<li>本质上都是利用了负margin来实现。</li>
+<li>都采用了先中间后两边的加载方式。</li>
+</ul>
+<p>不同点:</p>
+<ul>
+<li>圣杯布局利用父容器的左右padding来定位，而双飞翼是通过center父容器的margin进行定位，虽然多了一个div，但少了相对定<br>位的代码。</li>
+<li>圣杯布局会因为窗口太小而造成布局混乱，而双飞翼布局不会。</li>
+</ul>
+<p>圣杯布局和双飞翼布局在现在看来都显得太过复杂，感谢好时代！！！</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/CSS/">CSS</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/CSS/">CSS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/03/07/18.圣杯布局与双飞翼布局/" data-title="圣杯布局与双飞翼布局 | Xinghunm" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2016/05/05/8.css选择器/" title="css选择器">
+  <strong>上一篇：</strong><br>
+  <span>
+  css选择器</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/03/05/17.CSS中的BFC/" title="CSS中的BFC">
+ <strong>下一篇：</strong><br> 
+ <span>CSS中的BFC
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/css/" title="css">css<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/js/" title="js">js<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="/images/weixin.png" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xinghunm <br>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:316032603@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'xinghunm';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', '');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
