@@ -20,7 +20,7 @@
 <meta property="og:description" content="前端题集">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/images/mark_sweep.gif">
-<meta property="og:updated_time" content="2019-01-24T11:43:44.065Z">
+<meta property="og:updated_time" content="2019-01-25T02:25:43.382Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每日一题">
 <meta name="twitter:description" content="前端题集">
@@ -467,33 +467,34 @@
 <li>作用<br><code>&lt;!DOCTYPE&gt;</code>声明位于HTML文档的第一行，处于<code>&lt;html&gt;</code>标签之前。用于告诉浏览器以什么文档标准来解析这个文档，DOCTYPE不存在或格式错误会导致浏览器用兼容模式来解析文档。</li>
 <li>区别<br>标准模式是以浏览器支持的最高标准来运行，兼容模式中页面以宽松的向后兼容的模式进行显示，以防止老式浏览器无法正常工作。</li>
 </ul>
-<p><strong>37、</strong>  HTML5为什么只需要写<code>&lt;!DOCTYPE HTML&gt;</code>？<br>HTML5不是基于SGML的，因此不需要对DTD进行引用，但是需要Doctype来规范浏览器的行为(让浏览器按照他们应该的方式来运行)。HTML4.01是基于SGML的，因此需要对DTD进行引用，才能告知浏览器所使用的文档类型。</p>
-<p><strong>38、</strong>  介绍一下你对浏览器内核的理解</p>
+<p><strong>37、</strong>  HTML5为什么只需要写<code>&lt;!DOCTYPE HTML&gt;</code>？</p>
+<p>HTML5不是基于标准通用标记语言SGML(Standard Generalized Markup Language)的，因此不需要对文档类型定义DTD(Document Type Definition)进行引用，但是需要Doctype来规范浏览器的行为(让浏览器按照他们应该的方式来运行)。HTML4.01是基于SGML的，因此需要对DTD进行引用，才能告知浏览器所使用的文档类型。</p>
+<p><strong>38、</strong>  介绍一下你对浏览器内核的理解。</p>
 <p>主要分为两部分，渲染引擎和JS引擎。</p>
 <ul>
 <li>渲染引擎<br>主要负责获取网页内容(HTML、XML、图像等)、整理信息(CSS等)以及计算网页的显示方式，然后输出至显示器或打印机。不同的浏览器内核对网页的解释不同，所渲染出的网页效果也就不一样。</li>
 <li>JS引擎<br>解析和执行javascript来实现网页的动态效果。<br>最初渲染引擎和JS引擎并没有区分地很明确，后来JS引擎越来越独立，内核就倾向于指渲染引擎。</li>
 </ul>
-<p><strong>39、</strong>  简述一下你对HTML语义化的理解</p>
+<p><strong>39、</strong>  简述一下你对HTML语义化的理解。</p>
 <p>用正确的标签做正确的事情。</p>
 <ul>
 <li>html语义化使页面结构更加清晰，便于对浏览器搜索引擎解析。</li>
 <li>在没有CSS的情况下也以一种文档格式显示。</li>
 <li>搜索引擎的爬虫也依赖于HTML的标签来确定上下文和各个关键字的权重，利于SEO。</li>
-<li>有利于阅读代码的人理解网站的分块</li>
+<li>有利于阅读代码的人理解网站的分块。</li>
 </ul>
 <p><strong>40、</strong> iframe有哪些优缺点？<br>优点:</p>
 <ul>
 <li>用来实现长连接，在websocket不可用的时候作为一种替代。</li>
-<li>跨域通信</li>
-<li>无刷新上传文件，在FormData不可用时作为替代方案</li>
+<li>跨域通信。</li>
+<li>无刷新上传文件，在FormData不可用时作为替代方案。</li>
 <li>创建一个全新的独立的宿主环境。</li>
 </ul>
 <p>缺点:</p>
 <ul>
 <li>搜索引擎的爬虫还不能很好的处理iframe的内容，不利于SEO。</li>
-<li>iframe会阻塞页面的加载，onload事件不能及时触发(动态的给iframe添加src值可解决) 。</li>
-<li>iframe和主页面共享连接池，而浏览器对同域的连接有限制，所以会影响页面的并行加载(动态的给iframe添加<br>src值可解决)。</li>
+<li>iframe会阻塞页面的加载，onload事件不能及时触发(动态的给iframe添加src值可<br>解决) 。</li>
+<li>iframe和主页面共享连接池，而浏览器对同域的连接有限制，所以会影响页面的并行<br>加载(动态的给iframe添加src值可解决)。</li>
 <li>样式和脚本需要额外链入，增加服务器的http请求。</li>
 <li>多数小型的移动设备无法完全显示框架。</li>
 <li>浏览器的后退按钮无效。</li>
