@@ -1,0 +1,497 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>Git submodule的使用 | Xinghunm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xinghunm">
+    
+
+    
+    <meta name="description" content="最近在做一个上传的客户端，上传的部分由后端同学以SDK的方式提供，因此该SDK是在一个独立的仓库，那么对于客户端该如何方便的对集成该SDK呢？这就可以考虑用git的submodule。">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git submodule的使用">
+<meta property="og:url" content="http://yoursite.com/2016/07/24/19.git submodule的使用/index.html">
+<meta property="og:site_name" content="Xinghunm">
+<meta property="og:description" content="最近在做一个上传的客户端，上传的部分由后端同学以SDK的方式提供，因此该SDK是在一个独立的仓库，那么对于客户端该如何方便的对集成该SDK呢？这就可以考虑用git的submodule。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-11T07:33:25.126Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git submodule的使用">
+<meta name="twitter:description" content="最近在做一个上传的客户端，上传的部分由后端同学以SDK的方式提供，因此该SDK是在一个独立的仓库，那么对于客户端该如何方便的对集成该SDK呢？这就可以考虑用git的submodule。">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
+				<h2 class="blog-motto">Change the world or change yourself</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope="" itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/07/24/19.git submodule的使用/" title="Git submodule的使用" itemprop="url">Git submodule的使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-07-24T15:30:09.000Z" itemprop="datePublished"> Published 2016-07-24</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#遇到的问题"><span class="toc-number">1.</span> <span class="toc-text">遇到的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#什么是submodule"><span class="toc-number">2.</span> <span class="toc-text">什么是submodule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加submodule"><span class="toc-number">3.</span> <span class="toc-text">添加submodule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#克隆带有submodule的项目"><span class="toc-number">4.</span> <span class="toc-text">克隆带有submodule的项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#修改更新submodule"><span class="toc-number">5.</span> <span class="toc-text">修改更新submodule</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#删除submodule"><span class="toc-number">6.</span> <span class="toc-text">删除submodule</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="遇到的问题"><a href="#遇到的问题" class="headerlink" title="遇到的问题"></a><strong>遇到的问题</strong></h3><p>最近在做一个上传的客户端，上传的部分由后端同学以SDK的方式提供，因此该SDK是在一个独立的仓库，那么对于客户端该如何方便的集成该SDK呢？每次SDK更新把代码拷贝到客户端仓库？把SDK发布到npm？显然都不合理，这就可以考虑用git的submodule。</p>
+<h3 id="什么是submodule"><a href="#什么是submodule" class="headerlink" title="什么是submodule"></a><strong>什么是submodule</strong></h3><p>submodule是一个多项目管理工具，它允许将子项目以独立的git项目添加到主项目，而主项目以submodule的形式拥有子项目。子项目拥有自己的commit、push、pull，而与主项目互不干扰。主项目只需要记录子项目的地址和所需要的commit id，通过地址和commit id 就能够得到对应的子项目。</p>
+<h3 id="添加submodule"><a href="#添加submodule" class="headerlink" title="添加submodule"></a><strong>添加submodule</strong></h3><p>通常情况下，我们都有一个主项目(MainProject)，在MainProject文件夹下执行如下命令，即可添加submodule。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git submodule add [url] [path]</span><br><span class="line">//url为子项目远程地址或本地地址, path为子项目路径，可省略</span><br><span class="line">例: git add submodule git@github.com:fengyueran/UploaderSDK.git ./src/UploaderSDK</span><br></pre></td></tr></table></figure></p>
+<p>git status可以看到如下信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">On branch master</span><br><span class="line">   Changes to be committed:</span><br><span class="line">   </span><br><span class="line">       new file:   .gitmodules</span><br><span class="line">       new file:   UploaderSDK</span><br></pre></td></tr></table></figure></p>
+<p>可以看到多了两个个文件.gitmodules和UploaderSDK。<br>cat .gitmodules看到.gitmodules储存了submodule的路径及远程地址。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[submodule &quot;src/uploaderSDK&quot;]</span><br><span class="line">	path = src/uploaderSDK</span><br><span class="line">	url = git@github.com:fengyueran/UploaderSDK.git</span><br></pre></td></tr></table></figure></p>
+<p>UploaderSDK的内容为submodule的commit id。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Subproject commit 6b53e1840b27ca1587b96c1eb9dd5f4ff0866089</span><br></pre></td></tr></table></figure></p>
+<p>不难想象通过.gitmodules和UploaderSDK的信息就可以拿到submodule的内容了，因此我们需要提交这个两个文件。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m &quot;add submodule&quot;</span><br></pre></td></tr></table></figure></p>
+<h3 id="克隆带有submodule的项目"><a href="#克隆带有submodule的项目" class="headerlink" title="克隆带有submodule的项目"></a><strong>克隆带有submodule的项目</strong></h3><p>主要有两个方式</p>
+<p><strong>1. 采用先克隆后更新的方式</strong></p>
+<p>和想象中的不一样，直接clone主项目，submodule并不会跟着clone下来，而只有包含submodule名的空文件夹。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1）$ git clone git@github.com:fengyueran/MainProject.git</span><br></pre></td></tr></table></figure></p>
+<p>需再执行如下命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2）$ git submodule init</span><br></pre></td></tr></table></figure></p>
+<p>输出如下，可以看到该命令给子项目注册了路径，即在主项目中的位置。此时，uploaderSDK文件夹仍未空。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">Submodule &apos;src/uploaderSDK&apos; (git@github.com:fengyueran/UploaderSDK.git) registered for path &apos;src/uploaderSDK&apos;</span><br></pre></td></tr></table></figure></p>
+<p>再执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//该命令并不是直接更新到最新的submodule commit，而是更新至主项目所存储存的commit(有可能是较旧的commit)。</span><br><span class="line">3）$ git submodule update</span><br></pre></td></tr></table></figure></p>
+<p>输出如下，可以看到sumodule得到更新，更新到主项目存储的submodule commit，是一个游离的git header。<br>  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Cloning into &apos;/Work/test/MainProject/tmp/MainProject/src/uploaderSDK&apos;...</span><br><span class="line"></span><br><span class="line">Submodule path &apos;src/uploaderSDK&apos;: checked out &apos;6b53e1840b27ca1587b96c1eb9dd5f4ff0866089&apos;</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 采用递归参数–recursive</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:fengyueran/MainProject.git --recursive</span><br></pre></td></tr></table></figure>
+<p>输出如下，可以看到主项目包括submodule都被clone下来了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Cloning into &apos;MainProject&apos;...</span><br><span class="line">remote: Counting objects: 7, done.</span><br><span class="line">remote: Compressing objects: 100% (4/4), done.</span><br><span class="line">Receiving objects: 100% (7/7), done.</span><br><span class="line">remote: Total 7 (delta 0), reused 4 (delta 0), pack-reused 0</span><br><span class="line">Submodule &apos;src/uploaderSDK&apos; (git@github.com:fengyueran/UploaderSDK.git) registered for path &apos;src/uploaderSDK&apos;</span><br><span class="line">Cloning into &apos;/Work/test/MainProject/tmp/MainProject/tmp/MainProject/src/uploaderSDK&apos;...</span><br><span class="line">Submodule path &apos;src/uploaderSDK&apos;: checked out &apos;6b53e1840b27ca1587b96c1eb9dd5f4ff0866089&apos;</span><br></pre></td></tr></table></figure></p>
+<h3 id="修改更新submodule"><a href="#修改更新submodule" class="headerlink" title="修改更新submodule"></a><strong>修改更新submodule</strong></h3><p>主要有两种情况</p>
+<p><strong>1. 直接在主项目中的submodule下修改</strong></p>
+<p>如上例，直接在MainProject下的src/uploaderSDK中修改，uploaderSDK切换到工作分支，修改并提交后，可以checkout到最新的commit，也可以不切，反正都在当前最新的commit上(如果想测试其他commit也可以切换到相应commit上)，此时MainProject中我们可以看到src/uploaderSDK的commit有如下变化，a4d6为修改的提交，需要注意的地方是此时submodule已经在最新的commit上了，不要再在MainProject中git submodule update进行更新了，如果进行此操作submodule又会回到原来的commit(带有减号的commit)，只需要在MainProject提交，并在必要的时候push到远程仓库。这种方法，非submodule的开发人员就不用关心submodule是否更新了，只需要在MainProject下pull代码发现submodule有更改时执行git submodule update(更新为带减号commit)进行更新，前提是其他开发人员提交了正确的submodule commit。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Subproject commit 6b53e1840b27ca1587b96c1eb9dd5f4ff0866089</span><br><span class="line">+Subproject commit a4d6dc0457673a275b1f6cbeda6f8ff23293b9de</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 在submodule自己独立的仓库进行修改</strong></p>
+<p>在工作目录克隆下submodule的仓库，切换到工作分支进行修改提交并push到远程仓库。这种方法需要submodule开发人员告诉MainProject的开发人员submodule有更新或主动查看是否有更新，有更新时就在MainProject的src/uploaderSDK下pull远程代码(需要知道submodule的工作分支)，快速合并后，uploaderSDK的commit有如下变化，此时同1不要git submodule update，而只是在MainProject下提交这个更改。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Subproject commit f4573cc1bb50000779202c7f56a640b1ffc075cb</span><br><span class="line">+Subproject commit 64ae6d149c0f6e3b06b8cea262c6126a7bc0887f</span><br></pre></td></tr></table></figure></p>
+<h3 id="删除submodule"><a href="#删除submodule" class="headerlink" title="删除submodule"></a><strong>删除submodule</strong></h3><p>执行如下命令</p>
+<p>1) $ git submodule deinit<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">逆初始化模块，submodule为子模块目录，执行后可发现子模块目录被清空</span><br><span class="line">$ git submodule deinit [submodule_name] </span><br><span class="line">-&gt; Cleared directory &apos;test2sub&apos;</span><br><span class="line">Submodule &apos;test2sub&apos; (git@github.com:fengyueran/test2sub.git) unregistered for path &apos;test2sub&apos;</span><br><span class="line"></span><br><span class="line">//执行如下命令还能看到子项目信息</span><br><span class="line">$ git submodule</span><br><span class="line">-&gt; -dab52c62f52353d9967619625c28e28dc4320aef test2sub</span><br></pre></td></tr></table></figure></p>
+<p>2) $ git rm <code>--</code>cached [submodule_name]<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 删除.gitmodules中记录的模块信息（--cached选项清除.git/modules中的缓存）</span><br><span class="line">git rm --cached test2sub</span><br><span class="line">//执行如下命令已看看不到删除的子项目信息了</span><br><span class="line">$ git submodule</span><br></pre></td></tr></table></figure></p>
+<p>3）$ git commit<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;remove submodule&quot;</span><br></pre></td></tr></table></figure></p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Git/">Git</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Git/">Git</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/07/24/19.git submodule的使用/" data-title="Git submodule的使用 | Xinghunm" data-tsina="" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2016/10/10/11.css居中方法/" title="css居中方法">
+  <strong>上一篇：</strong><br>
+  <span>
+  css居中方法</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/06/24/2.git的常用命令简介/" title="Git常用命令">
+ <strong>下一篇：</strong><br> 
+ <span>Git常用命令
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Other/" title="Other">Other<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/css/" title="css">css<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/js/" title="js">js<sup>5</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="/images/weixin.png" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xinghunm <br>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:316032603@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'xinghunm';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', '');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
