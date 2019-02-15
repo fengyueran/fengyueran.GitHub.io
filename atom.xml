@@ -1,0 +1,419 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Xinghunm</title>
+  
+  <subtitle>Change the world or change yourself</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-01-07T06:52:28.300Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Xinghunm</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>nginx基本配置及常用命令</title>
+    <link href="http://yoursite.com/2017/10/11/10.nginx%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE%E5%8F%8A%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+    <id>http://yoursite.com/2017/10/11/10.nginx基本配置及常用命令/</id>
+    <published>2017-10-11T10:10:20.000Z</published>
+    <updated>2019-01-07T06:52:28.300Z</updated>
+    
+    <summary type="html">
+    
+      最近自己搭建了一个网站，并准备用nginx作为服务器，于是搜索了nginx的配置。nginx可配置项很多，由于该网站只是个人使用，只是简单进行了配置，在这里作一个记录。
+    
+    </summary>
+    
+      <category term="server" scheme="http://yoursite.com/categories/server/"/>
+    
+    
+      <category term="server" scheme="http://yoursite.com/tags/server/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>树的深度遍历与广度遍历</title>
+    <link href="http://yoursite.com/2017/06/27/15.%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6%E9%81%8D%E5%8E%86%E4%B8%8E%E5%B9%BF%E5%BA%A6%E9%81%8D%E5%8E%86/"/>
+    <id>http://yoursite.com/2017/06/27/15.树的深度遍历与广度遍历/</id>
+    <published>2017-06-26T18:11:08.000Z</published>
+    <updated>2019-01-25T07:24:49.179Z</updated>
+    
+    <summary type="html">
+    
+      作为一个非科班出生的前端开发人员，平时对数据结构与算法了解得相对较少，当谈到深度遍历与广度遍历时就一脸懵逼，于是查阅相关资料，希望对其有一个基本认识，并能够实现深度、广度遍历的方法。
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>伪类与伪元素的区别</title>
+    <link href="http://yoursite.com/2017/06/20/5.%E4%BC%AA%E7%B1%BB%E4%B8%8E%E4%BC%AA%E5%85%83%E7%B4%A0%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
+    <id>http://yoursite.com/2017/06/20/5.伪类与伪元素的区别/</id>
+    <published>2017-06-20T12:10:07.000Z</published>
+    <updated>2019-01-11T07:07:23.275Z</updated>
+    
+    <summary type="html">
+    
+      伪类与伪元素，一直傻傻分不清楚。
+    
+    </summary>
+    
+      <category term="html" scheme="http://yoursite.com/categories/html/"/>
+    
+    
+      <category term="html" scheme="http://yoursite.com/tags/html/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>React最佳实践</title>
+    <link href="http://yoursite.com/2017/06/20/3.react%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
+    <id>http://yoursite.com/2017/06/20/3.react最佳实践/</id>
+    <published>2017-06-20T12:10:07.000Z</published>
+    <updated>2019-01-11T07:07:05.960Z</updated>
+    
+    <summary type="html">
+    
+      在React应用的开发中遵循一定的基本准则，能使代码更加友好，提高代码质量。
+    
+    </summary>
+    
+      <category term="react" scheme="http://yoursite.com/categories/react/"/>
+    
+    
+      <category term="react" scheme="http://yoursite.com/tags/react/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你应该知道的网站</title>
+    <link href="http://yoursite.com/2017/05/03/22.%E4%BD%A0%E5%BA%94%E8%AF%A5%E7%9F%A5%E9%81%93%E7%9A%84%E7%BD%91%E7%AB%99/"/>
+    <id>http://yoursite.com/2017/05/03/22.你应该知道的网站/</id>
+    <published>2017-05-03T10:10:20.000Z</published>
+    <updated>2019-02-15T09:03:17.008Z</updated>
+    
+    <summary type="html">
+    
+      在日常的积累中，总是有一些网站或者文章是值得我们记住和研读的。通常我都是加入书签，随着时间的推移，书签就变得有些混乱，为了能更方便的去查询一些经典的站点，在这里把自己用过的，认为比较不错的网站和文章作一个记录。
+    
+    </summary>
+    
+      <category term="website" scheme="http://yoursite.com/categories/website/"/>
+    
+    
+      <category term="website" scheme="http://yoursite.com/tags/website/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript中的值传递、引用传递及深浅拷贝</title>
+    <link href="http://yoursite.com/2017/05/01/14.JavaScript%E4%B8%AD%E7%9A%84%E5%80%BC%E4%BC%A0%E9%80%92%E3%80%81%E5%BC%95%E7%94%A8%E4%BC%A0%E9%80%92%E5%8F%8A%E6%B7%B1%E6%B5%85%E6%8B%B7%E8%B4%9D/"/>
+    <id>http://yoursite.com/2017/05/01/14.JavaScript中的值传递、引用传递及深浅拷贝/</id>
+    <published>2017-05-01T10:10:20.000Z</published>
+    <updated>2019-01-11T07:05:53.534Z</updated>
+    
+    <summary type="html">
+    
+      在JavaScript编程中经常会遇到改变了一个变量另一个变量情况，即使传给函数的参数的改变都可能导致原值被改变，这和其他某些语言并不太一样，值得去探究一下。
+    
+    </summary>
+    
+      <category term="JS" scheme="http://yoursite.com/categories/JS/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css权重</title>
+    <link href="http://yoursite.com/2017/04/03/21.css%E6%9D%83%E9%87%8D/"/>
+    <id>http://yoursite.com/2017/04/03/21.css权重/</id>
+    <published>2017-04-03T10:10:20.000Z</published>
+    <updated>2019-02-14T11:29:29.706Z</updated>
+    
+    <summary type="html">
+    
+      通常，在我们的布局中，css每条规则的权重是导致应用在元素上的css没有生效的主要原因。为此，我们需要了解浏览器是如何利用权重进行解析的。
+    
+    </summary>
+    
+      <category term="css" scheme="http://yoursite.com/categories/css/"/>
+    
+    
+      <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>正则表达式</title>
+    <link href="http://yoursite.com/2017/02/25/6.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
+    <id>http://yoursite.com/2017/02/25/6.正则表达式/</id>
+    <published>2017-02-25T12:10:00.000Z</published>
+    <updated>2019-01-11T07:07:32.009Z</updated>
+    
+    <summary type="html">
+    
+      正则表达式，对于前端同学的我来说用得不多，也就一直没去研究，当需要写正则时候就是一头雾水，包括配置webpack,jest等。于是在这里整理了一些JavaScritpt正则相关的内容，以此对正则表达式有一个基本的认识并能够运用正则处理日常需求。
+    
+    </summary>
+    
+      <category term="JS" scheme="http://yoursite.com/categories/JS/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS中的原型</title>
+    <link href="http://yoursite.com/2017/02/01/16.JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B/"/>
+    <id>http://yoursite.com/2017/02/01/16.JS中的原型/</id>
+    <published>2017-02-01T10:10:20.000Z</published>
+    <updated>2019-01-15T06:43:48.246Z</updated>
+    
+    <summary type="html">
+    
+      在面向对象编程中，类之间共享是通过继承实现的，而在JavaScript中万物皆对象，并没有类的概念(ES6中类仅仅是一个语法糖)，对象之间的共享是通过一个叫做原型的东西实现的。
+    
+    </summary>
+    
+      <category term="JS" scheme="http://yoursite.com/categories/JS/"/>
+    
+    
+      <category term="JS" scheme="http://yoursite.com/tags/JS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>每日一题</title>
+    <link href="http://yoursite.com/2017/01/04/1.%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/"/>
+    <id>http://yoursite.com/2017/01/04/1.每日一题/</id>
+    <published>2017-01-04T13:36:05.000Z</published>
+    <updated>2019-02-15T02:30:49.264Z</updated>
+    
+    <summary type="html">
+    
+      前端题集
+    
+    </summary>
+    
+      <category term="subject" scheme="http://yoursite.com/categories/subject/"/>
+    
+    
+      <category term="subject" scheme="http://yoursite.com/tags/subject/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css居中方法</title>
+    <link href="http://yoursite.com/2016/10/10/11.css%E5%B1%85%E4%B8%AD%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2016/10/10/11.css居中方法/</id>
+    <published>2016-10-10T10:10:20.000Z</published>
+    <updated>2019-01-08T06:24:24.183Z</updated>
+    
+    <summary type="html">
+    
+      居中布局是前端布局当中很常见的一种设计，该如何实现呢？相信大多数同学都能说出几种，当然总有你还不知道的方法，于是查漏补缺对对常用的css居中的常用方法作一个总结。
+    
+    </summary>
+    
+      <category term="css" scheme="http://yoursite.com/categories/css/"/>
+    
+    
+      <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git submodule的使用</title>
+    <link href="http://yoursite.com/2016/07/24/19.git%20submodule%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
+    <id>http://yoursite.com/2016/07/24/19.git submodule的使用/</id>
+    <published>2016-07-24T15:30:09.000Z</published>
+    <updated>2019-02-11T07:33:25.126Z</updated>
+    
+    <summary type="html">
+    
+      最近在做一个上传的客户端，上传的部分由后端同学以SDK的方式提供，因此该SDK是在一个独立的仓库，那么对于客户端该如何方便的对集成该SDK呢？这就可以考虑用git的submodule。
+    
+    </summary>
+    
+      <category term="Git" scheme="http://yoursite.com/categories/Git/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Git常用命令</title>
+    <link href="http://yoursite.com/2016/06/24/2.git%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E7%AE%80%E4%BB%8B/"/>
+    <id>http://yoursite.com/2016/06/24/2.git的常用命令简介/</id>
+    <published>2016-06-24T15:30:09.000Z</published>
+    <updated>2019-02-11T07:33:13.139Z</updated>
+    
+    <summary type="html">
+    
+      Git作为一种流行的版本管理系统已经广泛应用于我们的日常开发中，在这里记录下日常遇到的关于git的常见用法，以备后续查询。
+    
+    </summary>
+    
+      <category term="Git" scheme="http://yoursite.com/categories/Git/"/>
+    
+    
+      <category term="Git" scheme="http://yoursite.com/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS常用方法</title>
+    <link href="http://yoursite.com/2016/06/05/4.JS%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
+    <id>http://yoursite.com/2016/06/05/4.JS常用方法/</id>
+    <published>2016-06-05T10:10:20.000Z</published>
+    <updated>2019-01-25T06:54:21.588Z</updated>
+    
+    <summary type="html">
+    
+      js中方法很多，在这里记录下自己容易忘记的一些较为重要的方法和技巧
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>css选择器</title>
+    <link href="http://yoursite.com/2016/05/05/8.css%E9%80%89%E6%8B%A9%E5%99%A8/"/>
+    <id>http://yoursite.com/2016/05/05/8.css选择器/</id>
+    <published>2016-05-05T10:10:20.000Z</published>
+    <updated>2019-02-14T07:54:43.543Z</updated>
+    
+    <summary type="html">
+    
+      css选择器用法较多，不常用的选择器容易遗忘，于是在这里整理出css选择器的基本用法，以备查用。
+    
+    </summary>
+    
+      <category term="css" scheme="http://yoursite.com/categories/css/"/>
+    
+    
+      <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>圣杯布局与双飞翼布局</title>
+    <link href="http://yoursite.com/2016/03/07/18.%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E4%B8%8E%E5%8F%8C%E9%A3%9E%E7%BF%BC%E5%B8%83%E5%B1%80/"/>
+    <id>http://yoursite.com/2016/03/07/18.圣杯布局与双飞翼布局/</id>
+    <published>2016-03-07T05:10:27.000Z</published>
+    <updated>2019-01-24T11:41:09.479Z</updated>
+    
+    <summary type="html">
+    
+      最近在浏览多列等高的布局实现中总是看到圣杯布局与双飞翼布局，而对这两个概念还是第一次听说，作为一个前端，这怎么能逃过我的魔爪呢！！！
+    
+    </summary>
+    
+      <category term="CSS" scheme="http://yoursite.com/categories/CSS/"/>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CSS中的BFC</title>
+    <link href="http://yoursite.com/2016/03/05/17.CSS%E4%B8%AD%E7%9A%84BFC/"/>
+    <id>http://yoursite.com/2016/03/05/17.CSS中的BFC/</id>
+    <published>2016-03-05T05:10:27.000Z</published>
+    <updated>2019-01-23T05:31:26.890Z</updated>
+    
+    <summary type="html">
+    
+      BFC(Block formatting context)，即块级格式化上下文，是CSS布局中的概念，在之前的编程中并没有显示地接触到这一概念，但是很可能无形中运用到了BFC，那究竟什么是BFC呢？我们来一探究竟。
+    
+    </summary>
+    
+      <category term="CSS" scheme="http://yoursite.com/categories/CSS/"/>
+    
+    
+      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JavaScript中的闭包</title>
+    <link href="http://yoursite.com/2016/03/02/13.JavaScript%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85/"/>
+    <id>http://yoursite.com/2016/03/02/13.JavaScript中的闭包/</id>
+    <published>2016-03-02T07:15:21.000Z</published>
+    <updated>2019-01-09T08:39:01.502Z</updated>
+    
+    <summary type="html">
+    
+      闭包，相信第一次接触到这个词的同学，都会觉得一脸懵逼，这是啥玩意儿，好高端的样子。看看书看看报，闭包似乎没有那么难。
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>函数的防抖与节流</title>
+    <link href="http://yoursite.com/2016/03/01/12.%E5%87%BD%E6%95%B0%E7%9A%84%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/"/>
+    <id>http://yoursite.com/2016/03/01/12.函数的防抖与节流/</id>
+    <published>2016-03-01T07:10:20.000Z</published>
+    <updated>2019-01-08T09:53:18.671Z</updated>
+    
+    <summary type="html">
+    
+      最初接触到函数的防抖与节流是在lodash库中看到了这样一个函数throttle，当时的心理感受是mmp，这是啥，一查翻译，哦...原来，还是不懂。防抖与节流看着很高级，其实在日常的编程中也是经常遇到，值得我们拥有。
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>markdown的基本语法</title>
+    <link href="http://yoursite.com/2016/01/24/20.markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"/>
+    <id>http://yoursite.com/2016/01/24/20.markdown基本语法/</id>
+    <published>2016-01-24T14:30:09.000Z</published>
+    <updated>2019-02-15T02:57:42.323Z</updated>
+    
+    <summary type="html">
+    
+      markdown语法较多，为了避免重复查询，在此记录下常用的语法。
+    
+    </summary>
+    
+      <category term="Other" scheme="http://yoursite.com/categories/Other/"/>
+    
+    
+      <category term="Other" scheme="http://yoursite.com/tags/Other/"/>
+    
+  </entry>
+  
+</feed>
