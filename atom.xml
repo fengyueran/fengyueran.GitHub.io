@@ -37,11 +37,31 @@
   </entry>
   
   <entry>
+    <title>认识vertical-align</title>
+    <link href="http://yoursite.com/2017/08/03/23.%E8%AE%A4%E8%AF%86vertical-align/"/>
+    <id>http://yoursite.com/2017/08/03/23.认识vertical-align/</id>
+    <published>2017-08-03T10:10:20.000Z</published>
+    <updated>2019-03-18T09:25:17.198Z</updated>
+    
+    <summary type="html">
+    
+      vertical-align用来对其元素，平时用得不是太多，但当用到的时候，你会发现和自己的想法大相径庭，有可能设置行内某个元素的对齐方式，结果却改变了其他元素，想要垂直居中对齐，也不能达到预期效果，如此种种，值得去探究一下vertical-align。
+    
+    </summary>
+    
+      <category term="css" scheme="http://yoursite.com/categories/css/"/>
+    
+    
+      <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
     <title>树的深度遍历与广度遍历</title>
     <link href="http://yoursite.com/2017/06/27/15.%E6%A0%91%E7%9A%84%E6%B7%B1%E5%BA%A6%E9%81%8D%E5%8E%86%E4%B8%8E%E5%B9%BF%E5%BA%A6%E9%81%8D%E5%8E%86/"/>
     <id>http://yoursite.com/2017/06/27/15.树的深度遍历与广度遍历/</id>
     <published>2017-06-26T18:11:08.000Z</published>
-    <updated>2019-02-20T02:38:35.392Z</updated>
+    <updated>2019-03-19T02:16:12.941Z</updated>
     
     <summary type="html">
     
@@ -161,7 +181,7 @@
     <link href="http://yoursite.com/2017/02/25/6.%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/"/>
     <id>http://yoursite.com/2017/02/25/6.正则表达式/</id>
     <published>2017-02-25T12:10:00.000Z</published>
-    <updated>2019-01-11T07:07:32.009Z</updated>
+    <updated>2019-03-19T05:40:43.251Z</updated>
     
     <summary type="html">
     
@@ -201,7 +221,7 @@
     <link href="http://yoursite.com/2017/01/04/1.%E6%AF%8F%E6%97%A5%E4%B8%80%E9%A2%98/"/>
     <id>http://yoursite.com/2017/01/04/1.每日一题/</id>
     <published>2017-01-04T13:36:05.000Z</published>
-    <updated>2019-02-20T08:43:47.964Z</updated>
+    <updated>2019-03-18T10:49:37.766Z</updated>
     
     <summary type="html">
     
@@ -261,7 +281,7 @@
     <link href="http://yoursite.com/2016/06/24/2.git%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E7%AE%80%E4%BB%8B/"/>
     <id>http://yoursite.com/2016/06/24/2.git的常用命令简介/</id>
     <published>2016-06-24T15:30:09.000Z</published>
-    <updated>2019-02-19T07:38:29.433Z</updated>
+    <updated>2019-03-19T07:27:55.737Z</updated>
     
     <summary type="html">
     
@@ -393,26 +413,6 @@
     
     
       <category term="js" scheme="http://yoursite.com/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>markdown的基本语法</title>
-    <link href="http://yoursite.com/2016/01/24/20.markdown%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/"/>
-    <id>http://yoursite.com/2016/01/24/20.markdown基本语法/</id>
-    <published>2016-01-24T14:30:09.000Z</published>
-    <updated>2019-02-20T02:17:29.054Z</updated>
-    
-    <summary type="html">
-    
-      markdown语法较多，为了避免重复查询，在此记录下常用的语法。
-    
-    </summary>
-    
-      <category term="Other" scheme="http://yoursite.com/categories/Other/"/>
-    
-    
-      <category term="Other" scheme="http://yoursite.com/tags/Other/"/>
     
   </entry>
   

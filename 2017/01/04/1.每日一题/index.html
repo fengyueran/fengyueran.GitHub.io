@@ -22,7 +22,7 @@
 <meta property="og:image" content="http://yoursite.com/images/1-29-1-sticky.gif">
 <meta property="og:image" content="http://yoursite.com/images/1-29-2-sticky.gif">
 <meta property="og:image" content="http://yoursite.com/images/mark_sweep.gif">
-<meta property="og:updated_time" content="2019-02-20T08:43:47.964Z">
+<meta property="og:updated_time" content="2019-03-18T10:49:37.766Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="每日一题">
 <meta name="twitter:description" content="前端题集">
@@ -616,14 +616,14 @@
 <p>因为浏览器兼容问题，不同的浏览器对有些标签的默认值是不一致的，如果没有初始化可能导致浏览器渲染的结果差异，但是初始化样式对SEO有一定影响，力求影响最小的情况下初始化。</p>
 <p><strong>52、</strong> CSS里的visibility属性有个collapse属性值是干嘛用的？在不同浏览器下以后什么区别？</p>
 <p>对普通元素设置visibility: collapse后这个元素会完全隐藏，但会占据局部空间，与visibility: hidden的效果一样，相当于此元素透明，如果元素为table，collapse会让table会隐藏但不会占据局部空间。<br>不同浏览器不同版本的表现并不一致，不建议使用。</p>
-<p><strong>53、</strong> 请解释一下为什么需要清除浮动？清除浮动的方式</p>
+<p><strong>53、</strong> 请解释一下为什么需要清除浮动，清除浮动的方式？</p>
 <p>清除浮动是为了清除使用浮动元素带来的影响，浮动的元素高度会塌陷，而高度的塌陷使我们后面的布局不能正常显示。<br>清除浮动的方式:</p>
 <ul>
 <li><p>利用clear属性</p>
-<p>如下，设置box的clear的属性为left或both即可消除兄弟元素浮动的影响，因为clear的本质是添加外边距，所有该方法不能解决父元素高度塌陷的问题。</p>
+<p>如下，设置box的clear的属性为left或both即可消除兄弟元素浮动的影响，clear的本质是添加外边距。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .float-left &#123;</span><br><span class="line">    float: left;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: blue;</span><br><span class="line">  &#125;</span><br><span class="line">  .box &#123;</span><br><span class="line">    width: 200px;</span><br><span class="line">    height: 100px;</span><br><span class="line">    background: gray;</span><br><span class="line">    clear: both;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line"></span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div class=&quot;float-left&quot; /&gt;</span><br><span class="line">  &lt;div class=&quot;box&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>添加空块级元素<br>如下在浮动元素后添加空块级元素div，并设置其clear属性为both或left即可以清除浮动，父元素高度塌陷的问题也得到了解决。</p>
+<li><p>添加空块级元素<br>如下，在浮动元素后添加空块级元素div，并设置其clear属性为both或left即可以清除浮动。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;style&gt;</span><br><span class="line">  .clear &#123;</span><br><span class="line">    clear: both;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;div&gt;</span><br><span class="line">  &lt;div class=&quot;float-left&quot; /&gt;</span><br><span class="line">  &lt;div class=&quot;clear&quot;/&gt;</span><br><span class="line">  &lt;div class=&quot;box&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>伪元素::after和::before(作用于浮动元素的父类)</p>
@@ -635,7 +635,7 @@
 </ul>
 <p><strong>53、</strong> 浏览器是怎样解析CSS选择器的？</p>
 <p>样式系统从关键选择器开始匹配，然后从右向左查找选择器的的祖先祖先元素，如果匹配，则继续左移查询父元素，不匹配则放弃查找，相比从左到右的正向查找效率大大提高。</p>
-<p><strong>54、</strong> 在网页中的应该使用奇数还是偶数的字体？为什么呢？<br>使用偶数字体更好，主要原因如下:</p>
+<p><strong>54、</strong> 在网页中的应该使用奇数还是偶数的字体，为什么呢？<br>使用偶数字体更好，主要原因如下:</p>
 <ul>
 <li>比例关系<br>相对来说偶数字号容易和web页面的其他部分构成比例关系，如使用14号为正文字号，使用14 <em> 0.5 = 7px作为margin，14 </em> 1.5 = 21px作为标题。</li>
 <li>ie6中会把13px的字号渲染为14px</li>
@@ -651,7 +651,7 @@
 <p>开启硬件加速，-webkit-overflow-scrolling: touch  </p>
 <p><strong>59、</strong> png、jpg、gif 这些图片格式解释一下，分别什么时候用。有没有了解过webp？</p>
 <ul>
-<li><p>png(Portable Network Graphics)<br>直译就是便携式网络图片，简称PNG，是一种无损压缩的位图图形格式式，支持索引、灰度、RGB三种颜色方案以及Alpha通道等特性。PNG的开发目标是改善并取代GIF作为适合网络传输的格式而不需要专利许可。<br>特性</p>
+<li><p>png(Portable Network Graphics)<br>直译就是便携式网络图片，简称PNG，是一种无损压缩的位图图形格式，支持索引、灰度、RGB三种颜色方案以及Alpha通道等特性。PNG的开发目标是改善并取代GIF作为适合网络传输的格式而不需要专利许可。<br>特性</p>
 <ul>
 <li>支持256色调色板技术以产生小体积文件</li>
 <li>支持最高24位真彩色图像以及8位灰度图像</li>
@@ -666,10 +666,10 @@
 </li>
 <li><p>gif(Graphics Interchange Format)<br>是一种位图图形文件格式，它采用无损压缩技术，以8位色(即2556种颜色)重现真彩色的图像，它既可以减少文件的大小，又保持成像质量。GIF图片可以动并且拥有透明度(透明或不透明，并没有alpha通道)。适合logo、线条图。</p>
 </li>
-<li><p>webp<br>是一种同时提供了有损压缩和无损压缩(可逆压缩)的图片文件格式。它的优势在于拥有更优的图像数据压缩算法，能带来更新的图片提交，而且拥有肉眼识别无差异的图像质量，此外它还具备Alpha透明以及动画特性。</p>
+<li><p>webp<br>是一种同时提供了有损压缩和无损压缩(可逆压缩)的图片文件格式。它的优势在于拥有更优的图像数据压缩算法，能带来更小的图片体积，而且拥有肉眼识别无差异的图像质量，此外它还具备Alpha透明以及动画特性。</p>
 </li>
 </ul>
-<p><strong>60、</strong> style标签写在body后与body前有什么区别</p>
+<p><strong>60、</strong> style标签写在body后与body前有什么区别？</p>
 <p>写在body前有利于浏览器逐步渲染(resources download=&gt;CSSOM+DOM=&gt;RenderTree=&gt;Layout=&gt;Paint)，写在body标签后由于浏览器逐行方式对html文档进行解析，当解析到写在尾部的样式表时会导致浏览器停止之前的渲染，等待加载且解析样式表完成后重新渲染，在windows的IE下可能会出现FOUC现象(即样式失效导致的页面闪烁问题)。</p>
 <p><strong>61、</strong> 什么是CSS 预处理器 / 后处理器？</p>
 <ul>
@@ -681,7 +681,7 @@
 <p><strong>62、</strong> 什么是Cookie隔离？</p>
 <p>cookie隔离就是在http请求的时候不带cookie，如果静态文件都放在主域名下，那么在静态文件请求时都会把带有cookie的请求提交给server，非常浪费资源，所以不如隔离开。<br>因为cookie有域的限制，因此不能跨域请求，因此使用非主域名的时候，请求头中就不会带有cookie，这样就可以降低请求头的大小，降低请求时间，从而达到降低整体请求延时的目的。</p>
 <p><strong>63、</strong> 什么是严格模式？</p>
-<p>严格模式是ES5中添加的一种运行模式，这种模式式Javascript在更严格的条件下运行。不支持严格模式与支持严格模式的浏览器在执行严格模式代码时会采用不同的行为。</p>
+<p>严格模式是ES5中添加的一种运行模式，这种模式使Javascript在更严格的条件下运行。不支持严格模式与支持严格模式的浏览器在执行严格模式代码时会采用不同的行为。</p>
 <p>严格模式对正常的JS语义作了一些修改。</p>
 <ul>
 <li>严格模式通过抛出错误来消除一些原有的静默错误。</li>
@@ -693,7 +693,7 @@
 <li>新增多种选择器</li>
 <li>圆角(border-radius)</li>
 <li>多列布局(multi-column layout)</li>
-<li>文字特效(text-shadow、text-)</li>
+<li>文字特效(text-shadow)</li>
 <li>线性渐变(gradient)</li>
 <li>2D转换(translate、rotate、scale、skew)</li>
 <li>过渡(transition)<br>…</li>
@@ -714,14 +714,14 @@
 <p>阻止冒泡:<br>通过e.stopPropagation函数来阻止事件传播。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//点击span，只输出outer，</span><br><span class="line">&lt;div id=&quot;outer&quot;&gt;</span><br><span class="line">  &lt;span id=&quot;inner&quot;&gt;</span><br><span class="line">    Click </span><br><span class="line">  &lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  const outer = document.getElementById(&quot;outer&quot;);</span><br><span class="line">  outer.addEventListener(&quot;click&quot;, (e) =&gt; &#123;</span><br><span class="line">    e.stopPropagation();</span><br><span class="line">    console.log(&quot;outer&quot;), true);</span><br><span class="line">  &#125;</span><br><span class="line">  const innner = document.getElementById(&quot;innner&quot;);</span><br><span class="line">  innner.addEventListener(&quot;click&quot;, (e) =&gt; console.log(&quot;innner&quot;)，true);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure></p>
 <p><strong>66、</strong> Javascript中，有一个函数，执行时对象查找时，永远不会去查找原型，这个函数是？</p>
 <p>hasOwnProperty，返回一个对象是否具有指定名称的属性。使用方法如下<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">  proName: 属性名</span><br><span class="line">  返回值: bool值</span><br><span class="line">*/</span><br><span class="line">object.hasOwnProperty(proName)</span><br></pre></td></tr></table></figure></p>
-<p><strong>67、</strong> JSON的了解？<br>JSON(JavaScript Object Notation)是一种轻量级的数据交换格式，它是JavaScript的一个子集。数据格式简单，易于读写，占用宽带小。如{ “name”: “xinghunm”, age: 18 }。</p>
+<p><strong>67、</strong> JSON的了解？<br>JSON(JavaScript Object Notation)是一种轻量级的数据交换格式，它是JavaScript的一个子集。数据格式简单，易于读写，占用宽带小。如{ “name”: “xinghunm”, “age”: 18 }。</p>
 <p>JSON有两种表示结构对象和数组</p>
 <ul>
 <li><p>对象<br>对象以左大括号<code>{</code>开始，以右大括号<code>}</code>结束，括号间由key-value的键值对组成，键值对间由逗号’,’分割，最后一个键值对可以省略逗号，键值对的key为字符串，值可以是字符串、数值、对象、布尔值、数组以及null。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123; </span><br><span class="line">  &quot;name&quot;: &quot;xinghunm&quot;,</span><br><span class="line">  &quot;age&quot;: 18</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>数组<br>数组以左中括号<code>[</code>开始，以右中括号<code>]</code>结束，中间由逗号分割的多个键值对列表组成。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123; </span><br><span class="line">    &quot;name&quot;: &quot;xinghunm&quot;,</span><br><span class="line">    &quot;age&quot;: 18</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; </span><br><span class="line">    &quot;name&quot;: &quot;snow&quot;,</span><br><span class="line">    &quot;age&quot;: 18</span><br><span class="line">  &#125;,</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123; </span><br><span class="line">    &quot;name&quot;: &quot;xinghunm&quot;,</span><br><span class="line">    &quot;age&quot;: 18</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123; </span><br><span class="line">    &quot;name&quot;: &quot;snow&quot;,</span><br><span class="line">    &quot;age&quot;: 18</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>JSON对象提供了字符串、对象相互转换的接口</p>
@@ -917,7 +917,7 @@
 		  
 		
 		  
-			<li><a href="/categories/css/" title="css">css<sup>3</sup></a></li>
+			<li><a href="/categories/css/" title="css">css<sup>4</sup></a></li>
 		  
 		
 		  
