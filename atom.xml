@@ -157,6 +157,26 @@
   </entry>
   
   <entry>
+    <title>作用域链</title>
+    <link href="http://yoursite.com/2017/04/05/25.%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/"/>
+    <id>http://yoursite.com/2017/04/05/25.作用域链/</id>
+    <published>2017-04-05T10:10:20.000Z</published>
+    <updated>2019-03-23T09:49:04.510Z</updated>
+    
+    <summary type="html">
+    
+      通常，我们在函数内部使用函数外部的变量时会很自然，并没有想过为什么能够直接使用函数外部的变量而在函数外部却不能直接使用函数内部的变量，一切都显得理所当然。佛曰，凡事必有因，这个因就是作用域链。
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
     <title>css权重</title>
     <link href="http://yoursite.com/2017/04/03/22.css%E6%9D%83%E9%87%8D/"/>
     <id>http://yoursite.com/2017/04/03/22.css权重/</id>
@@ -173,6 +193,26 @@
     
     
       <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS执行上下文</title>
+    <link href="http://yoursite.com/2017/04/03/24.JS%20%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/"/>
+    <id>http://yoursite.com/2017/04/03/24.JS 执行上下文/</id>
+    <published>2017-04-03T10:10:20.000Z</published>
+    <updated>2019-03-23T03:07:13.537Z</updated>
+    
+    <summary type="html">
+    
+      执行上下文，即context，也不知道是谁翻译的，多数的文献、书籍用的都是这个词，还记得第一次接触这个词时的惆怅、迷惘、不知所措，扶了扶眼睛，翻开大辞典，还是翻译成环境比较接地气。JS执行上下文，即JS的执行环境。
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
     
   </entry>
   
@@ -373,46 +413,6 @@
     
     
       <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JavaScript中的闭包</title>
-    <link href="http://yoursite.com/2016/03/02/13.JavaScript%E4%B8%AD%E7%9A%84%E9%97%AD%E5%8C%85/"/>
-    <id>http://yoursite.com/2016/03/02/13.JavaScript中的闭包/</id>
-    <published>2016-03-02T07:15:21.000Z</published>
-    <updated>2019-01-09T08:39:01.502Z</updated>
-    
-    <summary type="html">
-    
-      闭包，相信第一次接触到这个词的同学，都会觉得一脸懵逼，这是啥玩意儿，好高端的样子。看看书看看报，闭包似乎没有那么难。
-    
-    </summary>
-    
-      <category term="js" scheme="http://yoursite.com/categories/js/"/>
-    
-    
-      <category term="js" scheme="http://yoursite.com/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>函数的防抖与节流</title>
-    <link href="http://yoursite.com/2016/03/01/12.%E5%87%BD%E6%95%B0%E7%9A%84%E9%98%B2%E6%8A%96%E4%B8%8E%E8%8A%82%E6%B5%81/"/>
-    <id>http://yoursite.com/2016/03/01/12.函数的防抖与节流/</id>
-    <published>2016-03-01T07:10:20.000Z</published>
-    <updated>2019-01-08T09:53:18.671Z</updated>
-    
-    <summary type="html">
-    
-      最初接触到函数的防抖与节流是在lodash库中看到了这样一个函数throttle，当时的心理感受是mmp，这是啥，一查翻译，哦...原来，还是不懂。防抖与节流看着很高级，其实在日常的编程中也是经常遇到，值得我们拥有。
-    
-    </summary>
-    
-      <category term="js" scheme="http://yoursite.com/categories/js/"/>
-    
-    
-      <category term="js" scheme="http://yoursite.com/tags/js/"/>
     
   </entry>
   
