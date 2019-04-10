@@ -4,25 +4,25 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
   
-    <title>nginx基本配置及常用命令 | Xinghunm</title>
+    <title>离线缓存 | Xinghunm</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="Xinghunm">
     
 
     
-    <meta name="description" content="最近自己搭建了一个网站，并准备用nginx作为服务器，于是搜索了nginx的配置。nginx可配置项很多，由于该网站只是个人使用，只是简单进行了配置，在这里作一个记录。">
-<meta name="keywords" content="server">
+    <meta name="description" content="某些时候，我们希望能够离线访问网站，比如在飞机上、网络不稳定的火车上，这个时候，离线缓存技术就能派上用场了。">
+<meta name="keywords" content="js">
 <meta property="og:type" content="article">
-<meta property="og:title" content="nginx基本配置及常用命令">
-<meta property="og:url" content="http://yoursite.com/2017/10/11/10.nginx基本配置及常用命令/index.html">
+<meta property="og:title" content="离线缓存">
+<meta property="og:url" content="http://yoursite.com/2018/09/08/26.离线缓存/index.html">
 <meta property="og:site_name" content="Xinghunm">
-<meta property="og:description" content="最近自己搭建了一个网站，并准备用nginx作为服务器，于是搜索了nginx的配置。nginx可配置项很多，由于该网站只是个人使用，只是简单进行了配置，在这里作一个记录。">
+<meta property="og:description" content="某些时候，我们希望能够离线访问网站，比如在飞机上、网络不稳定的火车上，这个时候，离线缓存技术就能派上用场了。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-07T06:52:28.300Z">
+<meta property="og:updated_time" content="2019-04-01T10:45:49.099Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="nginx基本配置及常用命令">
-<meta name="twitter:description" content="最近自己搭建了一个网站，并准备用nginx作为服务器，于是搜索了nginx的配置。nginx可配置项很多，由于该网站只是个人使用，只是简单进行了配置，在这里作一个记录。">
+<meta name="twitter:title" content="离线缓存">
+<meta name="twitter:description" content="某些时候，我们希望能够离线访问网站，比如在飞机上、网络不稳定的火车上，这个时候，离线缓存技术就能派上用场了。">
 
     
     <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
@@ -75,14 +75,14 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2017/10/11/10.nginx基本配置及常用命令/" title="nginx基本配置及常用命令" itemprop="url">nginx基本配置及常用命令</a>
+      <a href="/2018/09/08/26.离线缓存/" title="离线缓存" itemprop="url">离线缓存</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
 		
   </p><p class="article-time">
-    <time datetime="2017-10-11T10:10:20.000Z" itemprop="datePublished"> Published 2017-10-11</time>
+    <time datetime="2018-09-08T10:10:20.000Z" itemprop="datePublished"> Published 2018-09-08</time>
     
   </p>
 </header>
@@ -91,25 +91,49 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">Contents</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本配置"><span class="toc-number">1.</span> <span class="toc-text">基本配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用命令"><span class="toc-number">2.</span> <span class="toc-text">常用命令</span></a></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#HTML5-Manifest"><span class="toc-number">1.</span> <span class="toc-text">HTML5 Manifest</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#开启离线缓存"><span class="toc-number">1.1.</span> <span class="toc-text">开启离线缓存</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Cache-Manifest-定义"><span class="toc-number">1.2.</span> <span class="toc-text">Cache Manifest 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#缓存流程"><span class="toc-number">1.3.</span> <span class="toc-text">缓存流程</span></a></li></ol></li></ol>
 		
 		</div>
 		
-		<h3 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a><strong>基本配置</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">### nginx.conf</span><br><span class="line">########### 每个指令必须有分号结束。#################</span><br><span class="line"></span><br><span class="line"> #配置运行nginx用户或用户组</span><br><span class="line">user root;   </span><br><span class="line">#允许生成的进程数，默认为1</span><br><span class="line">worker_processes 2; </span><br><span class="line">#制定错误日志路径，级别。这个设置可以放入全局块，http块，server块，级别依次为：debug|info|notice|warn|error|crit|alert|emerg</span><br><span class="line">error_log log/error.log debug; </span><br><span class="line"></span><br><span class="line">events &#123;</span><br><span class="line">#设置网路连接序列化，防止惊群现象发生，默认为on</span><br><span class="line">   accept_mutex on; </span><br><span class="line">#设置一个进程是否同时接受多个网络连接，默认为off</span><br><span class="line">   multi_accept on; </span><br><span class="line">#事件驱动模型，select|poll|kqueue|epoll|resig|/dev/poll|eventport</span><br><span class="line">#use epoll; </span><br><span class="line">#单个work进程允许的最大连接数，默认为512</span><br><span class="line">   worker_connections 1024; </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">#http服务器</span><br><span class="line">http &#123;</span><br><span class="line">#文件扩展名与文件类型映射表。设定mime类型(邮件支持类型),类型由mime.types文件定义</span><br><span class="line">#include /usr/local/etc/nginx/conf/mime.types;</span><br><span class="line">   include mime.types; </span><br><span class="line">#默认文件类型，默认为text/plain</span><br><span class="line">   default_type application/octet-stream; </span><br><span class="line"></span><br><span class="line">#自定义日志格式</span><br><span class="line">   log_format myFormat &apos;$remote_addr–$remote_user [$time_local] $request $status $body_bytes_sent $http_referer $http_user_agent $http_x_forwarded_for&apos;; </span><br><span class="line">#设置访问日志路径和格式。&quot;log/&quot;该路径为nginx日志的相对路径，mac下是/usr/local/var/log/。combined为日志格式的默认值</span><br><span class="line">   access_log log/access.log myFormat; </span><br><span class="line">   rewrite_log on;</span><br><span class="line"></span><br><span class="line">#允许sendfile方式传输文件，默认为off，可以在http块，server块，location块。（sendfile系统调用不需要将数据拷贝或者映射到应用程序地址空间中去）</span><br><span class="line">   sendfile on; </span><br><span class="line">#将tcp_nopush和tcp_nodelay两个指令设置为on用于防止网络阻塞</span><br><span class="line">   tcp_nopush on;</span><br><span class="line">   tcp_nodelay on;</span><br><span class="line">#连接超时时间，默认为75s，可以在http，server，location块。</span><br><span class="line">   keepalive_timeout 65; </span><br><span class="line"></span><br><span class="line">#gzip压缩开关</span><br><span class="line">   gzip on;</span><br><span class="line"></span><br><span class="line">#error_page 404 https://www.baidu.com; #错误页</span><br><span class="line"></span><br><span class="line">#HTTP服务器</span><br><span class="line"></span><br><span class="line"># 静态资源一般放在nginx所在主机</span><br><span class="line">   server &#123;</span><br><span class="line">       listen 8080; #监听HTTP端口</span><br><span class="line">       server_name localhost 149.28.211.15; #监听地址  </span><br><span class="line">       keepalive_requests 120; #单连接请求上限次数</span><br><span class="line">       root /root/www;</span><br><span class="line">       index index.html;  #定义首页索引文件的名称</span><br><span class="line">       location / &#123; </span><br><span class="line">          root /root/www; #静态资源根目录</span><br><span class="line">          index index.html;</span><br><span class="line">       &#125; </span><br><span class="line">       location /fancybook &#123;</span><br><span class="line">          alias /root/www/fancybook;</span><br><span class="line">          index index.html;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a><strong>常用命令</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1）启动nginx</span><br><span class="line">$ service nginx start</span><br><span class="line"></span><br><span class="line">2）停止nginx</span><br><span class="line">$ nginx -s stop</span><br><span class="line"></span><br><span class="line">3）不停止nginx重启</span><br><span class="line">$ nginx -s reload</span><br><span class="line"></span><br><span class="line">4）测试nginx.conf文件配置是否正确</span><br><span class="line">$ nginx -t</span><br><span class="line"></span><br><span class="line">5）查看nginx版本</span><br><span class="line">$ nginx -v</span><br><span class="line"></span><br><span class="line">6）查看nginx进程</span><br><span class="line">$ ps -ef | grep nginx</span><br></pre></td></tr></table></figure>  
+		<p>离线缓存早期是通过 html5 manifest 来实现的，虽然已经被 Service Worker 取代了，但是，老余说想要了解一个人，就得了解它的过去，怎么样，看看吧。</p>
+<h2 id="HTML5-Manifest"><a href="#HTML5-Manifest" class="headerlink" title="HTML5 Manifest"></a>HTML5 Manifest</h2><h3 id="开启离线缓存"><a href="#开启离线缓存" class="headerlink" title="开启离线缓存"></a>开启离线缓存</h3><p>开启离线缓存比较简单，分为如下两步:</p>
+<ul>
+<li><p>定义 manifest 文件，用于描述需要缓存的文件<br>manifest 文件可以使用任意扩展名。</p>
+</li>
+<li><p>在需要离线使用的页面中添加 manifest 属性，用于指定缓存清单文件的路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// %PUBLIC_URL%为public目录地址</span><br><span class="line">&lt;html lang=&quot;en&quot; manifest=&quot;%PUBLIC_URL%/app.manifest&quot;&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="Cache-Manifest-定义"><a href="#Cache-Manifest-定义" class="headerlink" title="Cache Manifest 定义"></a>Cache Manifest 定义</h3><p>manifest 文件的结构主要分为五部分，CACHE MANIFEST、注释行、CACHE、NETWORK 以及 FALLBACK。</p>
+<ul>
+<li>CACHE MANIFEST<br>manifest 文件的固定格式，必须在第一行声明 CACHE MANIFEST，否则不能解析 manifest 文件。</li>
+<li>注释行<br>以<code>#</code>开头的是注释行，通常在第二行写版本号、md5、日期等，通过修改这个注释来更新 manifest 文件，当然这并不是必须的。</li>
+<li>CACHE<br>用来标识以下哪些文件需要缓存，<code>CACHE:</code>标识符本身可以忽略，但需要缓存的文件应该列出来。缓存文件可以是相对路径也可以是绝对路径。</li>
+<li>NETWORK(可选)<br>用来标识以下哪些文件需要从网络获取，可以用通配符<code>*</code>，表示除需要 cache 的文件都需要从网络获取。</li>
+<li>FALLBACK(可选)<br>当资源无法访问时的备用页面，由两部分构成，第一部分表示要访问的资源(/about.html)，第二部分表示备用页面(404.html)</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">CACHE MANIFEST</span><br><span class="line">#version 1.0</span><br><span class="line"></span><br><span class="line">CACHE:</span><br><span class="line">  bundle.js</span><br><span class="line">  http://localhost:1989/main.css</span><br><span class="line"></span><br><span class="line">NETWORK:</span><br><span class="line">  favicon.ico</span><br><span class="line"></span><br><span class="line">FALLBACK: /about.html /404.html</span><br></pre></td></tr></table></figure>
+<h3 id="缓存流程"><a href="#缓存流程" class="headerlink" title="缓存流程"></a>缓存流程</h3><ul>
+<li>当浏览器第一次访问带有 manifest 特性的文档时，会下载 manifest 清单以及清单中列出的需要缓存的文件。</li>
+<li>再次访问时，会从缓存中获取 manifest 清单及清单中列出的的文件。此外，浏览器还会向 window.applicationCache 对象发送一个 checking 事件并获取清单文件。</li>
+<li>对比清单是否更新，如果没有，浏览器将向 applicationCache 对象发送一个 noupdate 事件。</li>
+<li>如果清单更新了，则下载所有清单中列出的文件，放到临时缓存中，如果更新错误，则暂停更新，使用原来的缓存。</li>
+<li>如果所有的更新都成功了，将临时缓存移动到真正的离线缓存中。</li>
+</ul>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/server/">server</a>
+  <a class="article-category-link" href="/categories/js/">js</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/server/">server</a>
+  <span></span> <a href="/tags/js/">js</a>
   </div>
 
 </div>
@@ -118,7 +142,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2017/10/11/10.nginx基本配置及常用命令/" data-title="nginx基本配置及常用命令 | Xinghunm" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2018/09/08/26.离线缓存/" data-title="离线缓存 | Xinghunm" data-tsina="" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -131,19 +155,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev">
- <a href="/2018/09/08/26.离线缓存/" title="离线缓存">
-  <strong>上一篇：</strong><br>
-  <span>
-  离线缓存</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2017/08/03/23.认识vertical-align/" title="认识vertical-align">
+<a href="/2017/10/11/10.nginx基本配置及常用命令/" title="nginx基本配置及常用命令">
  <strong>下一篇：</strong><br> 
- <span>认识vertical-align
+ <span>nginx基本配置及常用命令
 </span>
 </a>
 </div>

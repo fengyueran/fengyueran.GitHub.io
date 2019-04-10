@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-07T06:52:28.300Z</updated>
+  <updated>2019-04-01T10:45:49.099Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>离线缓存</title>
+    <link href="http://yoursite.com/2018/09/08/26.%E7%A6%BB%E7%BA%BF%E7%BC%93%E5%AD%98/"/>
+    <id>http://yoursite.com/2018/09/08/26.离线缓存/</id>
+    <published>2018-09-08T10:10:20.000Z</published>
+    <updated>2019-04-01T10:45:49.099Z</updated>
+    
+    <summary type="html">
+    
+      某些时候，我们希望能够离线访问网站，比如在飞机上、网络不稳定的火车上，这个时候，离线缓存技术就能派上用场了。
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
   
   <entry>
     <title>nginx基本配置及常用命令</title>
@@ -81,7 +101,7 @@
     <link href="http://yoursite.com/2017/06/20/5.%E4%BC%AA%E7%B1%BB%E4%B8%8E%E4%BC%AA%E5%85%83%E7%B4%A0%E7%9A%84%E5%8C%BA%E5%88%AB/"/>
     <id>http://yoursite.com/2017/06/20/5.伪类与伪元素的区别/</id>
     <published>2017-06-20T12:10:07.000Z</published>
-    <updated>2019-01-11T07:07:23.275Z</updated>
+    <updated>2019-04-09T10:04:20.688Z</updated>
     
     <summary type="html">
     
@@ -101,7 +121,7 @@
     <link href="http://yoursite.com/2017/06/20/3.react%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5/"/>
     <id>http://yoursite.com/2017/06/20/3.react最佳实践/</id>
     <published>2017-06-20T12:10:07.000Z</published>
-    <updated>2019-01-11T07:07:05.960Z</updated>
+    <updated>2019-04-08T11:32:40.066Z</updated>
     
     <summary type="html">
     
@@ -157,11 +177,11 @@
   </entry>
   
   <entry>
-    <title>作用域链</title>
-    <link href="http://yoursite.com/2017/04/05/25.%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/"/>
-    <id>http://yoursite.com/2017/04/05/25.作用域链/</id>
+    <title>变量对象与作用域链</title>
+    <link href="http://yoursite.com/2017/04/05/25.%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/"/>
+    <id>http://yoursite.com/2017/04/05/25.变量对象与作用域链/</id>
     <published>2017-04-05T10:10:20.000Z</published>
-    <updated>2019-03-23T09:49:04.510Z</updated>
+    <updated>2019-04-09T10:09:59.955Z</updated>
     
     <summary type="html">
     
@@ -177,31 +197,11 @@
   </entry>
   
   <entry>
-    <title>JS执行上下文</title>
-    <link href="http://yoursite.com/2017/04/03/24.JS%20%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/"/>
-    <id>http://yoursite.com/2017/04/03/24.JS 执行上下文/</id>
-    <published>2017-04-03T10:10:20.000Z</published>
-    <updated>2019-03-25T11:48:29.159Z</updated>
-    
-    <summary type="html">
-    
-      执行上下文，即context，也不知道是谁翻译的，多数的文献、书籍用的都是这个词，还记得第一次接触这个词时的惆怅、迷惘、不知所措，扶了扶眼睛，翻开大辞典，还是翻译成环境比较接地气。JS执行上下文，即JS的执行环境。
-    
-    </summary>
-    
-      <category term="js" scheme="http://yoursite.com/categories/js/"/>
-    
-    
-      <category term="js" scheme="http://yoursite.com/tags/js/"/>
-    
-  </entry>
-  
-  <entry>
     <title>css权重</title>
     <link href="http://yoursite.com/2017/04/03/22.css%E6%9D%83%E9%87%8D/"/>
     <id>http://yoursite.com/2017/04/03/22.css权重/</id>
     <published>2017-04-03T10:10:20.000Z</published>
-    <updated>2019-02-18T02:40:35.382Z</updated>
+    <updated>2019-04-01T06:56:23.440Z</updated>
     
     <summary type="html">
     
@@ -213,6 +213,26 @@
     
     
       <category term="css" scheme="http://yoursite.com/tags/css/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS执行环境</title>
+    <link href="http://yoursite.com/2017/04/03/24.JS%20%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/"/>
+    <id>http://yoursite.com/2017/04/03/24.JS 执行上下文/</id>
+    <published>2017-04-03T10:10:20.000Z</published>
+    <updated>2019-04-09T10:12:55.009Z</updated>
+    
+    <summary type="html">
+    
+      执行上下文，即context，也不知道是谁翻译的，不少的文献、书籍用的都是这个词。还记得第一次接触这个词时的惆怅、迷惘、不知所措，扶了扶眼镜，翻开大辞典，还是翻译成环境比较接地气。JS执行上下文，即JS的执行环境。
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
     
   </entry>
   
@@ -237,15 +257,15 @@
   </entry>
   
   <entry>
-    <title>JS中的原型</title>
-    <link href="http://yoursite.com/2017/02/01/16.JS%E4%B8%AD%E7%9A%84%E5%8E%9F%E5%9E%8B/"/>
-    <id>http://yoursite.com/2017/02/01/16.JS中的原型/</id>
+    <title>JS中的继承与原型链</title>
+    <link href="http://yoursite.com/2017/02/01/16.JS%E4%B8%AD%E7%9A%84%E7%BB%A7%E6%89%BF%E4%B8%8E%E5%8E%9F%E5%9E%8B%E9%93%BE/"/>
+    <id>http://yoursite.com/2017/02/01/16.JS中的继承与原型链/</id>
     <published>2017-02-01T10:10:20.000Z</published>
-    <updated>2019-01-15T06:43:48.246Z</updated>
+    <updated>2019-04-10T02:15:34.663Z</updated>
     
     <summary type="html">
     
-      在面向对象编程中，类之间共享是通过继承实现的，而在JavaScript中万物皆对象，并没有类的概念(ES6中类仅仅是一个语法糖)，对象之间的共享是通过一个叫做原型的东西实现的。
+      在面向对象编程中，类之间的共享是通过继承实现的，而在JavaScript中万物皆对象，并没有类的概念(ES6中类仅仅是一个语法糖)，对象之间的共享是通过一个叫做原型的东西实现的。
     
     </summary>
     
@@ -281,7 +301,7 @@
     <link href="http://yoursite.com/2016/10/10/11.css%E5%B1%85%E4%B8%AD%E6%96%B9%E6%B3%95/"/>
     <id>http://yoursite.com/2016/10/10/11.css居中方法/</id>
     <published>2016-10-10T10:10:20.000Z</published>
-    <updated>2019-01-08T06:24:24.183Z</updated>
+    <updated>2019-03-26T06:59:37.108Z</updated>
     
     <summary type="html">
     
@@ -301,11 +321,11 @@
     <link href="http://yoursite.com/2016/07/24/19.git%20submodule%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://yoursite.com/2016/07/24/19.git submodule的使用/</id>
     <published>2016-07-24T15:30:09.000Z</published>
-    <updated>2019-02-11T07:33:25.126Z</updated>
+    <updated>2019-04-03T05:28:59.365Z</updated>
     
     <summary type="html">
     
-      最近在做一个上传的客户端，上传的部分由后端同学以SDK的方式提供，因此该SDK是在一个独立的仓库，那么对于客户端该如何方便的对集成该SDK呢？这就可以考虑用git的submodule。
+      最近在做一个上传的客户端，上传的部分由后端同学以SDK的方式提供，因此该SDK是在一个独立的仓库，那么对于客户端该如何方便的集成该SDK呢？这就可以考虑用git的submodule。
     
     </summary>
     
@@ -321,7 +341,7 @@
     <link href="http://yoursite.com/2016/06/24/2.git%E7%9A%84%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E7%AE%80%E4%BB%8B/"/>
     <id>http://yoursite.com/2016/06/24/2.git的常用命令简介/</id>
     <published>2016-06-24T15:30:09.000Z</published>
-    <updated>2019-03-25T11:39:05.787Z</updated>
+    <updated>2019-03-26T06:55:57.404Z</updated>
     
     <summary type="html">
     
@@ -361,7 +381,7 @@
     <link href="http://yoursite.com/2016/05/05/8.css%E9%80%89%E6%8B%A9%E5%99%A8/"/>
     <id>http://yoursite.com/2016/05/05/8.css选择器/</id>
     <published>2016-05-05T10:10:20.000Z</published>
-    <updated>2019-02-14T07:54:43.543Z</updated>
+    <updated>2019-03-28T06:16:07.799Z</updated>
     
     <summary type="html">
     
@@ -386,26 +406,6 @@
     <summary type="html">
     
       最近在浏览多列等高的布局实现中总是看到圣杯布局与双飞翼布局，而对这两个概念还是第一次听说，作为一个前端，这怎么能逃过我的魔爪呢！！！
-    
-    </summary>
-    
-      <category term="CSS" scheme="http://yoursite.com/categories/CSS/"/>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>CSS中的BFC</title>
-    <link href="http://yoursite.com/2016/03/05/17.CSS%E4%B8%AD%E7%9A%84BFC/"/>
-    <id>http://yoursite.com/2016/03/05/17.CSS中的BFC/</id>
-    <published>2016-03-05T05:10:27.000Z</published>
-    <updated>2019-01-23T05:31:26.890Z</updated>
-    
-    <summary type="html">
-    
-      BFC(Block formatting context)，即块级格式化上下文，是CSS布局中的概念，在之前的编程中并没有显示地接触到这一概念，但是很可能无形中运用到了BFC，那究竟什么是BFC呢？我们来一探究竟。
     
     </summary>
     

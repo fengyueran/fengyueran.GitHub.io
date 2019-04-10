@@ -101,13 +101,13 @@
 
   <section class="post" itemscope="" itemprop="blogPost">
   
-    <a href="/2017/02/01/16.JS中的原型/" title="JS中的原型" itemprop="url">
+    <a href="/2017/02/01/16.JS中的继承与原型链/" title="JS中的继承与原型链" itemprop="url">
   
 
     <time datetime="2017-02-01T10:10:20.000Z" itemprop="datePublished">2017-02-01</time>
 
 
-    <h1 itemprop="name">JS中的原型</h1>
+    <h1 itemprop="name">JS中的继承与原型链</h1>
 
   </a>
 </section>
@@ -257,7 +257,14 @@ ga('send', 'pageview');
 
     </body>
    </html>
-;
+ut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
   });
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
