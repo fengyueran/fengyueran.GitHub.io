@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="Xinghunm">
 <meta property="og:description" content="js中方法很多，在这里记录下自己容易忘记的一些较为重要的方法和技巧">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-01-25T06:54:21.588Z">
+<meta property="og:updated_time" content="2019-04-11T07:51:52.286Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS常用方法">
 <meta name="twitter:description" content="js中方法很多，在这里记录下自己容易忘记的一些较为重要的方法和技巧">
@@ -116,11 +116,14 @@
 </ul>
 <h3 id="快速排序法"><a href="#快速排序法" class="headerlink" title="快速排序法"></a><strong>快速排序法</strong></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">const quickSort = (arr) =&gt; &#123;</span><br><span class="line">  if (arr.length &lt;= 1) return arr;</span><br><span class="line">  const pivotIndex = Math.floor(arr.length / 2);</span><br><span class="line">  const pivot = arr.splice(pivotIndex, 1);</span><br><span class="line">  const left = [];</span><br><span class="line">  const right = [];</span><br><span class="line"></span><br><span class="line">  for(let i = 0; i&lt; arr.length; i++) &#123;</span><br><span class="line">    const value = arr[i];</span><br><span class="line">    if (value &lt; pivot) &#123;</span><br><span class="line">      left.push(value);</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">      right.push(value);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  return quickSort(left).concat(pivot, quickSort(right));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="操作数组"><a href="#操作数组" class="headerlink" title="操作数组"></a><strong>操作数组</strong></h3><ul>
-<li><p>shift<br>该方法用于将数组的第一个元素从其中删除，并返回第一个元素的值。如果数组为空，则不进行任何操作，返回undefined值，该方法不会创建新数组而是从原数组直接进行修改。</p>
+<li><p>shift<br>该方法用于将数组的第一个元素从其中删除，并返回第一个元素的值。如果数组为空，则不进行任何操作，返回 undefined 值，该方法不会创建新数组而是从原数组直接进行修改。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const arr = [1, 2];</span><br><span class="line">const v = arr.shift();</span><br><span class="line">console.log(v); // 1</span><br><span class="line">console.log(arr); // [2]</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>pop<br>该方法用于删除并返回数组的最后一个元素，如果数组为空，则pop不改变数组，并返回undefined值，该方法不会创建新数组而是从原数组直接进行修改。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const arr = [1, 2];</span><br><span class="line">const v = arr.pop();</span><br><span class="line">console.log(v); // 2</span><br><span class="line">console.log(arr); // [1]</span><br></pre></td></tr></table></figure></li>
+<li><p>pop<br>该方法用于删除并返回数组的最后一个元素，如果数组为空，则 pop 不改变数组，并返回 undefined 值，该方法不会创建新数组而是从原数组直接进行修改。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const arr = [1, 2];</span><br><span class="line">const v = arr.pop();</span><br><span class="line">console.log(v); // 2</span><br><span class="line">console.log(arr); // [1]</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>find</p>
+</li>
 </ul>
   
 	</div>
@@ -223,7 +226,7 @@
 		  
 		
 		  
-			<li><a href="/categories/js/" title="js">js<sup>8</sup></a></li>
+			<li><a href="/categories/js/" title="js">js<sup>9</sup></a></li>
 		  
 		
 		  

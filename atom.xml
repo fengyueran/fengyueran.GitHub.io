@@ -181,11 +181,31 @@
     <link href="http://yoursite.com/2017/04/05/25.%E5%8F%98%E9%87%8F%E5%AF%B9%E8%B1%A1%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F%E9%93%BE/"/>
     <id>http://yoursite.com/2017/04/05/25.变量对象与作用域链/</id>
     <published>2017-04-05T10:10:20.000Z</published>
-    <updated>2019-04-09T10:09:59.955Z</updated>
+    <updated>2019-04-17T08:28:26.468Z</updated>
     
     <summary type="html">
     
       通常，我们在函数内部使用函数外部的变量时会很自然，并没有想过为什么能够直接使用函数外部的变量而在函数外部却不能直接使用函数内部的变量，一切都显得理所当然。佛曰，凡事必有因，这个因就是作用域链。
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>JS执行环境</title>
+    <link href="http://yoursite.com/2017/04/03/24.JS%20%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/"/>
+    <id>http://yoursite.com/2017/04/03/24.JS 执行上下文/</id>
+    <published>2017-04-03T10:10:20.000Z</published>
+    <updated>2019-04-17T08:42:08.571Z</updated>
+    
+    <summary type="html">
+    
+      执行上下文，即context，也不知道是谁翻译的，不少的文献、书籍用的都是这个词。还记得第一次接触这个词时的惆怅、迷惘、不知所措，扶了扶眼镜，翻开大辞典，还是翻译成环境比较接地气。JS执行上下文，即JS的执行环境。
     
     </summary>
     
@@ -213,26 +233,6 @@
     
     
       <category term="css" scheme="http://yoursite.com/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>JS执行环境</title>
-    <link href="http://yoursite.com/2017/04/03/24.JS%20%E6%89%A7%E8%A1%8C%E4%B8%8A%E4%B8%8B%E6%96%87/"/>
-    <id>http://yoursite.com/2017/04/03/24.JS 执行上下文/</id>
-    <published>2017-04-03T10:10:20.000Z</published>
-    <updated>2019-04-09T10:12:55.009Z</updated>
-    
-    <summary type="html">
-    
-      执行上下文，即context，也不知道是谁翻译的，不少的文献、书籍用的都是这个词。还记得第一次接触这个词时的惆怅、迷惘、不知所措，扶了扶眼镜，翻开大辞典，还是翻译成环境比较接地气。JS执行上下文，即JS的执行环境。
-    
-    </summary>
-    
-      <category term="js" scheme="http://yoursite.com/categories/js/"/>
-    
-    
-      <category term="js" scheme="http://yoursite.com/tags/js/"/>
     
   </entry>
   
@@ -317,6 +317,32 @@
   </entry>
   
   <entry>
+    <title>Jascript中的call、apply、bind</title>
+    <link href="http://yoursite.com/2016/09/04/27.Jascript%E4%B8%AD%E7%9A%84call%E3%80%81apply%E3%80%81bind/"/>
+    <id>http://yoursite.com/2016/09/04/27.Jascript中的call、apply、bind/</id>
+    <published>2016-09-04T10:10:20.000Z</published>
+    <updated>2019-04-11T02:40:08.998Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          
+        
+      
+    
+    </summary>
+    
+      <category term="js" scheme="http://yoursite.com/categories/js/"/>
+    
+    
+      <category term="js" scheme="http://yoursite.com/tags/js/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Git submodule的使用</title>
     <link href="http://yoursite.com/2016/07/24/19.git%20submodule%E7%9A%84%E4%BD%BF%E7%94%A8/"/>
     <id>http://yoursite.com/2016/07/24/19.git submodule的使用/</id>
@@ -361,7 +387,7 @@
     <link href="http://yoursite.com/2016/06/05/4.JS%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95/"/>
     <id>http://yoursite.com/2016/06/05/4.JS常用方法/</id>
     <published>2016-06-05T10:10:20.000Z</published>
-    <updated>2019-01-25T06:54:21.588Z</updated>
+    <updated>2019-04-11T07:51:52.286Z</updated>
     
     <summary type="html">
     
@@ -393,26 +419,6 @@
     
     
       <category term="css" scheme="http://yoursite.com/tags/css/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>圣杯布局与双飞翼布局</title>
-    <link href="http://yoursite.com/2016/03/07/18.%E5%9C%A3%E6%9D%AF%E5%B8%83%E5%B1%80%E4%B8%8E%E5%8F%8C%E9%A3%9E%E7%BF%BC%E5%B8%83%E5%B1%80/"/>
-    <id>http://yoursite.com/2016/03/07/18.圣杯布局与双飞翼布局/</id>
-    <published>2016-03-07T05:10:27.000Z</published>
-    <updated>2019-01-24T11:41:09.479Z</updated>
-    
-    <summary type="html">
-    
-      最近在浏览多列等高的布局实现中总是看到圣杯布局与双飞翼布局，而对这两个概念还是第一次听说，作为一个前端，这怎么能逃过我的魔爪呢！！！
-    
-    </summary>
-    
-      <category term="CSS" scheme="http://yoursite.com/categories/CSS/"/>
-    
-    
-      <category term="CSS" scheme="http://yoursite.com/tags/CSS/"/>
     
   </entry>
   
