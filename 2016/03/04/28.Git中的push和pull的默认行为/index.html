@@ -1,0 +1,541 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>Git中的push和pull的默认行为 | Xinghunm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xinghunm">
+    
+
+    
+    <meta name="description" content="在讨论 push 和 pull 的默认行为前我们需要先了解 upstream、downstream 和 FETCH_HEAD 的概念。 upstream &amp;amp;&amp;amp; downstream通俗来说，当本地仓库 R 的某分支 x 的代码 push 到远程仓库 R’的 x’分支时，把 x’分支称为 x 分支的 upstream，相对地把 x 分支称为 x’分支的 downstream。R 和">
+<meta name="keywords" content="Git">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git中的push和pull的默认行为">
+<meta property="og:url" content="http://yoursite.com/2016/03/04/28.Git中的push和pull的默认行为/index.html">
+<meta property="og:site_name" content="Xinghunm">
+<meta property="og:description" content="在讨论 push 和 pull 的默认行为前我们需要先了解 upstream、downstream 和 FETCH_HEAD 的概念。 upstream &amp;amp;&amp;amp; downstream通俗来说，当本地仓库 R 的某分支 x 的代码 push 到远程仓库 R’的 x’分支时，把 x’分支称为 x 分支的 upstream，相对地把 x 分支称为 x’分支的 downstream。R 和">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-15T06:35:04.591Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git中的push和pull的默认行为">
+<meta name="twitter:description" content="在讨论 push 和 pull 的默认行为前我们需要先了解 upstream、downstream 和 FETCH_HEAD 的概念。 upstream &amp;amp;&amp;amp; downstream通俗来说，当本地仓库 R 的某分支 x 的代码 push 到远程仓库 R’的 x’分支时，把 x’分支称为 x 分支的 upstream，相对地把 x 分支称为 x’分支的 downstream。R 和">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
+				<h2 class="blog-motto">Change the world or change yourself</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/04/28.Git中的push和pull的默认行为/" title="Git中的push和pull的默认行为" itemprop="url">Git中的push和pull的默认行为</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-03-04T10:10:20.000Z" itemprop="datePublished"> Published 2016-03-04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#upstream-amp-amp-downstream"><span class="toc-number">1.</span> <span class="toc-text">upstream &amp;&amp; downstream</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FETCH-HEAD"><span class="toc-number">2.</span> <span class="toc-text">FETCH_HEAD</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#push"><span class="toc-number">3.</span> <span class="toc-text">push</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pull"><span class="toc-number">4.</span> <span class="toc-text">pull</span></a></li></ol>
+		
+		</div>
+		
+		<p>在讨论 push 和 pull 的默认行为前我们需要先了解 upstream、downstream 和 FETCH_HEAD 的概念。</p>
+<h3 id="upstream-amp-amp-downstream"><a href="#upstream-amp-amp-downstream" class="headerlink" title="upstream &amp;&amp; downstream"></a>upstream &amp;&amp; downstream</h3><p>通俗来说，当本地仓库 R 的某分支 x 的代码 push 到远程仓库 R’的 x’分支时，把 x’分支称为 x 分支的 upstream，相对地把 x 分支称为 x’分支的 downstream。R 和 R’以及 x 和 x’可以不同名，但通常我们都设置为同名(默认同名)。通过 upstream 和 downstream 就建立起了本地分支和远程分支间的映射关系。以下是关于 track 关系的常用命令:</p>
+<ul>
+<li><p>查询 upstream 和 downstream 的映射关系</p>
+<p><code>git branch -vv</code> 或 <code>cat .git/config</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -vv</span><br><span class="line">=&gt;  dev    32cf90b [origin/dev] e23rw</span><br><span class="line">    master 9b04659 [origin/master] dadfa</span><br><span class="line"></span><br><span class="line">$ cat .git/config</span><br><span class="line">=&gt; [branch &quot;master&quot;]</span><br><span class="line">        remote = origin</span><br><span class="line">        merge = refs/heads/master</span><br><span class="line">    [branch &quot;dev&quot;]</span><br><span class="line">        remote = origin</span><br><span class="line">        merge = refs/heads/dev</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>建立当前分支的 upstream</p>
+<p><code>git branch -u [repository-name/branch-name]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -u origin/dev</span><br><span class="line">=&gt;  Branch &apos;dev&apos; set up to track remote branch &apos;dev&apos; from &apos;origin&apos;.</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>取消其他分支的 upstream</p>
+<p><code>git branch --unset-upstream [branch-name]</code></p>
+<p>省略分支名则表示取消当前分支的 upstream。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//取消dev分支的upstream</span><br><span class="line">$ git branch --unset-upstream dev</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="FETCH-HEAD"><a href="#FETCH-HEAD" class="headerlink" title="FETCH_HEAD"></a>FETCH_HEAD</h3><p>FETCH_HEAD 是是一个短期引用，表示刚刚从远程获取的分支的最新 commit。每执行一次 fetch 操作都会更新一次 FETCH_HEAD 列表，这个列表存在于<code>.git/FETCH_HEAD</code> 文件中，它的每一行对应一个分支的最新 commit，第一行表示当前分支的最新 commit。<br>在 master 分支下执行 git fetch，然后查看<code>.git/FETCH_HEAD</code> 文件，输出如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">9b04659a6105b139fad28018ee0f8c777379134a	branch &apos;master&apos; of https://github.com/fengyueran/test</span><br><span class="line">91edbb325972ffb8e924e664d61aa79054967e12	not-for-merge	branch &apos;dev&apos; of https://github.com/fengyueran/test</span><br><span class="line">32cf90b6fdad208260acde62fa24e72653895758	not-for-merge	branch &apos;dev1&apos; of https://github.com/fengyueran/test</span><br><span class="line">32cf90b6fdad208260acde62fa24e72653895758	not-for-merge	branch &apos;dev2&apos; of https://github.com/fengyueran/test</span><br></pre></td></tr></table></figure>
+<p>可以看到，直接 git fetch 会获取所有分支的最新 commit，第一行为 master 分支，即当前分支。此时执行 git fetch origin master，然后查看<code>.git/FETCH_HEAD</code> 文件，输出如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">9b04659a6105b139fad28018ee0f8c777379134a		branch &apos;master&apos; of https://github.com/fengyueran/test</span><br></pre></td></tr></table></figure>
+<p>可以看到只获取了指定分支 master 的最新 commit。</p>
+<h3 id="push"><a href="#push" class="headerlink" title="push"></a>push</h3><p>推送到远程分支命令:</p>
+<p><code>$ git push [remote-repository-name] [branch-name]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">例: 将代码推送到远程仓库pb的dev分支</span><br><span class="line">$ git push pb dev</span><br></pre></td></tr></table></figure>
+<p>当我们不显示指定仓库名和分支名而直接用 git push 会是什么效果呢？<br>对于 origin 仓库的 master 分支，是可以直接推送的，如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git push</span><br><span class="line">=&gt; Counting objects: 3, done.</span><br><span class="line">   Writing objects: 100% (3/3), 201 bytes | 201.00 KiB/s, done.</span><br><span class="line">   Total 3 (delta 0), reused 0 (delta 0)</span><br><span class="line">   To https://github.com/fengyueran/test.git</span><br><span class="line">   * [new branch]      master -&gt; master</span><br></pre></td></tr></table></figure>
+<p>之所以能够直接推送是因为在 clone 的时候会自动创建 master 分支来跟踪 origin/master。</p>
+<p>对于非 origin 仓库非 master 分支 git push 会是怎样呢？<br>如下，切换到 dev 分支然后 git push</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout -b dev</span><br><span class="line">$ git push</span><br><span class="line">=&gt; fatal: The current branch dev has no upstream branch.</span><br><span class="line">   To push the current branch and set the remote as upstream, use</span><br><span class="line"></span><br><span class="line">   git push --set-upstream origin dev</span><br></pre></td></tr></table></figure>
+<p>提示没有 upstream 的分支，也就说本地的 dev 分支 push 时不知道推送到远程的哪个分支，也就没法推送。但这取决于具体的 git 配置，在 Git2.0 之前，直接 git push，如果没有 upstream 就以当前分支名作为 upstream。我们可以通过配置 push.default 来改变这种行为，命令如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git config push.default [option]</span><br></pre></td></tr></table></figure>
+<p><strong>push.default 选项</strong></p>
+<p>push.default 有几个可选值: nothing, current, upstream, simple, matching</p>
+<ul>
+<li>nothing<br>什么都不推送除非显示地指定远程分支。</li>
+<li><p>current<br>推送当前分支到远程同名分支，如果远程不存在，则创建同名分支。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ git config push.default current</span><br><span class="line">$ git push</span><br><span class="line">=&gt; Total 0 (delta 0), reused 0 (delta 0)</span><br><span class="line">   remote:</span><br><span class="line">   remote: Create a pull request for &apos;dev&apos; on GitHub by visiting:</span><br><span class="line">   remote:      https://github.com/fengyueran/test/pull/new/dev</span><br><span class="line">   remote:</span><br><span class="line">   To https://github.com/fengyueran/test.git</span><br><span class="line">   * [new branch]      dev -&gt; dev</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>upstream<br>推送当前分支到 upstream 分支上，因此必须有 upstream 分支，这种模式通常用于从一个仓库获取代码的情景。</p>
+</li>
+<li>simple<br>和 upstream 类似，不同点在于，必须保证本地分支与 upstream 分支同名，否则不能 push。</li>
+<li>matching<br>推送所有本地和远程两端都存在的同名分支。</li>
+</ul>
+<p>在 Git2.0 之前 push.default 默认值为 matching，2.0 之后默认值为 simple，没有 upstream 不能被推送。</p>
+<h3 id="pull"><a href="#pull" class="headerlink" title="pull"></a>pull</h3><p>拉取远程分支命令:</p>
+<p><code>$ git pull [remote-repository-name] [branch-name]</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">例: 拉取远程仓库pb的dev分支</span><br><span class="line">$ git pull pb dev</span><br></pre></td></tr></table></figure>
+<p>当我们不显示指定仓库名和分支名而直接用 git pull 会是什么效果呢？</p>
+<p>事实上 git pull = git fetch + git merge FETCH_HEAD，直接 git pull 时会首先执行 git fetch origin 获取 origin 仓库所有分支，然后执行 git merge FETCH_HEAD 将 FETCH_HEAD(远程某个分支的最新 commit) 合并到当前分支。<br>如果是 git pull –rebase 第二步则执行 rebase 操作，即 git rebase FETCH_HEAD。</p>
+<p>如下: git pull pb dev 相当于分两步执行</p>
+<ul>
+<li>将 pull 替换为 fetch 执行命令<br>git fetch pb dev</li>
+<li>git merge FETCH_HEAD</li>
+</ul>
+<p>第二步 merge 时会访问 git 的默认配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// cat .git/config</span><br><span class="line">[branch &quot;master&quot;]</span><br><span class="line">	remote = origin</span><br><span class="line">	merge = refs/heads/master</span><br></pre></td></tr></table></figure>
+<p>可以看到 master 分支的 upstream 为远程的 master 分支，因此在 pull 合并时会合并远程的 master 分支，这里的 refs/heads/master 指的是远程仓库的 master 分支。当然我们可以修改这个配置，重新建立 upstream 或直接修改配置。<br>这里直接通过以下命令修改配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config branch.master.merge refs/heads/dev</span><br></pre></td></tr></table></figure>
+<p>此时，再查看配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[branch &quot;master&quot;]</span><br><span class="line">	remote = origin</span><br><span class="line">	merge = refs/heads/dev</span><br></pre></td></tr></table></figure>
+<p>merge 的值变成了 refs/heads/dev，也就是说在 master 分支运行 pull 再 merge 的时候会 merge 远程仓库的 dev 分支而不是 master 分支。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Git/">Git</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Git/">Git</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/03/04/28.Git中的push和pull的默认行为/" data-title="Git中的push和pull的默认行为 | Xinghunm" data-tsina class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2016/03/05/17.CSS中的BFC/" title="CSS中的BFC">
+  <strong>上一篇：</strong><br>
+  <span>
+  CSS中的BFC</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/03/04/29.typeof和instanceof实现原理/" title="typeof和instanceof实现原理">
+ <strong>下一篇：</strong><br> 
+ <span>typeof和instanceof实现原理
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Html/" title="Html">Html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Other/" title="Other">Other<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/css/" title="css">css<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/js/" title="js">js<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/website/" title="website">website<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="/images/weixin.png" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xinghunm <br>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:316032603@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'xinghunm';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', '');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

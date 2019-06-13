@@ -19,12 +19,13 @@
 <meta property="og:site_name" content="Xinghunm">
 <meta property="og:description" content="通常，我们在函数内部使用函数外部的变量时会很自然，并没有想过为什么能够直接使用函数外部的变量而在函数外部却不能直接使用函数内部的变量，一切都显得理所当然。佛曰，凡事必有因，这个因就是作用域链。">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/4/18/16a2f55cd71b035e?w=613&h=328&f=png&s=282657">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/4/3/169e1b94ce0fc256?w=1070&h=372&f=png&s=49703">
-<meta property="og:updated_time" content="2019-04-17T08:28:26.468Z">
+<meta property="og:updated_time" content="2019-05-24T09:14:20.576Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="变量对象与作用域链">
 <meta name="twitter:description" content="通常，我们在函数内部使用函数外部的变量时会很自然，并没有想过为什么能够直接使用函数外部的变量而在函数外部却不能直接使用函数内部的变量，一切都显得理所当然。佛曰，凡事必有因，这个因就是作用域链。">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2019/4/3/169e1b94ce0fc256?w=1070&h=372&f=png&s=49703">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2019/4/18/16a2f55cd71b035e?w=613&h=328&f=png&s=282657">
 
     
     <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
@@ -71,7 +72,7 @@
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope="" itemprop="blogPost">
+      <div id="main" class="post" itemscope itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -98,12 +99,14 @@
 		</div>
 		
 		<h3 id="作用域-Scope"><a href="#作用域-Scope" class="headerlink" title="作用域(Scope)"></a>作用域(Scope)</h3><p>当我们的代码在执行时，对于特定的代码，我们应该去哪查找变量？我们又该如何查找这些变量？答案就是作用域，也就是说作用域确定了如何在某些位置存储变量以及如何在稍后查找这些变量。在 JS 中采用词法作用域(Lexical Scope)，也就是静态作用域。</p>
-<p><strong>静态作用域 vs 动态作用域</strong></p>
-<p>对于静态作用域，函数的作用域与书写代码的位置直接相关，也就说作用域在在函数定义时就确定了。与静态作用域相对的就是动态作用域，函数的作用域在函数调用时才确定。<br>来看下面的例子:</p>
+<p><strong>静态作用域</strong></p>
+<p>对于静态作用域，函数的作用域与书写代码的位置直接相关，也就说作用域在在函数定义时就确定了。那是如何确定的呢？就是词法的嵌套结构: 在函数内部的环境引用函数外部的环境，函数外部的环境也可以引用它外部的环境，如此，直到全局环境。像下面的洋葱圈，全局环境是洋葱的最外层，里面的每一层(函数环境)都嵌套其中。</p>
+<p><img style="display:block; margin: auto; width:400px" alt="作用域示意图" src="https://user-gold-cdn.xitu.io/2019/4/18/16a2f55cd71b035e?w=613&h=328&f=png&s=282657"></p>
+<p>来看下面的例子:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">var name = &apos;lily&apos;;</span><br><span class="line"></span><br><span class="line">function getName() &#123;</span><br><span class="line">  console.log(&apos;name: &apos;, name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function getMyName() &#123;</span><br><span class="line">    var name = &apos;lucy&apos;;</span><br><span class="line">    getName();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getMyName();</span><br></pre></td></tr></table></figure>
-<p>输出的结果是什么呢？对于静态作用域，函数 getName 执行时，先在函数内部查找变量，如果没有，则在上层查找，显然它的上层环境在定义时就已经确定，为全局环境，因此找到了 lily，输出<code>name: lily</code>。<br>假如采用动态作用域(如 bash)，当函数 getMyName 执行时，变量 name 的值已经变成了 lucy，因此调用 getName 函数时输出<code>name: lucy</code>。如下，执行 <code>bash ./test.sh</code> 就会输出<code>name: lucy</code>。</p>
+<p>输出的结果是什么呢？对于静态作用域，函数 getName 执行时，先在函数内部查找变量，如果没有，则在上层查找，显然它的上层环境在定义时就已经确定，为全局环境，因此找到了 lily，输出<code>name: lily</code>。</p>
+<p><strong>动态作用域</strong><br>与静态作用域相对的就是动态作用域，函数的作用域在函数调用时才确定。<br>假如采用动态作用域(如 bash)，当函数 getMyName 执行时，变量 name 的值已经变成了 lucy，因此调用 getName 函数时输出<code>name: lucy</code>。如下，执行 <code>bash ./test.sh</code> 就会输出<code>name: lucy</code>。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">#test.sh</span><br><span class="line">name=&apos;lily&apos;;</span><br><span class="line"></span><br><span class="line">function getName() &#123;</span><br><span class="line">  echo name: $name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function getMyName() &#123;</span><br><span class="line">  local name=&apos;lucy&apos;;</span><br><span class="line">  getName;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getMyName;</span><br></pre></td></tr></table></figure>
-<p><img style="display:block; margin: auto;" alt="洋葱圈示意图" src=""></p>
 <p>前面我们说到作用域确定了如何在某些位置存储变量，这个位置就是变量对象，而如何查找这些变量，就需要作用域链。</p>
 <h3 id="变量对象-Variable-Object-VO"><a href="#变量对象-Variable-Object-VO" class="headerlink" title="变量对象(Variable Object, VO)"></a>变量对象(Variable Object, VO)</h3><p>我们知道变量对象决定了变量的储存，因此我们需要了解变量对象是如何创建的。过程大致如下:</p>
 <ul>
@@ -133,8 +136,8 @@
 <p>上面的代码会创建三个执行环境，全局环境、函数 getName 局部环境以及函数 fullName 局部环境，它们的变量对象分别为 VO(global)、VO(getName)以及 VO(fullName)。函数 fullName 的作用域链是如何与这些变量对象关联起来的呢？步骤如下:</p>
 <ul>
 <li><p>函数 fullName 创建时，保存作用域链到内置属性[[scope]]</p>
-<p>函数定义时，根据静态作用域可以知道 fullName 的作用域链包括 VO(global)和 VO(getName)。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fullName.[[scope]] = [</span><br><span class="line">  VO(getName),</span><br><span class="line">  VO(global)</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<p>fullName 在解析时(getName 调用时)根据静态作用域可以知道它的作用域链包括 VO(global)和 AO(getName)(getName 执行 VO(getName)变为 AO(getName))。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fullName.[[scope]] = [</span><br><span class="line">  AO(getName),</span><br><span class="line">  VO(global)</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>函数 fullName 激活(调用执行)时，创建<a href="https://juejin.im/post/5ca060dde51d4524245d6142" target="_blank" rel="noopener">执行上下文</a>压入栈顶</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">  fullName EC,</span><br><span class="line">  getName EC,</span><br><span class="line">  globalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
@@ -143,19 +146,19 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fullNameEC = &#123;</span><br><span class="line">  scopeChain: fullName.[[scope]], // 创建作用域链</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>用 arguments 创建活动对象，并加入形参、变量声明、函数声明</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fullNameExecutionContext = &#123;</span><br><span class="line">  scopeChain: [VO(getName), VO(global)],</span><br><span class="line">  activeObject: &#123;</span><br><span class="line">    arguments: &#123;</span><br><span class="line">      length: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    lastName: undefined,</span><br><span class="line">  &#125;,</span><br><span class="line">  this: &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">fullNameExecutionContext = &#123;</span><br><span class="line">  scopeChain: [AO(getName), VO(global)],</span><br><span class="line">  activeObject: &#123;</span><br><span class="line">    arguments: &#123;</span><br><span class="line">      length: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    lastName: undefined,</span><br><span class="line">  &#125;,</span><br><span class="line">  this: &#123; ... &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>将活动对象推入 fullName 作用域的前端</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fullNameEC = &#123;</span><br><span class="line">  AO: &#123;</span><br><span class="line">    arguments: &#123;</span><br><span class="line">      length: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    lastName: undefined,</span><br><span class="line">  &#125;</span><br><span class="line">  scopeChain: [AO(fullName), VO(getName), VO(global)], // 作用域链</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li><p>将活动对象推入 fullName 作用域链的前端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fullNameEC = &#123;</span><br><span class="line">  AO: &#123;</span><br><span class="line">    arguments: &#123;</span><br><span class="line">      length: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    lastName: undefined,</span><br><span class="line">  &#125;</span><br><span class="line">  scopeChain: [AO(fullName), AO(getName), VO(global)], // 作用域链</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>准备工作完成，开始执行函数，为 AO(fullName)对象的变量赋值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fullNameEC = &#123;</span><br><span class="line">  AO: &#123;</span><br><span class="line">    arguments: &#123;</span><br><span class="line">      length: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    lastName: &apos;Jordan&apos;,</span><br><span class="line">  &#125;</span><br><span class="line">  scopeChain: [AO(fullName), VO(getName), VO(global)], // 作用域链</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fullNameEC = &#123;</span><br><span class="line">  AO: &#123;</span><br><span class="line">    arguments: &#123;</span><br><span class="line">      length: 0</span><br><span class="line">    &#125;,</span><br><span class="line">    lastName: &apos;Jordan&apos;,</span><br><span class="line">  &#125;</span><br><span class="line">  scopeChain: [AO(fullName), AO(getName), VO(global)], // 作用域链</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>fullName 执行完毕，其上下文弹出执行栈</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ECStack = [</span><br><span class="line">  getName EC,</span><br><span class="line">  globalContext</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>这里，我们用一个数组来表示作用域链，数组的第一个元素即链条的最前端为当前执行环境的变量对象，数组的最后一个元素即链条的最末端为全局执行环境的变量对象。当前执行环境在执行阶段访问变量会先从作用域链的最前端开始查找变量，如果没有则在包含环境中查找，如果包含环境中没有则继续向上查找，如此，直到全局环境中的变量对象，返过来并不成立，也就是说在全局作用域并不能访问函数内部的变量。</p>
+<p>这里，我们用一个数组来表示作用域链，数组的第一个元素即链条的最前端为当前执行环境的活动对象，数组的最后一个元素即链条的最末端为全局执行环境的变量对象。当前执行环境在执行阶段访问变量会先从作用域链的最前端开始查找变量，如果没有则在包含环境中查找，如果包含环境中没有则继续向上查找，如此，直到全局环境中的变量对象，返过来并不成立，也就是说在全局作用域并不能访问函数内部的变量。</p>
 <p><img style="display:block; margin: auto;" alt="作用域链示意图" src="https://user-gold-cdn.xitu.io/2019/4/3/169e1b94ce0fc256?w=1070&h=372&f=png&s=49703"></p>
 <h3 id="延长作用域链"><a href="#延长作用域链" class="headerlink" title="延长作用域链"></a>延长作用域链</h3><p>在 js 中，某些语句可以在作用域链前端临时添加一个变量对象，该变量对象会在代码执行完毕后移除。具体来说当执行流进入到下列两种语句时，作用域就会得到加长：</p>
 <ul>
@@ -196,7 +199,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2017/04/05/25.变量对象与作用域链/" data-title="变量对象与作用域链 | Xinghunm" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/04/05/25.变量对象与作用域链/" data-title="变量对象与作用域链 | Xinghunm" data-tsina class="share clearfix">
 	  </div>
 	
 	</div>
@@ -255,11 +258,15 @@
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+			<li><a href="/categories/Git/" title="Git">Git<sup>3</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
+			<li><a href="/categories/Html/" title="Html">Html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>4</sup></a></li>
 		  
 		
 		  

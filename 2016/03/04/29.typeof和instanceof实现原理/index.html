@@ -1,0 +1,515 @@
+
+ <!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+  
+    <title>typeof和instanceof实现原理 | Xinghunm</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Xinghunm">
+    
+
+    
+    <meta name="description" content="typeof不同的对象底层都表示为二进制，其低位的 1-3 位用来存储类型信息，typeof 就是通过判断前三位的机器码来判定类型。判定规则如下:  000: 对象 110: 布尔 010: 浮点数 100: 字符串 1: 整数  有两个值比较特殊:  null(JSVAL_NULL) null 的所有机器码为 0，因此 typeof null 为”object”  undefined(JSVAL">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="typeof和instanceof实现原理">
+<meta property="og:url" content="http://yoursite.com/2016/03/04/29.typeof和instanceof实现原理/index.html">
+<meta property="og:site_name" content="Xinghunm">
+<meta property="og:description" content="typeof不同的对象底层都表示为二进制，其低位的 1-3 位用来存储类型信息，typeof 就是通过判断前三位的机器码来判定类型。判定规则如下:  000: 对象 110: 布尔 010: 浮点数 100: 字符串 1: 整数  有两个值比较特殊:  null(JSVAL_NULL) null 的所有机器码为 0，因此 typeof null 为”object”  undefined(JSVAL">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-05-24T09:13:34.758Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="typeof和instanceof实现原理">
+<meta name="twitter:description" content="typeof不同的对象底层都表示为二进制，其低位的 1-3 位用来存储类型信息，typeof 就是通过判断前三位的机器码来判定类型。判定规则如下:  000: 对象 110: 布尔 010: 浮点数 100: 字符串 1: 整数  有两个值比较特殊:  null(JSVAL_NULL) null 的所有机器码为 0，因此 typeof null 为”object”  undefined(JSVAL">
+
+    
+    <link rel="alternative" href="/atom.xml" title="Xinghunm" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.png">
+    
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+</html>
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xinghunm">Xinghunm</a></h1>
+				<h2 class="blog-motto">Change the world or change yourself</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="/about">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search">
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</ul></nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2016/03/04/29.typeof和instanceof实现原理/" title="typeof和instanceof实现原理" itemprop="url">typeof和instanceof实现原理</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Xinghunm" target="_blank" itemprop="author">Xinghunm</a>
+		
+  </p><p class="article-time">
+    <time datetime="2016-03-04T10:10:20.000Z" itemprop="datePublished"> Published 2016-03-04</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#typeof"><span class="toc-number">1.</span> <span class="toc-text">typeof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof"><span class="toc-number">2.</span> <span class="toc-text">instanceof</span></a></li></ol>
+		
+		</div>
+		
+		<h3 id="typeof"><a href="#typeof" class="headerlink" title="typeof"></a>typeof</h3><p>不同的对象底层都表示为二进制，其低位的 1-3 位用来存储类型信息，typeof 就是通过判断前三位的机器码来判定类型。判定规则如下:</p>
+<ul>
+<li>000: 对象</li>
+<li>110: 布尔</li>
+<li>010: 浮点数</li>
+<li>100: 字符串</li>
+<li>1: 整数</li>
+</ul>
+<p>有两个值比较特殊:</p>
+<ul>
+<li><p>null(JSVAL_NULL)</p>
+<p>null 的所有机器码为 0，因此 typeof null 为”object”</p>
+</li>
+<li><p>undefined(JSVAL_VOID)</p>
+<p>用整数 −2^30(整数范围之外的数字)表示。</p>
+</li>
+</ul>
+<p>以下是 typeof 的<a href="https://dxr.mozilla.org/classic/source/js/src/jsapi.c" target="_blank" rel="noopener">引擎代码</a>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">JS_PUBLIC_API(JSType)</span><br><span class="line">   JS_TypeOfValue(JSContext *cx, jsval v)</span><br><span class="line">   &#123;</span><br><span class="line">       JSType type = JSTYPE_VOID;// 初始化为undefined</span><br><span class="line">       JSObject *obj;</span><br><span class="line">       JSObjectOps *ops;</span><br><span class="line">       JSClass *clasp;</span><br><span class="line"></span><br><span class="line">       CHECK_REQUEST(cx);</span><br><span class="line">       if (JSVAL_IS_VOID(v)) &#123;</span><br><span class="line">           type = JSTYPE_VOID;</span><br><span class="line">       &#125; else if (JSVAL_IS_OBJECT(v)) &#123;</span><br><span class="line">           obj = JSVAL_TO_OBJECT(v);</span><br><span class="line">           if (obj &amp;&amp;</span><br><span class="line">               (ops = obj-&gt;map-&gt;ops,</span><br><span class="line">                ops == &amp;js_ObjectOps</span><br><span class="line">                ? (clasp = OBJ_GET_CLASS(cx, obj),</span><br><span class="line">                   clasp-&gt;call || clasp == &amp;js_FunctionClass)</span><br><span class="line">                : ops-&gt;call != 0)) &#123;</span><br><span class="line">               type = JSTYPE_FUNCTION;</span><br><span class="line">           &#125; else &#123;</span><br><span class="line">               type = JSTYPE_OBJECT;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125; else if (JSVAL_IS_NUMBER(v)) &#123;</span><br><span class="line">           type = JSTYPE_NUMBER;</span><br><span class="line">       &#125; else if (JSVAL_IS_STRING(v)) &#123;</span><br><span class="line">           type = JSTYPE_STRING;</span><br><span class="line">       &#125; else if (JSVAL_IS_BOOLEAN(v)) &#123;</span><br><span class="line">           type = JSTYPE_BOOLEAN;</span><br><span class="line">       &#125;</span><br><span class="line">       return type;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到 typeof 首先判断值是不是 undefined(通过值是不是等于 JSVAL_VOID(−2^30)来判断)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define JSVAL_IS_VOID(v)  ((v) == JSVAL_VOID)</span><br></pre></td></tr></table></figure>
+<p>当判断为 object 类型后会作进一步判断，如果可以调用 call 或者内部属性[[Class]]标记为函数则为函数，因此 typeof 可以判断是不是函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">clasp-&gt;call</span><br><span class="line">clasp == &amp;js_FunctionClass</span><br></pre></td></tr></table></figure>
+<p>对于 null，通过 JSVAL_IS_OBJECT 判断为 true 后，作进一步判断，不是函数，因此为 object。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#define JSVAL_IS_OBJECT(v)      (JSVAL_TAG(v) == JSVAL_OBJECT)</span><br></pre></td></tr></table></figure>
+<p>typeof 只能判断基本类型，此外还有一个兼容性较好的判断类型的方法，即 Objct.prototype.toString 方法，如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Object.prototype.toString.call(&apos;xhm&apos;) // &quot;[object String]&quot;</span><br><span class="line">Object.prototype.toString.call(1) // &quot;[object Number]&quot;</span><br><span class="line">Object.prototype.toString.call(true) // &quot;[object Boolean]&quot;</span><br><span class="line">Object.prototype.toString.call(undefined) // &quot;[object Undefined]&quot;</span><br><span class="line">Object.prototype.toString.call(null) // &quot;[object Null]&quot;</span><br><span class="line">Object.prototype.toString.call(Symbol(1)) // &quot;[object Symbol]&quot;</span><br><span class="line"></span><br><span class="line">Object.prototype.toString.call(&#123; name:&apos;xhm&apos; &#125;) // &quot;[object Object]&quot;</span><br><span class="line">Object.prototype.toString.call([&apos;a&apos;, &apos;b&apos;]) // &quot;[object Array]&quot;</span><br><span class="line">Object.prototype.toString.call(() =&gt; &#123;&#125;) // &quot;[object Function]&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p>instanceof 的用途为判断对象 object 是否属于某个类型，基本用法如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">  object: 对象</span><br><span class="line">  constructor: 构造器</span><br><span class="line">  object instanceof constructor</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line">const Food = function() &#123;&#125;;</span><br><span class="line">const meat = new Food();</span><br><span class="line"></span><br><span class="line">meat instanceof Food // true</span><br></pre></td></tr></table></figure>
+<p>由<a href="https://juejin.im/post/5cab34def265da034c7002a6" target="_blank" rel="noopener">JS 中的继承与原型链</a>一文我们可以知道，当构造函数在执行时会将返回对象的 prototype 赋值给实例对象的<code>__proto__</code>，因此可以通过判断实例对象或其原型链中的<code>__proto__</code>是否等于构造函数的 prototype 来检查对象的类型。其实现思路大致如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var newInstanceof = (obj, ctor) =&gt; &#123;</span><br><span class="line">   let objProto = obj.__proto__;</span><br><span class="line">   while(objProto) &#123;</span><br><span class="line">      if (objProto === ctor.prototype) &#123;</span><br><span class="line">        return true;</span><br><span class="line">      &#125;</span><br><span class="line">      objProto = objProto.__proto__;</span><br><span class="line">   &#125;</span><br><span class="line">   return false;</span><br><span class="line">&#125;</span><br><span class="line">newInstanceof(meat, Food) // true</span><br></pre></td></tr></table></figure>
+<p>来看下面的例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var Food = function() &#123;&#125;;</span><br><span class="line">var Meat = function() &#123;&#125;;</span><br><span class="line">Meat.prototype = new Food();</span><br><span class="line">var meat = new Meat();</span><br><span class="line"></span><br><span class="line">newInstanceof(meat, Meat) // true</span><br><span class="line">newInstanceof(meat, Food) // true</span><br><span class="line">meat instanceof Meat // true</span><br><span class="line">meat instanceof Food // true</span><br></pre></td></tr></table></figure>
+<p>我们看到 meat instanceof Food 为 true，因为 meat 在原型链上能够找到 Food，来看另一个例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var Meat = function() &#123;</span><br><span class="line">  return &#123; name: &apos;xhm&apos; &#125;;</span><br><span class="line">&#125;;</span><br><span class="line">var meat = new Meat();</span><br><span class="line">newInstanceof(meat, Meat); // false</span><br><span class="line">meat instanceof Meat // false</span><br></pre></td></tr></table></figure>
+<p>我们看到 meat instanceof Meat 为 false，因为 instanceof 的本质是判断原型链上的对象，而当一个对象不是通过原型构造出来的实例时(Meat 构造函数返回了一个与 Meat 毫不相干的对象)，这种判定方法就会失效。</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/JS/">JS</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/JS/">JS</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2016/03/04/29.typeof和instanceof实现原理/" data-title="typeof和instanceof实现原理 | Xinghunm" data-tsina class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev">
+ <a href="/2016/03/04/28.Git中的push和pull的默认行为/" title="Git中的push和pull的默认行为">
+  <strong>上一篇：</strong><br>
+  <span>
+  Git中的push和pull的默认行为</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2016/03/02/13.JavaScript中的闭包/" title="JavaScript中的闭包">
+ <strong>下一篇：</strong><br> 
+ <span>JavaScript中的闭包
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+<section id="comments" class="comment">
+  <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  </div>
+</section>
+
+
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/CSS/" title="CSS">CSS<sup>2</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Git/" title="Git">Git<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Html/" title="Html">Html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Other/" title="Other">Other<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/css/" title="css">css<sup>4</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/html/" title="html">html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/js/" title="js">js<sup>9</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/network/" title="network">network<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/react/" title="react">react<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/server/" title="server">server<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/subject/" title="subject">subject<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/website/" title="website">website<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  <div class="weixin">
+  <br>
+  <p class="asidetitle">微信</p>
+  <p>我的微信号，和我一起成长：</p>
+  <img src="/images/weixin.png" width="230px">
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer">
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Xinghunm <br>
+			This is my blog, believe it or not.</p>
+	</section>
+	 
+	<div class="social-font">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		<a href="mailto:316032603@qq.com" target="_blank" class="icon-email" title="Email Me"></a>
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2019 
+		
+		<a href="/about" target="_blank" title="Xinghunm">Xinghunm</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+<script type="text/javascript">
+
+var disqus_shortname = 'xinghunm';
+
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/count.js';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Analytics Begin -->
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-28029597-1', '');  
+ga('send', 'pageview');
+</script>
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="Back to Top"><img src="/img/scrollup.png"></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

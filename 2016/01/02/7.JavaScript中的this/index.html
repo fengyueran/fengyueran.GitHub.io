@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="Xinghunm">
 <meta property="og:description" content="在JavaScript中并没有OOP编程的概念，我们谈到的this不同于一些OOP编程里指向的实例化对象，它指的是运行时的上下文。所谓上下文，就是运行时所在的环境对象，比如你在公司，可能你的领导是你的部门经理，在家就是你媳妇儿一样，不同的场合上下文是不一样的。">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-04-16T06:06:39.992Z">
+<meta property="og:updated_time" content="2019-05-24T09:35:58.792Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript中的this">
 <meta name="twitter:description" content="在JavaScript中并没有OOP编程的概念，我们谈到的this不同于一些OOP编程里指向的实例化对象，它指的是运行时的上下文。所谓上下文，就是运行时所在的环境对象，比如你在公司，可能你的领导是你的部门经理，在家就是你媳妇儿一样，不同的场合上下文是不一样的。">
@@ -69,7 +69,7 @@
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope="" itemprop="blogPost">
+      <div id="main" class="post" itemscope itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -163,7 +163,7 @@
 <p><strong>bind 函数</strong></p>
 <p>bind 方法不会立即执行，而是返回一个改变了上下文 this 后的函数。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const newGetName = girl.getName.bind(boy);</span><br><span class="line">newGetName(&apos;Michael&apos;, &apos;Jordan&apos;)</span><br><span class="line">=&gt; Michael.Jeffrey.Jordan</span><br></pre></td></tr></table></figure>
-<p>综上，this 的指向由其具体的执行环境决定，同时也可以通过函数的原型方法 apply、call 以及 bind 来显式地改变 this 的指向。</p>
+<p>综上，this 的指向由其具体的执行环境决定，同时也可以通过函数的原型方法 apply、call 以及 bind 来显式地改变 this 的指向。不过，箭头函数的 this，总是指向定义时所在的对象，而不是运行时所在的对象，apply、call 也无法更改。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -186,7 +186,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2016/01/02/7.JavaScript中的this/" data-title="JavaScript中的this | Xinghunm" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/01/02/7.JavaScript中的this/" data-title="JavaScript中的this | Xinghunm" data-tsina class="share clearfix">
 	  </div>
 	
 	</div>
@@ -245,11 +245,15 @@
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+			<li><a href="/categories/Git/" title="Git">Git<sup>3</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
+			<li><a href="/categories/Html/" title="Html">Html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>4</sup></a></li>
 		  
 		
 		  

@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/4/17/16a2a74a7233075f?w=1244&h=416&f=png&s=113665">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/4/17/16a2a74a7455b266?w=1244&h=558&f=png&s=151273">
 <meta property="og:image" content="https://user-gold-cdn.xitu.io/2019/4/17/16a2a74a717443db?w=1324&h=360&f=png&s=39247">
-<meta property="og:updated_time" content="2019-04-17T08:42:08.571Z">
+<meta property="og:updated_time" content="2019-04-18T01:54:54.593Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS执行环境">
 <meta name="twitter:description" content="执行上下文，即context，也不知道是谁翻译的，不少的文献、书籍用的都是这个词。还记得第一次接触这个词时的惆怅、迷惘、不知所措，扶了扶眼镜，翻开大辞典，还是翻译成环境比较接地气。JS执行上下文，即JS的执行环境。">
@@ -73,7 +73,7 @@
 </div>
     </header>
     <div id="container">
-      <div id="main" class="post" itemscope="" itemprop="blogPost">
+      <div id="main" class="post" itemscope itemprop="blogPost">
   
 	<article itemprop="articleBody"> 
 		<header class="article-info clearfix">
@@ -101,9 +101,15 @@
 		
 		<h3 id="执行环境-Execution-Context-EC"><a href="#执行环境-Execution-Context-EC" class="headerlink" title="执行环境(Execution Context, EC)"></a>执行环境(Execution Context, EC)</h3><p>当我们的代码执行时，会进入到不同的执行上下文，即不同的环境。在不同的环境中，有着不同的 scope(作用域)，代码所能访问到的资源也就不同。<br>在 JS 中，执行环境有如下三种情况:</p>
 <ul>
-<li>全局环境<br>代码默认运行的环境，代码执行时会首先进入全局环境。它是最外围的一个执行环境，根据 ECMAScript 实现所在的宿主环境的不同，表示全局环境的对象也不一样。在 web 浏览器中，全局环境就是 window 对象。全局变量和函数都是作为全局对象 window 的变量和方法来创建的。</li>
-<li>函数环境<br>函数被调用执行时，所创建的执行环境。</li>
-<li>eval<br>使用 eval 会进入一个新的执行环境，它的变量对象为全局变量对象或调用者的变量对象。由于 eval 的毒瘤属性，一般不推荐使用，可忽略。</li>
+<li><p>全局环境</p>
+<p>代码默认运行的环境，代码执行时会首先进入全局环境。它是最外围的一个执行环境，根据 ECMAScript 实现所在的宿主环境的不同，表示全局环境的对象也不一样。在 web 浏览器中，全局环境就是 window 对象。全局变量和函数都是作为全局对象 window 的变量和方法来创建的。</p>
+</li>
+<li><p>函数环境</p>
+<p>函数被调用执行时，所创建的执行环境。</p>
+</li>
+<li><p>eval</p>
+<p>使用 eval 会进入一个新的执行环境，它的变量对象为全局变量对象或调用者的变量对象。由于 eval 的毒瘤属性，一般不推荐使用，可忽略。</p>
+</li>
 </ul>
 <p>某个执行环境中的所有代码执行完毕后，该环境被销毁，保存在环境中的变量和函数也随之销毁。这些变量和函数保存在一个叫做变量对象的对象(variableObject)中，关于变量对象将在<a href="https://juejin.im/post/5ca062f0e51d4556a05cf45c" target="_blank" rel="noopener">变量对象与作用域链</a>一文作详细探讨。</p>
 <h3 id="执行环境的生命周期"><a href="#执行环境的生命周期" class="headerlink" title="执行环境的生命周期"></a>执行环境的生命周期</h3><p>执行环境的生命周期大概分为两个阶段，即创建阶段和执行阶段:</p>
@@ -164,7 +170,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2017/04/03/24.JS 执行上下文/" data-title="JS执行环境 | Xinghunm" data-tsina="" class="share clearfix">
+	  <div data-url="http://yoursite.com/2017/04/03/24.JS 执行上下文/" data-title="JS执行环境 | Xinghunm" data-tsina class="share clearfix">
 	  </div>
 	
 	</div>
@@ -223,11 +229,15 @@
 		  
 		
 		  
-			<li><a href="/categories/Git/" title="Git">Git<sup>2</sup></a></li>
+			<li><a href="/categories/Git/" title="Git">Git<sup>3</sup></a></li>
 		  
 		
 		  
-			<li><a href="/categories/JS/" title="JS">JS<sup>3</sup></a></li>
+			<li><a href="/categories/Html/" title="Html">Html<sup>1</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/JS/" title="JS">JS<sup>4</sup></a></li>
 		  
 		
 		  
